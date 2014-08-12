@@ -12,7 +12,7 @@ private EntityManager em;
 		this.em = em;
 	}
 	
-	public void persistArtistList(List<Song> list){
+	public void persistSongList(List<Song> list){
 		em.getTransaction().begin();
 		
 		for(Song a: list){
@@ -22,7 +22,7 @@ private EntityManager em;
 		em.getTransaction().commit();
 	}
 	
-	public void listArtists(){
+	public void listSongs(){
 		List<Song> list = em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
 		
