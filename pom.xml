@@ -44,5 +44,23 @@
     	<artifactId>mysql-connector-java</artifactId>
     	<version>5.1.28</version>
     </dependency>
+
   </dependencies>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			<version>$(version.maven.compiler.plugin)</version>
+  			<inherited>true</inherited>
+  			
+  			<configuration>
+  				<source>$(version.java)</source>
+  				<target>$(version.java)</target>
+  			</configuration>
+  		</plugin>
+  		
+  	</plugins>
+  </build>
 </project>
