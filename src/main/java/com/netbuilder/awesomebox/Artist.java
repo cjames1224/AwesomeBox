@@ -66,7 +66,7 @@ public class Artist {
 		return new StringBuilder()
 		.append("Artist { name=\"" + name)
 		.append("\", id=\"" + id)
-		.append("\", rating=\"" + rating + " }")
+		.append("\", rating=\"" + rating + "\" }")
 		.toString();
 		
 	}
