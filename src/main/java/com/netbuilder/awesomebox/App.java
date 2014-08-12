@@ -27,11 +27,15 @@ public class App
         
         List<Artist> list = populateCategoryList();
         
+        as.persistArtistList(list);
+        
         as.listArtists();
         
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }
+        
+        
         
         em.close();
         
