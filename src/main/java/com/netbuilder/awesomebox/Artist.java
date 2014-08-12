@@ -26,6 +26,11 @@ public class Artist {
 	@Column(name="Rating")
 	private int rating;
 	
+	public Artist () {
+		
+	}
+	
+	//this is a comment
 	public Artist( String name, int rating){
 		
 		this.name = name;
