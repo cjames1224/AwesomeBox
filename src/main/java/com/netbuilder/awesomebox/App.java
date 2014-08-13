@@ -84,6 +84,24 @@ public class App
         
         aas.listAlbumArtists();
         
+        // albumsongtest
+        AlbumSongService ass = new AlbumSongService(em);
+        
+        List<AlbumSong> albumSongList = populateAlbumSongList(albumList, songList);
+        
+        ass.persistAlbumSongList(albumSongList);
+        
+        ass.listAlbumSongs();
+        
+     // albumsongtest
+        PlaylistSongService pss = new PlaylistSongService(em);
+        
+        List<PlaylistSong> playlistSongList = populatePlaylistSongList(playList, songList);
+        
+        pss.persistPlaylistSongList(playlistSongList);
+        
+        pss.listPlaylistSongs();
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        
@@ -180,6 +198,32 @@ public class App
     	list.add(new AlbumArtist(albumList.get(2), artistList.get(2)));
     	list.add(new AlbumArtist(albumList.get(3), artistList.get(3)));
     	//list.add(new AlbumArtist(albumList.get(4), artistList.get(4)));
+    	
+    	return list;
+    }
+    
+    private static List<AlbumSong> populateAlbumSongList(List<Album> albumList,
+    		List<Song> songList){
+    	
+    	List<AlbumSong> list = new ArrayList<AlbumSong>();
+    	
+    	list.add(new AlbumSong(albumList.get(0), songList.get(0),1));
+    	list.add(new AlbumSong(albumList.get(1), songList.get(1),1));
+    	list.add(new AlbumSong(albumList.get(2), songList.get(2),1));
+    	list.add(new AlbumSong(albumList.get(3), songList.get(3),1));
+    	
+    	return list;
+    }
+    
+    private static List<PlaylistSong> populatePlaylistSongList(List<Playlist> playList,
+    		List<Song> songList){
+    	
+    	List<PlaylistSong> list = new ArrayList<PlaylistSong>();
+    	
+    	list.add(new PlaylistSong(playList.get(0), songList.get(0),1));
+    	list.add(new PlaylistSong(playList.get(1), songList.get(1),1));
+    	list.add(new PlaylistSong(playList.get(2), songList.get(2),1));
+    	list.add(new PlaylistSong(playList.get(3), songList.get(3),1));
     	
     	return list;
     }
