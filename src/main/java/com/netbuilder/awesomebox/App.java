@@ -25,7 +25,7 @@ public class App
         
         ArtistService as = new ArtistService(em);
         
-        List<Artist> artistList = populateCategoryList();
+        List<Artist> artistList = populateArtistList();
         
         as.persistArtistList(artistList);
         
@@ -67,6 +67,14 @@ public class App
         
         ps.listPlaylists();
         
+        SongArtistService sas = new SongArtistService(em);
+        
+        List<SongArtist> songArtistList = populateSongArtistList(songList, artistList);
+        
+        sas.persistSongArtistList(songArtistList);
+        
+        sas.listSongArtists();
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        
@@ -76,7 +84,7 @@ public class App
         System.out.println("Finished");
     }
     
-    private static List<Artist> populateCategoryList(){
+    private static List<Artist> populateArtistList(){
     	List<Artist> list = new ArrayList<Artist>();
     	
     	list.add(new Artist( "Bon Jovi", 5 ));
@@ -135,6 +143,20 @@ public class App
     	list.add(new Album( "Moulin Rouge", 2005,  "Compilation", 3, "rock"));
     	list.add(new Album( "Stuff I'm Making Up", 2012, "Regular", 2 , "classical"));
     	list.add(new Album( "Abbey Road", 1800, "Regular", 1, "pop" ));
+    	
+    	return list;
+    }
+    
+    private static List<SongArtist> populateSongArtistList(List<Song> songList,
+    		List<Artist> artistList){
+    	
+    	List<SongArtist> list = new ArrayList<SongArtist>();
+    	
+    	list.add(new SongArtist(songList.get(0), artistList.get(0)));
+    	list.add(new SongArtist(songList.get(1), artistList.get(1)));
+    	list.add(new SongArtist(songList.get(2), artistList.get(2)));
+    	list.add(new SongArtist(songList.get(3), artistList.get(3)));
+    	list.add(new SongArtist(songList.get(4), artistList.get(4)));
     	
     	return list;
     }
