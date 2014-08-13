@@ -38,6 +38,9 @@ public class AlbumService {
 		em.createQuery(query);
 		album.setName(name);
 		album.setRating(rating);
+		album.setYear(year);
+		album.setGenre(genre);
+		album.setType(type);
 		em.getTransaction().commit();
 	}
 	
