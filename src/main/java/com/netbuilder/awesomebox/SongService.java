@@ -3,6 +3,7 @@ package com.netbuilder.awesomebox;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public class SongService {
 private EntityManager em;
@@ -29,5 +30,26 @@ private EntityManager em;
 		for(Song s: list){
 			System.out.println(s.toString());
 		}
+	}
+	
+	public void updateSong(Song Song,String name,int length, String fileLocation, String genre, int rating) {
+		em.getTransaction().begin();
+		String query = "UPDATE Song SET name = \'" + name + "\', length = " + length + ", fileLocation = \'" + fileLocation + "\', genre = \'" + genre + 
+				"\', rating = " + rating + " WHERE id = " + Song.getId();
+		em.createQuery(query);
+		Song.setName(name);
+		Song.setLength(length);
+		Song.setFileLocation(fileLocation);
+		Song.setGenre(genre);
+		Song.setRating(rating);
+		em.getTransaction().commit();
+	}
+	
+	public void deleteSong(Song Song) {
+		em.getTransaction().begin();
+		String query = "DELETE FROM Song WHERE id = " + Song.getId();
+		Query q = em.createQuery(query);
+		q.executeUpdate();
+		em.getTransaction().commit();
 	}
 }
