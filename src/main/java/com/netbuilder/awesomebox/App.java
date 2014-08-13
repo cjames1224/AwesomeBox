@@ -33,14 +33,23 @@ public class App
         
 
         
-/*        SongService ss = new SongService(em);
+        AlbumService als = new AlbumService(em);
+        
+        List<Album> albumList = populateAlbumList();
+        
+        als.persistAlbumList(albumList);
+        
+        //System.out.println("listing songs?");
+        als.listAlbums();
+        
+        SongService ss = new SongService(em);
         
         List<Song> songList = populateSongList();
         
         ss.persistSongList(songList);
         
         //System.out.println("listing songs?");
-        ss.listSongs();*/
+        ss.listSongs();
         
         UserService us = new UserService(em);
         
@@ -89,12 +98,23 @@ public class App
     private static List<Song> populateSongList(){
     	List<Song> list = new ArrayList<Song>();
     	
-    	list.add(new Song( "Sweet Caroline", 300, 1990, "filelocation", "madeup", 4 ));
-    	list.add(new Song( "Poker Face", 300, 2012, "filelocation", "rock", 3));
-    	list.add(new Song( "Theme Song", 300, 1080, "filelocation", "classical", 2 ));
-    	list.add(new Song( "Radar", 300, 2008, "filelocation", "pop", 1 ));
-    	list.add(new Song( "Hit Me Baby One More Time", 300, 2000, "filelocation", "rock", 1 ));
-    	list.add(new Song( "Wake Me Up", 300, 2008, "filelocation", "pop", 5 ));
+    	list.add(new Song( "Sweet Caroline", 300, "filelocation", "madeup", 4 ));
+    	list.add(new Song( "Poker Face", 300,  "filelocation", "rock", 3));
+    	list.add(new Song( "Theme Song", 300, "filelocation", "classical", 2 ));
+    	list.add(new Song( "Radar", 300, "filelocation", "pop", 1 ));
+    	list.add(new Song( "Hit Me Baby One More Time", 300, "filelocation", "rock", 1 ));
+    	list.add(new Song( "Wake Me Up", 300,  "filelocation", "pop", 5 ));
+    	
+    	return list;
+    }
+    
+    private static List<Album> populateAlbumList(){
+    	List<Album> list = new ArrayList<Album>();
+    	
+    	list.add(new Album( "Hit Me Baby One More Time", 2000, "Single", 4 , "madeup"));
+    	list.add(new Album( "Moulin Rouge", 2005,  "Compilation", 3, "rock"));
+    	list.add(new Album( "Stuff I'm Making Up", 2012, "Regular", 2 , "classical"));
+    	list.add(new Album( "Abbey Road", 1800, "Regular", 1, "pop" ));
     	
     	return list;
     }

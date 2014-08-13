@@ -22,7 +22,7 @@ public class AlbumService {
 		em.getTransaction().commit();
 	}
 	
-	public void listArtists(){
+	public void listAlbums(){
 		List<Album> list = em.createQuery("SELECT a FROM Album a",
 				Album.class).getResultList();
 		
