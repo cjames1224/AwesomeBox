@@ -62,7 +62,7 @@ public class Album {
 		
 	}
 	
-	private albumType stringToAlbumType (String s) {
+	public albumType stringToAlbumType (String s) {
 		switch (s) {
 		case "Regular": return albumType.Regular;
 		case "Compilation": return albumType.Compilation;
