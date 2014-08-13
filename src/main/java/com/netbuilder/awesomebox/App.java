@@ -33,14 +33,14 @@ public class App
         
 
         
-        SongService ss = new SongService(em);
+/*        SongService ss = new SongService(em);
         
         List<Song> songList = populateSongList();
         
         ss.persistSongList(songList);
         
         //System.out.println("listing songs?");
-        ss.listSongs();
+        ss.listSongs();*/
         
         UserService us = new UserService(em);
         
