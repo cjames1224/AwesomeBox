@@ -56,7 +56,7 @@ public class Playlist {
 		return new StringBuilder()
 		.append("Playlist { name=\"" + name)
 		.append("\", id=\"" + id)
-		.append("\", user=\"" + owner)
+		.append("\", user=\"" + owner + "\" }")
 		.toString();
 	}
 }
