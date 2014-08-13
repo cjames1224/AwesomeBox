@@ -23,7 +23,7 @@ public class AlbumArtistService {
 	}
 	
 	public void listAlbumArtists(){
-		List<AlbumArtist> list = em.createQuery("SELECT a FROM Album a",
+		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
 				AlbumArtist.class).getResultList();
 		
 		for(AlbumArtist a: list){

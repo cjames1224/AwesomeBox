@@ -75,6 +75,15 @@ public class App
         
         sas.listSongArtists();
         
+        // albumartisttest
+        AlbumArtistService aas = new AlbumArtistService(em);
+        
+        List<AlbumArtist> albumArtistList = populateAlbumArtistList(albumList, artistList);
+        
+        aas.persistAlbumArtistList(albumArtistList);
+        
+        aas.listAlbumArtists();
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        
@@ -157,6 +166,20 @@ public class App
     	list.add(new SongArtist(songList.get(2), artistList.get(2)));
     	list.add(new SongArtist(songList.get(3), artistList.get(3)));
     	list.add(new SongArtist(songList.get(4), artistList.get(4)));
+    	
+    	return list;
+    }
+    
+    private static List<AlbumArtist> populateAlbumArtistList(List<Album> albumList,
+    		List<Artist> artistList){
+    	
+    	List<AlbumArtist> list = new ArrayList<AlbumArtist>();
+    	
+    	list.add(new AlbumArtist(albumList.get(0), artistList.get(0)));
+    	list.add(new AlbumArtist(albumList.get(1), artistList.get(1)));
+    	list.add(new AlbumArtist(albumList.get(2), artistList.get(2)));
+    	list.add(new AlbumArtist(albumList.get(3), artistList.get(3)));
+    	//list.add(new AlbumArtist(albumList.get(4), artistList.get(4)));
     	
     	return list;
     }
