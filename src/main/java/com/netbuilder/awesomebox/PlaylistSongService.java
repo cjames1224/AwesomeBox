@@ -35,7 +35,7 @@ private EntityManager em;
 	
 	public void updatePlaylistSong(PlaylistSong playlistSong, Song newSong) {
 		em.getTransaction().begin();
-		String query = "UPDATE PlaylistSong SET song = \'" + newSong + " WHERE id = " + playlistSong.getId();
+		String query = "UPDATE PlaylistSong SET song = " + newSong.getId() + " WHERE id = " + playlistSong.getId();
 		em.createQuery(query);
 		playlistSong.setSong(newSong);
 		em.getTransaction().commit();
