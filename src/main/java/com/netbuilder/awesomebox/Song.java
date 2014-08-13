@@ -24,9 +24,6 @@ public class Song {
 	@Column(name="Length", nullable = false)
 	@NotNull
 	private int length;
-	@Column(name="Year", nullable = false)
-	@NotNull
-	private int year;
 	@Column(name="Plays", nullable = false)
 	@NotNull
 	private int plays;
@@ -42,10 +39,9 @@ public class Song {
 		
 	}
 	
-	public Song(String name,int length,int year,String fileLocation,String genre,int rating) {
+	public Song(String name,int length,String fileLocation,String genre,int rating) {
 		this.name = name;
 		this.length = length;
-		this.year = year;
 		this.fileLocation = fileLocation;
 		this.genre = genre;
 		this.rating = rating;
@@ -74,14 +70,6 @@ public class Song {
 
 	public void setLength(int length) {
 		this.length = length;
-	}
-
-	public int getYear() {
-		return year;
-	}
-
-	public void setYear(int year) {
-		this.year = year;
 	}
 
 	public int getPlays() {
@@ -122,7 +110,6 @@ public class Song {
 		.append("Song { name=\"" + name)
 		.append("\", id=\"" + id)
 		.append("\", length=\"" + length)
-		.append("\", year=\"" + year)
 		.append("\", plays=\"" + plays)
 		.append("\", file location=\"" + fileLocation)
 		.append("\", genre=\"" + genre)
