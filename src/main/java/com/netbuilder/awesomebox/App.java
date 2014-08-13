@@ -59,6 +59,13 @@ public class App
         
         us.listUsers();
         
+        PlaylistService ps = new PlaylistService(em);
+        
+        List<Playlist> playList = populatePlaylistList(userList);
+        
+        ps.persistPlaylistList(playList);
+        
+        ps.listPlaylists();
         
         if(em != null){
         	System.out.println("Entity manager created successfully");
@@ -91,6 +98,19 @@ public class App
     	list.add(new User( "Green Day", "boob", 2, false ));
     	list.add(new User( "Lady Gaga", "brit", 0, false ));
     	list.add(new User( "Britbrit", "gaga", 5, false ));
+    	
+    	return list;
+    }
+    
+    private static List<Playlist> populatePlaylistList(List<User> userList){
+    	List<Playlist> list = new ArrayList<Playlist>();
+    	
+    	list.add(new Playlist( "Charleigh Playlist",userList.get(0)));
+    	list.add(new Playlist( "Christian Playlist",userList.get(1)));
+    	list.add(new Playlist( "Dragonforce Playlist",userList.get(2)));
+    	list.add(new Playlist( "Green Day Playlist",userList.get(3)));
+    	list.add(new Playlist( "Lady Gaga Playlist",userList.get(4)));
+    	list.add(new Playlist( "Britbrit Playlist",userList.get(5)));
     	
     	return list;
     }

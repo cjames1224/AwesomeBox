@@ -50,4 +50,13 @@ public class Playlist {
 	public int getId() {
 		return id;
 	}
+	
+	@Override
+	public String toString() {
+		return new StringBuilder()
+		.append("Playlist { name=\"" + name)
+		.append("\", id=\"" + id)
+		.append("\", user=\"" + owner)
+		.toString();
+	}
 }
