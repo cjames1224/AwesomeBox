@@ -102,6 +102,16 @@ public class App
         
         pss.listPlaylistSongs();
         
+        //update artist
+        
+        as.updateArtist(artistList.get(0), "James", 1);
+        
+        as.listArtists();
+        
+        as.deleteArtist(artistList.remove(0));
+        
+        as.listArtists();
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        

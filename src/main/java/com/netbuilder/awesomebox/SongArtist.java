@@ -21,13 +21,13 @@ public class SongArtist {
 	private int id;
 	
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "Song_ID", referencedColumnName = "ID")
 	@NotNull
 	private Song song;
 	
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "Artist_ID", referencedColumnName = "ID")
 	@NotNull
 	private Artist artist;

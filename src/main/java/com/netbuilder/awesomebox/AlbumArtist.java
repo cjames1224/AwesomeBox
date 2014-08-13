@@ -21,12 +21,12 @@ public class AlbumArtist {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="Album_ID", referencedColumnName="ID", nullable=false )
 	@NotNull
 	private Album album;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="Artist_ID", referencedColumnName="ID", nullable=false )
 	@NotNull
 	private Artist artist;

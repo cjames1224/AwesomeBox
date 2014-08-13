@@ -3,6 +3,7 @@ package com.netbuilder.awesomebox;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public class ArtistService {
 	
@@ -30,6 +31,23 @@ public class ArtistService {
 		for(Artist a: list){
 			System.out.println(a.toString());
 		}
+	}
+	
+	public void updateArtist(Artist artist,String name,int rating) {
+		em.getTransaction().begin();
+		String query = "UPDATE Artist SET name = \'" + name + "\', rating = " + rating + " WHERE id = " + artist.getId();
+		em.createQuery(query);
+		artist.setName(name);
+		artist.setRating(rating);
+		em.getTransaction().commit();
+	}
+	
+	public void deleteArtist(Artist artist) {
+		em.getTransaction().begin();
+		String query = "DELETE FROM Artist WHERE id = " + artist.getId();
+		Query q = em.createQuery(query);
+		q.executeUpdate();
+		em.getTransaction().commit();
 	}
 
 }
