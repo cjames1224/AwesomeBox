@@ -27,40 +27,76 @@ public class ArtistService {
 		em.getTransaction().commit();
 	}
 	
-	public void listArtists(){
+	public List<Artist> listArtists(){
 		List<Artist> list = em.createQuery("SELECT a FROM Artist a",
 				Artist.class).getResultList();
 		
+		if (list == null || list.size() == 0) {
+			System.out.println("No Results Were Found");
+		}
+		
 		for(Artist a: list){
 			System.out.println(a.toString());
 		}
+		
+		return list;
 	}
 	
-	public void listArtistById(int id) {
+	public List<Artist> listArtistById(int id) {
+		if (id <= 0) {
+			throw new ValidationException("Invalid ID");
+		}
+		
 		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE id = " + id,
 				Artist.class).getResultList();
 		
+		if (list == null || list.size() == 0) {
+			System.out.println("No Results Were Found");
+		}
+		
 		for(Artist a: list){
 			System.out.println(a.toString());
 		}
+		
+		return list;
 	}
 	
-	public void listArtistByName(String name) {
+	public List<Artist> listArtistByName(String name) {
+		if (name == null) {
+			throw new ValidationException("Invalid name");
+		}
+		
 		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE name = \'" + name + "\'",
 				Artist.class).getResultList();
 		
-		for(Artist a: list){
-			System.out.println(a.toString());
+		if (list == null || list.size() == 0) {
+			System.out.println("No Results Were Found");
 		}
-	}
-	
-	public void listArtistByRating(int rating) {
-		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE rating = " + rating,
-				Artist.class).getResultList();
 		
 		for(Artist a: list){
 			System.out.println(a.toString());
 		}
+		
+		return list;
+	}
+	
+	public List<Artist> listArtistByRating(int rating) {
+		if (rating < 0) {
+			throw new ValidationException("Invalid Name");
+		}
+		
+		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE rating = " + rating,
+				Artist.class).getResultList();
+		
+		if (list == null || list.size() == 0) {
+			System.out.println("No Results Were Found");
+		}
+		
+		for(Artist a: list){
+			System.out.println(a.toString());
+		}
+		
+		return list;
 	}
 	
 	public void updateArtistName(Artist artist,String name) {
