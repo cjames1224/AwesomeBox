@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -26,6 +27,17 @@ private EntityManager em;
 		}
 		
 		em.getTransaction().commit();
+	}
+	
+	public void addSongToPlaylist(Playlist playlist, Song song) {
+		List<Song> songList = em.createQuery("SELECT s FROM Song s, Playlist p, PlaylistSong ps WHERE s.id = ps.song AND p.id = ps.playlist AND p.id = "+playlist.getId(),
+				Song.class).getResultList();
+		int count = songList.size();
+		PlaylistSong playlistSong = new PlaylistSong(playlist, song, count++);
+		List<PlaylistSong> list = new ArrayList<PlaylistSong>();
+		list.add(playlistSong);
+		this.persistPlaylistSongList(list);
+	
 	}
 	
 	public List<PlaylistSong> listPlaylistSongs(){

@@ -1,5 +1,7 @@
 package com.netbuilder.awesomebox;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -98,6 +100,7 @@ public class User {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
 	
 	@Override
 	public String toString(){

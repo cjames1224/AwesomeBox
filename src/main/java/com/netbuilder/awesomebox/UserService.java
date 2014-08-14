@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -110,5 +111,7 @@ public class UserService {
 		q.executeUpdate();
 		em.getTransaction().commit();
 	}
+	
+
 
 }

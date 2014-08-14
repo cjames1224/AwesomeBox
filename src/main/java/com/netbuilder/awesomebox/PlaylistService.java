@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,15 @@ public class PlaylistService {
 	public PlaylistService(EntityManager em){
 		this.em = em;
 	}
+	
+	public void createPlaylist(User user, String name) {
+		Playlist playlist = new Playlist(name, user);
+		List<Playlist> playlistList = new ArrayList<Playlist>();
+		playlistList.add(playlist);
+		this.persistPlaylistList(playlistList);
+		
+	}
+	
 	
 	public void persistPlaylistList(List<Playlist> list){
 		if (list == null) {
@@ -95,6 +105,7 @@ public class PlaylistService {
 		q.executeUpdate();
 		em.getTransaction().commit();
 	}
+	
 	
 
 }
