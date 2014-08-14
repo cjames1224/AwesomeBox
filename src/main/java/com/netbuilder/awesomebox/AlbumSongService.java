@@ -15,6 +15,10 @@ private EntityManager em;
 	}
 	
 	public void persistAlbumSongList(List<AlbumSong> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		
 		em.getTransaction().begin();
 		
 		for(AlbumSong a: list){

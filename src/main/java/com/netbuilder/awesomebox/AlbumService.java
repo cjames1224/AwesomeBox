@@ -14,6 +14,10 @@ public class AlbumService {
 	}
 	
 	public void persistAlbumList(List<Album> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		
 		em.getTransaction().begin();
 		
 		for(Album a: list){
@@ -33,6 +37,10 @@ public class AlbumService {
 	}
 
 	public void updateAlbum(Album album,String name,int rating,int year,String genre,String type) {
+		if (album == null || name == null || type == null) {
+			throw new ValidationException("Invalid Album Update");
+		}
+		
 		em.getTransaction().begin();
 		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.stringToAlbumType(type) +" WHERE id = " + album.getID();
 		em.createQuery(query);
@@ -45,6 +53,10 @@ public class AlbumService {
 	}
 	
 	public void deleteAlbum(Album album) {
+		if (album == null) {
+			throw new ValidationException("Invalid Album");
+		}
+		
 		em.getTransaction().begin();
 		String query = "DELETE FROM Album WHERE id = " + album.getID();
 		Query q = em.createQuery(query);

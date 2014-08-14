@@ -15,6 +15,10 @@ private EntityManager em;
 	}
 	
 	public void persistPlaylistSongList(List<PlaylistSong> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		
 		em.getTransaction().begin();
 		
 		for(PlaylistSong a: list){
@@ -34,6 +38,10 @@ private EntityManager em;
 	}
 	
 	public void updatePlaylistSong(PlaylistSong playlistSong, Song newSong) {
+		if (playlistSong == null || newSong == null) {
+			throw new ValidationException("Invalid PlaylistSong Update");
+		}
+		
 		em.getTransaction().begin();
 		String query = "UPDATE PlaylistSong SET song = " + newSong.getId() + " WHERE id = " + playlistSong.getId();
 		em.createQuery(query);
@@ -42,6 +50,10 @@ private EntityManager em;
 	}
 	
 	public void updatePlaylistSongTrackNumber(PlaylistSong playlistSong, int trackNumber) {
+		if (playlistSong == null) {
+			throw new ValidationException("Invalid PlaylistSong Update");
+		}
+		
 		em.getTransaction().begin();
 		String query = "UPDATE PlaylistSong SET trackNumber = \'" + trackNumber + " WHERE id = " + playlistSong.getId();
 		em.createQuery(query);
@@ -50,9 +62,13 @@ private EntityManager em;
 	}
 	
 	
-	public void deletePlaylistSong(PlaylistSong PlaylistSong) {
+	public void deletePlaylistSong(PlaylistSong playlistSong) {
+		if (playlistSong == null) {
+			throw new ValidationException("Invalid PlaylistSong Update");
+		}
+		
 		em.getTransaction().begin();
-		String query = "DELETE FROM PlaylistSong WHERE id = " + PlaylistSong.getId();
+		String query = "DELETE FROM PlaylistSong WHERE id = " + playlistSong.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
 		em.getTransaction().commit();

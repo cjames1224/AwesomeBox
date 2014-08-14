@@ -14,6 +14,10 @@ public class AlbumArtistService {
 	}
 	
 	public void persistAlbumArtistList(List<AlbumArtist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		
 		em.getTransaction().begin();
 		
 		for(AlbumArtist a: list){
