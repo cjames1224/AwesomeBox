@@ -86,11 +86,11 @@ public class Album {
 	}
 
 	public String getType() {
-		return type.albumTypeToString(type);
+		return AlbumType.albumTypeToString(type);
 	}
 
 	public void setType(String type) {
-		this.type = this.type.stringToAlbumType(type);
+		this.type = AlbumType.stringToAlbumType(type);
 	}
 
 	public int getRating() {

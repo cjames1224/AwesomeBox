@@ -36,6 +36,14 @@ public class ArtistService {
 		}
 	}
 	
+	public void updateArtistName(Artist artist,String name) {
+		updateArtist(artist,name,artist.getRating());
+	}
+	
+	public void updateArtistRating(Artist artist,int rating) {
+		updateArtist(artist,artist.getName(),rating);
+	}
+	
 	public void updateArtist(Artist artist,String name,int rating) {
 		if (artist == null || name == null) {
 			throw new ValidationException("Invalid artist update");
