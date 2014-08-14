@@ -79,7 +79,8 @@ public class Search {
 	}
 	
 	public List<Song> searchSongByPlaylist(Playlist playlist, Artist artist) {
-		List<Song> list = em.createQuery("SELECT s FROM Song s, Playlist p, PlaylistSong ps,  WHERE s.id = ps.song AND p.id = ps.playlist AND p.name = '"+playlist+"'",
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Playlist p, PlaylistSong ps  WHERE s.id = ps.song AND p.id = ps.playlist AND p.id = " + playlist.getId() +
+				"AND s IN (SELECT s FROM Song s, Artist a, SongArtist sa WHERE s.id = sa.song AND a.id = sa.artist AND a.id = " +artist.getId()+")",
 				Song.class).getResultList();
 		
 		if(list == null || list.size()==0) {
