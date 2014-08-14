@@ -50,6 +50,18 @@ public class UserService {
 		em.getTransaction().commit();
 	}
 	
+	public void updateUserPassword(User user, String password) {
+		updateUser(user, password, user.getCredits(), user.isAdmin());
+	}
+	
+	public void updateUserCredits(User user, int credits) {
+		updateUser(user, user.getPassword(), credits, user.isAdmin());
+	}
+	
+	public void updateUserIsAdmin(User user, boolean isAdmin) {
+		updateUser(user, user.getPassword(), user.getCredits(), isAdmin);
+	}
+	
 	public void deleteUser(User user) {
 		if(user == null){
 			throw new ValidationException("Invalid user delete");
