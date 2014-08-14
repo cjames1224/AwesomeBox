@@ -42,7 +42,7 @@ public class AlbumService {
 		}
 		
 		em.getTransaction().begin();
-		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.stringToAlbumType(type) +" WHERE id = " + album.getID();
+		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.getType() +" WHERE id = " + album.getID();
 		em.createQuery(query);
 		album.setName(name);
 		album.setRating(rating);

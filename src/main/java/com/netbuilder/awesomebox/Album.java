@@ -18,8 +18,6 @@ import org.hibernate.validator.constraints.Range;
 @Table(name="album")
 public class Album {
 	
-	private enum albumType {Single,Compilation,Regular};
-	
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +35,7 @@ public class Album {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Type")
-	private albumType type;
+	private AlbumType type;
 	
 	@Column(name="Rating")
 	@Range(min = 1, max = 5)
@@ -56,27 +54,12 @@ public class Album {
 	public Album(String name, int year, String t, int rating, String genre ){
 		this.name = name;
 		this.year = year;
-		type = this.stringToAlbumType(t);
+		type = type.stringToAlbumType(t);
 		this.rating = rating;
 		this.genre = genre;
 		
 	}
 	
-	public albumType stringToAlbumType (String s) {
-		switch (s) {
-		case "Regular": return albumType.Regular;
-		case "Compilation": return albumType.Compilation;
-		default: return albumType.Single;
-		}
-	}
-	
-	private String albumTypeToString (albumType t) {
-		switch (t) {
-		case Regular: return "Regular";
-		case Compilation: return "Compilation";
-		default: return "Single";
-		}
-	}
 	
 	public long getID() {
 		return ID;
@@ -103,11 +86,11 @@ public class Album {
 	}
 
 	public String getType() {
-		return this.albumTypeToString(type);
+		return type.albumTypeToString(type);
 	}
 
 	public void setType(String type) {
-		this.type = this.stringToAlbumType(type);
+		this.type = this.type.stringToAlbumType(type);
 	}
 
 	public int getRating() {
