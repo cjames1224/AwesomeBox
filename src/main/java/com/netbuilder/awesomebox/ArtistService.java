@@ -36,6 +36,33 @@ public class ArtistService {
 		}
 	}
 	
+	public void listArtistById(int id) {
+		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE id = " + id,
+				Artist.class).getResultList();
+		
+		for(Artist a: list){
+			System.out.println(a.toString());
+		}
+	}
+	
+	public void listArtistByName(String name) {
+		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE name = " + name,
+				Artist.class).getResultList();
+		
+		for(Artist a: list){
+			System.out.println(a.toString());
+		}
+	}
+	
+	public void listArtistByRating(int rating) {
+		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE rating = " + rating,
+				Artist.class).getResultList();
+		
+		for(Artist a: list){
+			System.out.println(a.toString());
+		}
+	}
+	
 	public void updateArtistName(Artist artist,String name) {
 		updateArtist(artist,name,artist.getRating());
 	}

@@ -116,6 +116,8 @@ public class App
         
         pss.listPlaylistSongs();
         
+        System.out.println(artistList.get(0));
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        
