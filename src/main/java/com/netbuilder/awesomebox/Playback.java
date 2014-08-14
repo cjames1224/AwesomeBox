@@ -21,8 +21,22 @@ public class Playback {
 	private byte[] buffer;
 	private Runnable playing;
 	
+	private Playback instance = null;
+	
 	public Playback(){
-
+		
+	}
+	
+	public Playback getInstance(){
+		if(instance == null){
+			instance = new Playback();
+		}return instance;
+	}
+	
+	public boolean isPlaying(){
+		if(line != null)
+			return line.isRunning();
+		return false;
 	}
 
 	public void clearValues(){
@@ -84,7 +98,6 @@ public class Playback {
 		//System.out.println("Begun streaming " + fileSplit[fileSplit.length - 1]);
 		line.stop();
 		playing = new Runnable(){
-			@Override
 			public void run() {
 				int totals = 0;
 				try {
