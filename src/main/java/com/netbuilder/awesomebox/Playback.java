@@ -45,30 +45,33 @@ public class Playback {
 		}
 	}
 	
-	public void createLineFromPath(String fileLocation) throws Exception{
-		
-		clearValues();
-		
-		this.fileLocation = fileLocation;
-		stream = AudioSystem.getAudioInputStream(new File(fileLocation));
-		AudioFormat format = stream.getFormat();
-		if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
-			format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
-					format.getSampleRate(),
-					format.getSampleSizeInBits() * 2,
-					format.getChannels(),
-					format.getFrameSize() * 2,
-					format.getFrameRate(),
-					true);
-			stream = AudioSystem.getAudioInputStream(format, stream);
+	public void createLineFromPath(String fileLocation) {
+		try {
+			clearValues();
+
+			this.fileLocation = fileLocation;
+			stream = AudioSystem.getAudioInputStream(new File(fileLocation));
+			AudioFormat format = stream.getFormat();
+			if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
+				format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+						format.getSampleRate(),
+						format.getSampleSizeInBits() * 2,
+						format.getChannels(),
+						format.getFrameSize() * 2,
+						format.getFrameRate(),
+						true);
+				stream = AudioSystem.getAudioInputStream(format, stream);
+			}
+
+			SourceDataLine.Info info = new DataLine.Info(SourceDataLine.class, 
+					stream.getFormat(),
+					((int) stream.getFrameLength() * format.getFrameSize()));
+
+			initStream(info);
+
+		} catch (Exception e) {
+			System.out.println("You lose");
 		}
-
-		SourceDataLine.Info info = new DataLine.Info(SourceDataLine.class, 
-				stream.getFormat(),
-				((int) stream.getFrameLength() * format.getFrameSize()));
-
-		initStream(info);
-
 	}
 
 	private void initStream(Info info) throws Exception{
