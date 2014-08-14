@@ -129,6 +129,11 @@ public class App
         search.searchSongByPlaylist(playList.get(2).getName());
         System.out.println("Test search playlist and artist");
         search.searchSongByPlaylist(playList.get(0), artistList.get(0));
+        System.out.println("Test search album and artist");
+        search.searchSongByAlbum(albumList.get(0), artistList.get(0));
+        System.out.println("Test search playlist and album");
+        search.searchSongByPlaylist(playList.get(0), albumList.get(0));
+        
         
         if(em != null){
         	System.out.println("Entity manager created successfully");

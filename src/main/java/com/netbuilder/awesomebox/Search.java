@@ -96,4 +96,40 @@ public class Search {
 		return list;
 	}
 	
+	public List<Song> searchSongByAlbum(Album album, Artist artist) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als  WHERE s.id = als.song AND al.id = als.album AND al.id = " + album.getId() +
+				"AND s IN (SELECT s FROM Song s, Artist a, SongArtist sa WHERE s.id = sa.song AND a.id = sa.artist AND a.id = " +artist.getId()+")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongByPlaylist(Playlist playlist, Album album) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Playlist p, PlaylistSong ps  WHERE s.id = ps.song AND p.id = ps.playlist AND p.id = " + playlist.getId() +
+				"AND s IN (SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.id = " +album.getId()+")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
 }
