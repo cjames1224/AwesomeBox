@@ -36,6 +36,44 @@ public class PlaylistService {
 		}
 	}
 	
+	public List<Playlist> getPlaylist(String name){
+		if(name == null){
+			throw new ValidationException("Invalid playlist name");
+		}
+		
+		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a where name =\'" + name + "\'",
+				Playlist.class).getResultList();
+		
+		if(list == null || list.size() == 0){
+			System.out.println("No such playlist with name = " + name);
+		}
+		
+		for(Playlist a: list){
+			System.out.println(a.toString());
+		}
+		
+		return list;
+	}
+	
+	public List<Playlist> getPlaylist(long id){
+		if(id <= 0){
+			throw new ValidationException("Invalid playlist id");
+		}
+		
+		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a where id ="+id,
+				Playlist.class).getResultList();
+		
+		if(list == null || list.size() == 0){
+			System.out.println("No such playlist with id = " + id);
+		}
+		
+		for(Playlist a: list){
+			System.out.println(a.toString());
+		}
+		
+		return list;
+	}
+	
 	public void updatePlaylist(Playlist playlist,String name) {
 		if (playlist == null || name == null) {
 			throw new ValidationException("Invalid playlist update");
