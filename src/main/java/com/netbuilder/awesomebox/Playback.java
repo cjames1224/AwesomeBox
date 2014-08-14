@@ -21,13 +21,13 @@ public class Playback {
 	private byte[] buffer;
 	private Runnable playing;
 	
-	private Playback instance = null;
+	private static Playback instance = null;
 	
-	public Playback(){
+	private Playback(){
 		
 	}
 	
-	public Playback getInstance(){
+	public static Playback getInstance(){
 		if(instance == null){
 			instance = new Playback();
 		}return instance;

@@ -5,11 +5,9 @@ import java.util.ArrayList;
 public class Queue {
 
 	private ArrayList<Song> queue;
-	private Playback playback;
 	
 	public Queue() {
 		queue = new ArrayList<Song>();
-		playback = new Playback();
 	}
 	
 	public void addSong(Song song) {
@@ -33,6 +31,6 @@ public class Queue {
 	}
 	
 	public void play() {
-		playback.createLineFromPath(queue.remove(0).getFileLocation());
+		Playback.getInstance().createLineFromPath(queue.remove(0).getFileLocation());
 	}
 }
