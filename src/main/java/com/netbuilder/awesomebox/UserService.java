@@ -13,6 +13,10 @@ public class UserService {
 	}
 	
 	public void persistUserList(List<User> list) {
+		if(list == null){
+			throw new ValidationException("Invalid list");
+		}
+		
 		em.getTransaction().begin();
 		
 		for (User u : list) {
@@ -31,19 +35,28 @@ public class UserService {
 		}
 	}
 	
-	public void updateUser(User User,String password,int credits, boolean isAdmin) {
+	public void updateUser(User user,String password,int credits, boolean isAdmin) {
+		if(user == null || password == null){
+			throw new ValidationException("Invalid user update");
+		}
+		
+		
 		em.getTransaction().begin();
-		String query = "UPDATE User SET password = \'" + password + "\', credits = " + credits + ", isAdmin = " + isAdmin + " WHERE id = " + User.getId();
+		String query = "UPDATE User SET password = \'" + password + "\', credits = " + credits + ", isAdmin = " + isAdmin + " WHERE id = " + user.getId();
 		em.createQuery(query);
-		User.setPassword(password);
-		User.setCredits(credits);
-		User.setAdmin(isAdmin);
+		user.setPassword(password);
+		user.setCredits(credits);
+		user.setAdmin(isAdmin);
 		em.getTransaction().commit();
 	}
 	
-	public void deleteUser(User User) {
+	public void deleteUser(User user) {
+		if(user == null){
+			throw new ValidationException("Invalid user delete");
+		}
+		
 		em.getTransaction().begin();
-		String query = "DELETE FROM User WHERE id = " + User.getId();
+		String query = "DELETE FROM User WHERE id = " + user.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
 		em.getTransaction().commit();

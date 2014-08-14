@@ -14,6 +14,9 @@ private EntityManager em;
 	}
 	
 	public void persistSongArtistList(List<SongArtist> list){
+		if(list == null){
+			throw new ValidationException("Invalid SongArtist Update");
+		}
 		em.getTransaction().begin();
 		
 		for(SongArtist sa: list){
