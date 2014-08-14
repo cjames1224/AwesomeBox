@@ -54,7 +54,7 @@ public class Album {
 	public Album(String name, int year, String t, int rating, String genre ){
 		this.name = name;
 		this.year = year;
-		type = type.stringToAlbumType(t);
+		type = AlbumType.stringToAlbumType(t);
 		this.rating = rating;
 		this.genre = genre;
 		

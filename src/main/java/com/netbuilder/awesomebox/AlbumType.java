@@ -4,7 +4,7 @@ public enum AlbumType {
 
 	Single,Compilation,Regular;
 	
-	public AlbumType stringToAlbumType (String s) {
+	public static AlbumType stringToAlbumType (String s) {
 		switch (s) {
 		case "Regular": return Regular;
 		case "Compilation": return Compilation;
@@ -12,7 +12,7 @@ public enum AlbumType {
 		}
 	}
 	
-	public String albumTypeToString (AlbumType t) {
+	public static String albumTypeToString (AlbumType t) {
 		switch (t) {
 		case Regular: return "Regular";
 		case Compilation: return "Compilation";
