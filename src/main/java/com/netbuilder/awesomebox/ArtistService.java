@@ -46,7 +46,7 @@ public class ArtistService {
 	}
 	
 	public void listArtistByName(String name) {
-		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE name = " + name,
+		List<Artist> list = em.createQuery("SELECT a FROM Artist a WHERE name = \'" + name + "\'",
 				Artist.class).getResultList();
 		
 		for(Artist a: list){

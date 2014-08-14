@@ -35,6 +35,41 @@ public class UserService {
 		}
 	}
 	
+	public User getUser(long id){
+		if(id < 0){
+			throw new ValidationException("Invalid user id");
+		}
+		
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE id="+id,
+				User.class).getResultList();
+		
+		if(list == null || list.size() == 0){
+			throw new ValidationException("No such user with id = "+id);
+		}
+		for (User u : list) {
+			System.out.println( u.toString() );
+		}
+		
+		return list.get(0);
+	}
+	
+	public User getUser(String name){
+		if(name == null){
+			throw new ValidationException("Invalid user name");
+		}
+		
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE username=\'"+name+"\'",
+				User.class).getResultList();
+		
+		if(list == null || list.size() == 0){
+			throw new ValidationException("No such user with name = "+name);
+		}
+		
+		System.out.println( list.get(0).toString() );
+		
+		return list.get(0);
+	}
+	
 	public void updateUser(User user,String password,int credits, boolean isAdmin) {
 		if(user == null || password == null){
 			throw new ValidationException("Invalid user update");
