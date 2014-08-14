@@ -26,16 +26,18 @@ public class UserService {
 		em.getTransaction().commit();
 	}
 	
-	public void listUsers() {
+	public List<User> listUsers() {
 		List<User> list = em.createQuery("SELECT u FROM User u",
 				User.class).getResultList();
 		
 		for (User u : list) {
 			System.out.println(u.toString());
 		}
+		
+		return list;
 	}
 	
-	public User getUser(long id){
+	public List<User> getUser(long id){
 		if(id < 0){
 			throw new ValidationException("Invalid user id");
 		}
@@ -50,10 +52,10 @@ public class UserService {
 			System.out.println( u.toString() );
 		}
 		
-		return list.get(0);
+		return list;
 	}
 	
-	public User getUser(String name){
+	public List<User> getUser(String name){
 		if(name == null){
 			throw new ValidationException("Invalid user name");
 		}
@@ -67,7 +69,7 @@ public class UserService {
 		
 		System.out.println( list.get(0).toString() );
 		
-		return list.get(0);
+		return list;
 	}
 	
 	public void updateUser(User user,String password,int credits, boolean isAdmin) {
