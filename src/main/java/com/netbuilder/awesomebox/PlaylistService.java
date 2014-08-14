@@ -14,6 +14,10 @@ public class PlaylistService {
 	}
 	
 	public void persistPlaylistList(List<Playlist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid playlist persist");
+		}
+		
 		em.getTransaction().begin();
 		
 		for(Playlist a: list){
@@ -32,17 +36,23 @@ public class PlaylistService {
 		}
 	}
 	
-	public void updatePlaylist(Playlist Playlist,String name) {
+	public void updatePlaylist(Playlist playlist,String name) {
+		if (playlist == null || name == null) {
+			throw new ValidationException("Invalid playlist update");
+		}
 		em.getTransaction().begin();
-		String query = "UPDATE Playlist SET name = \'" + name + "\' WHERE id = " + Playlist.getId();
+		String query = "UPDATE Playlist SET name = \'" + name + "\' WHERE id = " + playlist.getId();
 		em.createQuery(query);
-		Playlist.setName(name);
+		playlist.setName(name);
 		em.getTransaction().commit();
 	}
 	
-	public void deletePlaylist(Playlist Playlist) {
+	public void deletePlaylist(Playlist playlist) {
+		if (playlist == null) {
+			throw new ValidationException("Invalid playlist delete");
+		}
 		em.getTransaction().begin();
-		String query = "DELETE FROM Playlist WHERE id = " + Playlist.getId();
+		String query = "DELETE FROM Playlist WHERE id = " + playlist.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
 		em.getTransaction().commit();

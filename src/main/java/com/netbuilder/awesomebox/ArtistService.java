@@ -15,6 +15,9 @@ public class ArtistService {
 	}
 	
 	public void persistArtistList(List<Artist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid Artist persist");
+		}
 		em.getTransaction().begin();
 		
 		for(Artist a: list){
@@ -34,6 +37,10 @@ public class ArtistService {
 	}
 	
 	public void updateArtist(Artist artist,String name,int rating) {
+		if (artist == null || name == null) {
+			throw new ValidationException("Invalid artist update");
+		}
+		
 		em.getTransaction().begin();
 		String query = "UPDATE Artist SET name = \'" + name + "\', rating = " + rating + " WHERE id = " + artist.getId();
 		em.createQuery(query);
@@ -43,6 +50,9 @@ public class ArtistService {
 	}
 	
 	public void deleteArtist(Artist artist) {
+		if (artist == null ) {
+			throw new ValidationException("Invalid artist delete");
+		}
 		em.getTransaction().begin();
 		String query = "DELETE FROM Artist WHERE id = " + artist.getId();
 		Query q = em.createQuery(query);
