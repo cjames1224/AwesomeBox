@@ -21,7 +21,7 @@ public class Album {
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ID;
+	private long id;
 	
 	@Column(name="Name", nullable = false, length = 45)
 	@NotNull
@@ -61,12 +61,12 @@ public class Album {
 	}
 	
 	
-	public long getID() {
-		return ID;
+	public long getId() {
+		return id;
 	}
 
-	public void setID(long iD) {
-		ID = iD;
+	public void setId(long iD) {
+		id = iD;
 	}
 
 	public String getName() {
@@ -113,7 +113,7 @@ public class Album {
 	public String toString(){
 		return new StringBuilder()
 		.append("Album { name=\"" + name)
-		.append("\", id=\"" + ID)
+		.append("\", id=\"" + id)
 		.append("\", year=\"" + year)
 		.append("\", type=\"" + type)
 		.append("\", genre=\"" + genre)

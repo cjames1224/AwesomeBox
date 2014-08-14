@@ -26,13 +26,16 @@ private EntityManager em;
 		em.getTransaction().commit();
 	}
 	
-	public void listSongArtists(){
+	public List<SongArtist> listSongArtists(){
 		List<SongArtist> list = em.createQuery("SELECT sa FROM SongArtist sa",
 				SongArtist.class).getResultList();
 		
 		for(SongArtist s: list){
 			System.out.println(s.toString());
 		}
+		
+		return list;
+		
 	}
 	
 }

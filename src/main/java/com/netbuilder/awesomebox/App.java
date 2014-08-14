@@ -120,6 +120,14 @@ public class App
         
         System.out.println(ss.listSongsByName("Theme Song"));
         
+        Search search = new Search(em);
+        System.out.println("Testsearch artist");
+        search.searchSongByArtist( "Lady Gaga");
+        System.out.println("Test search album");
+        search.searchSongByAlbum(albumList.get(0).getName());
+        System.out.println("Test search playlist");
+        search.searchSongByPlaylist(playList.get(2).getName());
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        
@@ -179,6 +187,7 @@ public class App
     	list.add(new Song( "Radar", 300, "filelocation", "pop", 1 ));
     	list.add(new Song( "Hit Me Baby One More Time", 300, "filelocation", "rock", 1 ));
     	list.add(new Song( "Wake Me Up", 300,  "filelocation", "pop", 5 ));
+    	list.add(new Song( "Final Countdown", 600,  "filelocation", "classics", 5 ));
     	
     	return list;
     }
@@ -200,10 +209,13 @@ public class App
     	List<SongArtist> list = new ArrayList<SongArtist>();
     	
     	list.add(new SongArtist(songList.get(0), artistList.get(0)));
-    	list.add(new SongArtist(songList.get(1), artistList.get(1)));
-    	list.add(new SongArtist(songList.get(2), artistList.get(2)));
-    	list.add(new SongArtist(songList.get(3), artistList.get(3)));
-    	list.add(new SongArtist(songList.get(4), artistList.get(4)));
+    	list.add(new SongArtist(songList.get(1), artistList.get(0)));
+    	list.add(new SongArtist(songList.get(2), artistList.get(1)));
+    	list.add(new SongArtist(songList.get(3), artistList.get(2)));
+    	list.add(new SongArtist(songList.get(4), artistList.get(3)));
+    	list.add(new SongArtist(songList.get(5), artistList.get(4)));
+    	list.add(new SongArtist(songList.get(6), artistList.get(5)));
+
     	
     	return list;
     }

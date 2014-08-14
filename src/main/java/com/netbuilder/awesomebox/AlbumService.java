@@ -62,7 +62,7 @@ public class AlbumService {
 		}
 		
 		em.getTransaction().begin();
-		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.getType() +" WHERE id = " + album.getID();
+		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.getType() +" WHERE id = " + album.getId();
 		em.createQuery(query);
 		album.setName(name);
 		album.setRating(rating);
@@ -78,7 +78,7 @@ public class AlbumService {
 		}
 		
 		em.getTransaction().begin();
-		String query = "DELETE FROM Album WHERE id = " + album.getID();
+		String query = "DELETE FROM Album WHERE id = " + album.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
 		em.getTransaction().commit();

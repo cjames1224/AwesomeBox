@@ -44,7 +44,8 @@ private EntityManager em;
 				Song.class).getResultList();
 		
 		if(list == null || list.size()==0) {
-			throw new ValidationException("No songs with such name = "+name);
+			System.out.println("No songs with such name = "+name);
+			return list;
 		}
 		
 		for(Song s: list){
@@ -60,7 +61,8 @@ private EntityManager em;
 				Song.class).getResultList();
 		
 		if(list == null || list.size()==0) {
-			throw new ValidationException("No songs with such genre = "+genre);
+			System.out.println("No songs with such genre = "+genre);
+			return list;
 		}
 		
 		for(Song s: list){
@@ -75,7 +77,8 @@ private EntityManager em;
 				Song.class).getResultList();
 		
 		if(list == null || list.size()==0) {
-			throw new ValidationException("No songs with such rating = "+rating);
+			System.out.println("No songs with such rating = "+rating);
+			return list;
 		}
 		
 		for(Song s: list){
@@ -90,7 +93,8 @@ private EntityManager em;
 				Song.class).getResultList();
 		
 		if(list == null || list.size()==0) {
-			throw new ValidationException("No songs with such plays = "+plays);
+			System.out.println("No songs with such plays = "+plays);
+			return list;
 		}
 		
 		for(Song s: list){
