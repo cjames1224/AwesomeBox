@@ -28,14 +28,78 @@ private EntityManager em;
 		em.getTransaction().commit();
 	}
 	
-	public void listSongs(){
+	public List<Song> listSongs(){
 		List<Song> list = em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
 		
 		for(Song s: list){
 			System.out.println(s.toString());
 		}
+		
+		return list;
 	}
+	
+	public List<Song> listSongsByName(String name){
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE name = \'"+name+"\'",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			throw new ValidationException("No songs with such name = "+name);
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+		}
+		
+		return list;
+	}
+	
+	
+	public List<Song> listSongsByGenre(String genre){
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE genre = \'"+genre+"\'",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			throw new ValidationException("No songs with such genre = "+genre);
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+		}
+		
+		return list;
+	}
+	
+	public List<Song> listSongsByRating(int rating){
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE rating = \'"+rating+"\'",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			throw new ValidationException("No songs with such rating = "+rating);
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+		}
+		
+		return list;
+	}
+	
+	public List<Song> listSongsByPlays(int plays){
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE plays = \'"+plays+"\'",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			throw new ValidationException("No songs with such plays = "+plays);
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+		}
+		
+		return list;
+	}
+	
 	
 	public void updateSong(Song song,String name,int length, String fileLocation, String genre, int rating) {
 		if(song == null || name == null || fileLocation == null || genre == null){

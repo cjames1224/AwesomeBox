@@ -27,13 +27,15 @@ public class AlbumArtistService {
 		em.getTransaction().commit();
 	}
 	
-	public void listAlbumArtists(){
+	public List<AlbumArtist> listAlbumArtists(){
 		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
 				AlbumArtist.class).getResultList();
 		
 		for(AlbumArtist a: list){
 			System.out.println(a.toString());
 		}
+		
+		return list;
 	}
 	
 //	public void updateAlbumArtist(AlbumArtist albumArtist,Album album,Artist artist) {

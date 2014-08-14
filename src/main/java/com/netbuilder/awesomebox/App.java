@@ -118,6 +118,8 @@ public class App
         
         System.out.println(artistList.get(0));
         
+        System.out.println(ss.listSongsByName("Theme Song"));
+        
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        
@@ -125,6 +127,8 @@ public class App
         em.close();
         
         System.out.println("Finished");
+        
+        
     }
     
     private static List<Artist> populateArtistList(){

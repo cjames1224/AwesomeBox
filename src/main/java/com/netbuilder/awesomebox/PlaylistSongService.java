@@ -28,13 +28,14 @@ private EntityManager em;
 		em.getTransaction().commit();
 	}
 	
-	public void listPlaylistSongs(){
+	public List<PlaylistSong> listPlaylistSongs(){
 		List<PlaylistSong> list = em.createQuery("SELECT a FROM PlaylistSong a",
 				PlaylistSong.class).getResultList();
 		
 		for(PlaylistSong a: list){
 			System.out.println(a.toString());
 		}
+		return list;
 	}
 	
 	public void updatePlaylistSong(PlaylistSong playlistSong, Song newSong) {
