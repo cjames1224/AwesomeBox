@@ -10,6 +10,7 @@ public class Queue {
 	
 	public Queue() {
 		queue = new ArrayList<Song>();
+		isShuffle = false;
 	}
 	
 	public void addSong(Song song) {
