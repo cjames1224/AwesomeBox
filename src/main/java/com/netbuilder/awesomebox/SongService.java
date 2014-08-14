@@ -54,6 +54,26 @@ private EntityManager em;
 		em.getTransaction().commit();
 	}
 	
+	public void updateSongName(Song song, String name){
+		updateSong(song, name, song.getLength(), song.getFileLocation(), song.getGenre(), song.getRating());
+	}
+	
+	public void updateSongLength(Song song, int length){
+		updateSong(song, song.getName(), length, song.getFileLocation(), song.getGenre(), song.getRating());
+	}
+	
+	public void updateSongFileLocation(Song song, String fileLocation){
+		updateSong(song, song.getName(), song.getLength(), fileLocation, song.getGenre(), song.getRating());
+	}
+	
+	public void updateSongGenre(Song song, String genre){
+		updateSong(song, song.getName(), song.getLength(), song.getFileLocation(), genre, song.getRating());
+	}
+	
+	public void updateSongRating(Song song, int rating){
+		updateSong(song, song.getName(), song.getLength(), song.getFileLocation(), song.getGenre(), rating);
+	}
+	
 	public void deleteSong(Song song) {
 		if(song == null){
 			throw new ValidationException("Invalid song delete");
