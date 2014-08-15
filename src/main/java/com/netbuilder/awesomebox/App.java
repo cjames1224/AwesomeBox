@@ -150,6 +150,16 @@ public class App
         System.out.println("Test search length");
         search.searchSongLength(600);
         
+        pss.addSongToPlaylist(playList.get(0), songList.get(0));
+        pss.addSongToPlaylist(playList.get(0), songList.get(1));
+        pss.addSongToPlaylist(playList.get(0), songList.get(2));
+        pss.addSongToPlaylist(playList.get(0), songList.get(3));
+        
+        System.out.println("TEST THINGS");
+        pss.listPlaylistSongs();
+        pss.reorderSong(playList.get(0), songList.get(1), 1);
+        pss.listPlaylistSongs();
+        
         //TEST MOVING TRACK NUMBER
         if(em != null){
         	System.out.println("Entity manager created successfully");

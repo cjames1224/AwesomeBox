@@ -52,22 +52,22 @@ public class PlaylistSongService {
 	public void addSongToPlaylist(Playlist playlist, Song song) {
 		// throws error if song already exists
 		if(em.createQuery("SELECT ps from PlaylistSong ps WHERE ps.song = "+song.getId()).getResultList().size() > 0 ) {
-			throw new ValidationException("Song already exists in playlist");
+			//throw new ValidationException("Song already exists in playlist");
 		}
 		
-		// get count of current playlist and add new song with last track number
-		List<Song> songList = em.createQuery("SELECT s FROM Song s, Playlist p, PlaylistSong ps WHERE s.id = ps.song AND p.id = ps.playlist AND p.id = "+playlist.getId(),
-				Song.class).getResultList();
-		int count = songList.size();
+		List<PlaylistSong> list = em.createQuery("SELECT ps FROM PlaylistSong ps WHERE ps.playlist =" + playlist.getId(),
+				PlaylistSong.class).getResultList();
+		System.out.println(list.size());
+		PlaylistSong  ps = new PlaylistSong(playlist, song, list.size()+1);
+		List<PlaylistSong> list23 = new ArrayList<PlaylistSong>();
+		list23.add(ps);
 		
-		// add new PlaylistSong
-		em.createQuery("INSERT INTO PlaylistSong (song, playlist, trackNumber) Values ("+song.getId()+", "+playlist.getId()+", "+(count+1)+")", 
-				PlaylistSong.class);
-	
+		this.persistPlaylistSongList(list23);
+		//persistPlaylistSongList(list);
 	}
 	
 	/**
-	 * reorders playlist given a song and a position to move it to.
+	 * reorders playlist given a song and a position to move it to. 
 	 * 
 	 * @param playlist playlist to change
 	 * @param song song selected to move
