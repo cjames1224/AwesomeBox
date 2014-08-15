@@ -143,8 +143,14 @@ public class App
         search.searchSongGreaterYear(2000);
         System.out.println("Test search Less than year");
         search.searchSongLesserYear(2000);
+        System.out.println("Test search album rating");
+        search.searchSongAlbumRating(3);
+        System.out.println("Test search artist rating");
+        search.searchSongArtistRating(5);
+        System.out.println("Test search length");
+        search.searchSongLength(600);
         
-        
+        //TEST MOVING TRACK NUMBER
         if(em != null){
         	System.out.println("Entity manager created successfully");
         }        

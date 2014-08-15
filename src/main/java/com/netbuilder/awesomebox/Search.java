@@ -267,4 +267,157 @@ public class Search {
 		
 		return list;
 	}
+	
+	public List<Song> searchSongAlbumRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating = " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongAlbumGreaterRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating >= " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongAlbumLesserRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating <= " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongArtistRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating = " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongArtistGreaterRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating >= " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongArtistLesserRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating <= " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongLength(int length) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE length = " + length +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongGreaterLength(int length) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE length >= " + length +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongLesserLength(int length) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE length <= " + length +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
 }
