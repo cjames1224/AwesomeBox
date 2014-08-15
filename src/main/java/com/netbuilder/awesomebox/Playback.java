@@ -1,7 +1,10 @@
 package com.netbuilder.awesomebox;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Scanner;
 
 import javax.sound.sampled.AudioFormat;
@@ -20,19 +23,19 @@ public class Playback {
 	private int numRead = 0, offset = 0;
 	private byte[] buffer;
 	private Runnable playing;
-	
+
 	private static Playback instance = null;
-	
+
 	private Playback(){
-		
+
 	}
-	
+
 	public static Playback getInstance(){
 		if(instance == null){
 			instance = new Playback();
 		}return instance;
 	}
-	
+
 	public boolean isPlaying(){
 		if(line != null)
 			return line.isRunning();
@@ -58,13 +61,15 @@ public class Playback {
 			//pb.line.drain();
 		}
 	}
-	
+
 	public void createLineFromPath(String fileLocation) {
 		try {
 			clearValues();
 
 			this.fileLocation = fileLocation;
-			stream = AudioSystem.getAudioInputStream(new File(fileLocation));
+			File f = new File(fileLocation);
+			stream = AudioSystem.getAudioInputStream(new File(fileLocation));			
+
 			AudioFormat format = stream.getFormat();
 			if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
 				format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
@@ -84,7 +89,7 @@ public class Playback {
 			initStream(info);
 
 		} catch (Exception e) {
-			System.out.println("You lose");
+			e.printStackTrace();
 		}
 	}
 
@@ -106,7 +111,7 @@ public class Playback {
 						while(offset < numRead){
 							offset += line.write(buffer, offset, numRead - offset);
 						}
-						
+
 						stream.mark(totals);
 						totals += 32;
 					}
@@ -120,19 +125,25 @@ public class Playback {
 				//System.exit(0);
 			}
 		};
-		
+
 		new Thread(playing).start();
 
 	}
-	
+
 	//move 5 buffer frames ahead
 	public void fastForward(){
-		
+		stream.mark(32);
+		try {
+			stream.reset();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	//move 5 buffer frames back
 	public void rewind(){
-		
+
 	}
 
 	public void stop(){
@@ -140,46 +151,46 @@ public class Playback {
 		//System.out.println("Thanks for listening. Line closed");
 		//System.exit(0);
 	}
-	
-	
+
+
 //	public static void main(String[] args){
-//	Playback pb = new Playback();
-//	
-//	try {
-//		pb.createLineFromPath("C:/Users/Training12/Desktop/bonjovi-itsmylife.wav");
-//	} catch (Exception e) {
-//		e.printStackTrace();
-//	}
-//	
-//	pb.togglePlay();
-//	
-//	String control = "";
-//	Scanner scan = new Scanner(System.in);
-//	for(;;){
-//		System.out.print("\"stop\" - stops song\n\"pause\" - toggles pause\n\"ff\" - fast-foward\n\"rw\" - rewinds\n>> ");
-//		control = scan.nextLine();
-//		switch(control){
-//		case "pause":
-//			pb.togglePlay();
-//			break;
-//		case "ff":
-//			pb.fastForward();
-//			break;
-//		case "rw":
-//			pb.rewind();
-//			break;
+//		Playback pb = new Playback();
 //
-//		case "stop":
-//			pb.stop();
-//			break;
-//			//break;
-//		default:
-//			break;
+//		try {
+//			pb.createLineFromPath("C:/Users/Training12/Desktop/bonjovi-itsmylife.wav");
+//		} catch (Exception e) {
+//			e.printStackTrace();
 //		}
+//
+//		pb.togglePlay();
+//
+//		String control = "";
+//		Scanner scan = new Scanner(System.in);
+//		for(;;){
+//			System.out.print("\"stop\" - stops song\n\"pause\" - toggles pause\n\"ff\" - fast-foward\n\"rw\" - rewinds\n>> ");
+//			control = scan.nextLine();
+//			switch(control){
+//			case "pause":
+//				pb.togglePlay();
+//				break;
+//			case "ff":
+//				pb.fastForward();
+//				break;
+//			case "rw":
+//				pb.rewind();
+//				break;
+//
+//			case "stop":
+//				pb.stop();
+//				break;
+//				//break;
+//			default:
+//				break;
+//			}
+//		}
+//
+//
 //	}
-//	
-//	
-//}
 
 
 }
