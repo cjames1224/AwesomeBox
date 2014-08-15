@@ -132,4 +132,139 @@ public class Search {
 		return list;
 	}
 	
+	public List<Song> searchSongGreaterRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE rating >= " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongLesserRating(int rating) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE rating <= " + rating +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongPlays(int plays) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE plays = " + plays +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongGreaterPlays(int plays) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE plays >= " + plays +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongLesserPlays(int plays) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE plays <= " + plays +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongYear(int year) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year = " + year +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongGreaterYear(int year) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year >= " + year +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
+	
+	public List<Song> searchSongLesserYear(int year) {
+		List<Song> list = em.createQuery("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year <= " + year +")",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			//System.out.println("No songs with such plays = "+plays);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+			//System.out.print(b);
+		}
+		
+		return list;
+	}
 }

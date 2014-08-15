@@ -133,6 +133,16 @@ public class App
         search.searchSongByAlbum(albumList.get(0), artistList.get(0));
         System.out.println("Test search playlist and album");
         search.searchSongByPlaylist(playList.get(0), albumList.get(0));
+        System.out.println("Test search greater than rating");
+        search.searchSongGreaterRating(2);
+        System.out.println("Test search less than rating");
+        search.searchSongLesserRating(2);
+        System.out.println("Test search year");
+        search.searchSongYear(2000);
+        System.out.println("Test search Greater year");
+        search.searchSongGreaterYear(2000);
+        System.out.println("Test search Less than year");
+        search.searchSongLesserYear(2000);
         
         
         if(em != null){
