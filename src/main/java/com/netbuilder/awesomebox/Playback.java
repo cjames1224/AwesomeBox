@@ -130,21 +130,21 @@ public class Playback {
 
 	}
 
-	//move 5 buffer frames ahead
-	public void fastForward(){
-		stream.mark(32);
-		try {
-			stream.reset();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	//move 5 buffer frames back
-	public void rewind(){
-
-	}
+//	//move 5 buffer frames ahead
+//	public void fastForward(){
+//		stream.mark(32);
+//		try {
+//			stream.reset();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	//move 5 buffer frames back
+//	public void rewind(){
+//
+//	}
 
 	public void stop(){
 		line.close();
