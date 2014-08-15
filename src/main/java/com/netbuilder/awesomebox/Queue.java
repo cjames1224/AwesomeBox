@@ -33,6 +33,10 @@ public class Queue {
 		queue.remove(song);
 	}
 	
+	public boolean isPlaying(){
+		return Playback.getInstance().isPlaying();
+	}
+	
 	public void clear() {
 		queue.clear();
 	}
@@ -46,6 +50,10 @@ public class Queue {
 	}
 	
 	public void play() {
+		if (queue.size() == 0) {
+			throw new ValidationException("Cannot play, Queue is empty");
+		}
+		
 		if (isShuffle) {
 			Playback.getInstance().createLineFromPath(queue.remove(new Random().nextInt(queue.size())).getFileLocation());
 		} else {
