@@ -18,6 +18,10 @@ public class LoginBean {
 	private String password;
 	private EntityManager em;
 	
+	public LoginBean(){
+
+	}
+	
 	public LoginBean(EntityManager em){
 		this.em = em;
 	}
