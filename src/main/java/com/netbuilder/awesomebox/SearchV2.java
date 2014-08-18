@@ -2,39 +2,46 @@ package com.netbuilder.awesomebox;
 
 import java.util.List;
 
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class SearchV2 {
 	
-	EntityManager em;
-	StringBuilder searchBuilder;
+	private EntityManager em;
+	private StringBuilder searchBuilder;
+	private int endParens = 0;
 
 	public SearchV2(EntityManager em) {
 		this.em = em;
 		this.searchBuilder = null;
 	}
 	
-	public static void main(String[] args){
-		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("awesomebox");
-        
-		EntityManager em = emf.createEntityManager();
-		 
-		SearchV2 s = new SearchV2(em);
-		
-		s.
-		searchSongName("Final Countdown").
-		searchSongLength(300).
-		search();
-
+//	public static void main(String[] args){
+//		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("awesomebox");
+//        
+//		EntityManager em = emf.createEntityManager();
+//		 
+//		SearchV2 s = new SearchV2(em);
+//		
+//		s.searchSongLesserRating(3).searchSongGenre("rock").search();
+//		
+//	}
+//	
+	public StringBuilder getStringBuilder(){
+		return searchBuilder;
 	}
 	
 	public List<Song> search(){
+		for(int i = 0; i < endParens; i++)
+			searchBuilder.append(" ) ");
 		List<Song> list = em.createQuery(searchBuilder.toString(), Song.class).getResultList();
 		if(list == null || list.size() == 0){
 			return list;
 		}
+		
+		System.out.println(searchBuilder.toString());
 		
 		for(Song s: list){
 			System.out.println(s.toString());
@@ -50,13 +57,14 @@ public class SearchV2 {
 		if(searchBuilder == null){
 			searchBuilder = new StringBuilder();
 		}else{
-			searchBuilder.append(" intersect ");
+			searchBuilder.append(" And s in ( ");
+			endParens ++;
 		}
 	}
 	
 	public SearchV2 searchSongName(String songName) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE name = \'"+songName+"\'");
+		searchBuilder.append("SELECT s FROM Song s WHERE name = \'"+songName+"\' ");
 		return this;		
 	}
 	
@@ -115,103 +123,103 @@ public class SearchV2 {
 	
 	public SearchV2 searchSongGreaterRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE rating >= " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE rating >= " + rating );
 		return this;
 	}
 	
 	public SearchV2 searchSongLesserRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE rating <= " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE rating <= " + rating);
 		return this;
 	}
 	
 	public SearchV2 searchSongPlays(int plays) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE plays = " + plays +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE plays = " + plays);
 		return this;
 	}
 	
 	public SearchV2 searchSongGreaterPlays(int plays) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE plays >= " + plays +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE plays >= " + plays);
 		return this;
 	}
 	
 	public SearchV2 searchSongLesserPlays(int plays) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE plays <= " + plays +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE plays <= " + plays);
 		return this;
 	}
 	
 	public SearchV2 searchSongYear(int year) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year = " + year +")");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year = " + year);
 		return this;
 	}
 	
 	public SearchV2 searchSongGreaterYear(int year) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year >= " + year +")");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year >= " + year);
 		return this;
 	}
 	
 	public SearchV2 searchSongLesserYear(int year) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year <= " + year +")");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.year <= " + year );
 		return this;
 	}
 	
 	public SearchV2 searchSongAlbumRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating = " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating = " + rating );
 		return this;
 	}
 	
 	public SearchV2 searchSongAlbumGreaterRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating >= " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating >= " + rating );
 		return this;
 	}
 	
 	public SearchV2 searchSongAlbumLesserRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating <= " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s.id = als.song AND al.id = als.album AND al.rating <= " + rating);
 		return this;
 	}
 	
 	public SearchV2 searchSongArtistRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating = " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating = " + rating );
 		return this;
 	}
 	
 	public SearchV2 searchSongArtistGreaterRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating >= " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating >= " + rating );
 		return this;
 	}
 	
 	public SearchV2 searchSongArtistLesserRating(int rating) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating <= " + rating +")");
+		searchBuilder.append("SELECT s FROM Song s, Artist ar, SongArtist sar WHERE s.id = sar.song AND ar.id = sar.artist AND ar.rating <= " + rating);
 		return this;
 	}
 	
 	public SearchV2 searchSongLength(int length) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE length = " + length +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE length = " + length);
 		return this;
 	}
 	
 	public SearchV2 searchSongGreaterLength(int length) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE length >= " + length +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE length >= " + length );
 		return this;
 	}
 	
 	public SearchV2 searchSongLesserLength(int length) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE length <= " + length +")");
+		searchBuilder.append("SELECT s FROM Song s WHERE length <= " + length );
 		return this;
 	}
 }
