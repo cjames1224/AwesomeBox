@@ -5,16 +5,19 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-@Stateless
-@Named
-public class LoginBean  implements Serializable{
 
+@Named
+@SessionScoped
+public class LoginBean implements Serializable {
+
+    private static final long serialVersionUID = 5443351151396868724L;
 	private String username;
 	private String password;
 	private EntityManager em;
@@ -28,11 +31,11 @@ public class LoginBean  implements Serializable{
 		this.em = em;
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUserName(String userName) {
+	public void setUsername(String userName) {
 		this.username = userName;
 	}
 
