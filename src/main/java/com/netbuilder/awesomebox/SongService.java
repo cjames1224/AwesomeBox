@@ -1,16 +1,23 @@
 package com.netbuilder.awesomebox;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Named
+@SessionScoped
 public class SongService {
 private EntityManager em;
+private List<Song> songList;
 	
 	
 	public SongService(EntityManager em){
 		this.em = em;
+		songList = new ArrayList<Song>();
 	}
 	
 	public void persistSongList(List<Song> list){
@@ -26,8 +33,17 @@ private EntityManager em;
 		}
 		
 		em.getTransaction().commit();
+		songList = list;
 	}
 	
+	public List<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(List<Song> songList) {
+		this.songList = songList;
+	}
+
 	public List<Song> listSongs(){
 		List<Song> list = em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();

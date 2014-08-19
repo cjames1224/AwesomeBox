@@ -17,14 +17,14 @@
             <h2>Kobe Bryant</h2>
             
                  
-           <h:dataTable value="#{songService.listSongs}" var="song"
+           <h:dataTable value="#{songService.songList}" var="song"
                       styleClass="table">
             <h:column>
                 <div class="media">
                     <div class="media-body">
                         <h3 class="media-heading">
-                            <h:link outcome="showitems" includeViewParams="true" value="#{song.getName}">
-                                <f:param name="songId" value="#{song.getId}"/>
+                            <h:link outcome="showitems" includeViewParams="true" value="#{song.name}">
+                                <f:param name="songId" value="#{song.id}"/>
                                 
                             </h:link>
                         </h3>

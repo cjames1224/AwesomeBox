@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "Song")
+@XmlRootElement
 public class Song {
 
 	@Id
