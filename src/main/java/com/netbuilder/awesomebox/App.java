@@ -160,6 +160,8 @@ public class App
         pss.reorderSong(playList.get(0), songList.get(1), 1);
         pss.listPlaylistSongs();
         
+        System.out.println(ss.getSongList().get(0));
+        
         //TEST MOVING TRACK NUMBER
         if(em != null){
         	System.out.println("Entity manager created successfully");

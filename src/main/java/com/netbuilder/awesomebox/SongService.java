@@ -1,8 +1,10 @@
 package com.netbuilder.awesomebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -10,14 +12,22 @@ import javax.persistence.Query;
 
 @Named
 @SessionScoped
-public class SongService {
+public class SongService implements Serializable {
+	
+private static final long serialVersionUID = 5443351151396868724L;
 private EntityManager em;
 private List<Song> songList;
 	
-	
 	public SongService(EntityManager em){
 		this.em = em;
-		songList = new ArrayList<Song>();
+		updateSongList();
+	}
+	
+	@PostConstruct
+	public void updateSongList() {
+		List<Song> list = em.createQuery("SELECT s FROM Song s",
+				Song.class).getResultList();
+		songList = list;
 	}
 	
 	public void persistSongList(List<Song> list){
@@ -44,6 +54,7 @@ private List<Song> songList;
 		this.songList = songList;
 	}
 
+
 	public List<Song> listSongs(){
 		List<Song> list = em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
@@ -51,7 +62,7 @@ private List<Song> songList;
 		for(Song s: list){
 			System.out.println(s.toString());
 		}
-		
+		this.songList = list;
 		return list;
 	}
 	
