@@ -18,17 +18,17 @@ public class SearchV2 {
 		this.searchBuilder = null;
 	}
 	
-//	public static void main(String[] args){
-//		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("awesomebox");
-//        
-//		EntityManager em = emf.createEntityManager();
-//		 
-//		SearchV2 s = new SearchV2(em);
-//		
-//		s.searchSongLesserRating(3).searchSongGenre("rock").search();
-//		
-//	}
-//	
+	public static void main(String[] args){
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("awesomebox");
+        
+		EntityManager em = emf.createEntityManager();
+		 
+		SearchV2 s = new SearchV2(em);
+		
+		s.searchSongLesserRating(3).searchSongGenre("rock").search();
+		
+	}
+	
 	public StringBuilder getStringBuilder(){
 		return searchBuilder;
 	}

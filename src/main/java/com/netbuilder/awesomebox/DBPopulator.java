@@ -17,7 +17,7 @@ public class DBPopulator {
 	private ArrayList<Song> songs;
 
 	public static void main(String[] args) {
-		new DBPopulator().populateDB();;
+		new DBPopulator().populateDB();
 	}
 
 	public void populateDB() {
@@ -32,18 +32,26 @@ public class DBPopulator {
 		initSongs();
 		initUsers();
 		initPlaylists();
+		initAlbumArtists();
+		initAlbumSongs();
+		initPlaylistSongs();
+		initSongArtists();
+		
 	}
 
 	public void clearDB() {
 		em.getTransaction().begin();
-		String query = "DROP TABLE *";
-		Query q = em.createQuery(query);
-		q.executeUpdate();
+		
+		String[] queries = new String[]{
+				"SET FOREIGN_KEY_CHECKS=0", "TRUNCATE TABLE Album_Song",   "TRUNCATE TABLE Playlist_Song","TRUNCATE TABLE Album_Artist", "TRUNCATE TABLE Song_Artist", 
+				"TRUNCATE TABLE Album","TRUNCATE TABLE Artist","TRUNCATE TABLE Song","TRUNCATE TABLE Playlist",  "TRUNCATE TABLE User", "SET FOREIGN_KEY_CHECKS=0"
+		};
+		for(String s: queries)
+			em.createNativeQuery(s).executeUpdate();
+	
 		em.getTransaction().commit();
 	}
-
 	
-
 	private void initArtists() {
 		artists = new ArrayList<Artist>();
 		artists.add(new Artist("Britney Spears", 5));
