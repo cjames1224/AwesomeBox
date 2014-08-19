@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,11 +13,12 @@ import javax.persistence.Persistence;
 
 @Stateless
 @Named
-public class LoginBean {
+public class LoginBean  implements Serializable{
 
 	private String username;
 	private String password;
 	private EntityManager em;
+	private String login = null;
 	
 	public LoginBean(){
 
@@ -42,7 +44,7 @@ public class LoginBean {
 		this.password = password;
 	}
 	
-	public boolean login(){
+	public String getlogin(){
 	
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE username =\'" + username + "\'",
 				User.class).getResultList();
@@ -53,7 +55,7 @@ public class LoginBean {
 		for(User u : list){
 			if(u.getPassword().equals(this.password)){
 				System.out.println("Logged in successfully!");
-				return true;
+				return "logged in";
 			}
 		}
 		throw new ValidationException("No such User with the password you've input.");

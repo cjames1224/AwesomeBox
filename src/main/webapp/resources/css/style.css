@@ -1,1 +1,15 @@
 @CHARSET "UTF-8";
+
+.navlist li {
+	display:inline-block;
+}
+
+.header div {
+	display:inline-block;
+}
+
+.logo { 
+	width:200px;
+	height:200px;
+
+}
