@@ -3,8 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                >
-
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="WEB-INF/layouts/template.xhtml">
     <ui:define name="title">AwesomeBox</ui:define>
 
     <ui:define name="body">
@@ -14,6 +15,26 @@
             </map>
             <img src="resources/kobe.jpg" border="0" width="350" height="355" align="middle" usemap="#pestoremap"
                  alt="Welcome to AwesomeBox"/>
+                 
+            <h2>Kobe</h2>
+            
+                 
+            <h:dataTable value="songService.listSongs()" var="oneSong"
+                      styleClass="table">
+            <h:column>
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="media-heading">
+                            <h:link outcome="showitems" includeViewParams="true" value="oneSong.get(0).getName()">
+                                <f:param name="songId" value="oneSong.get(0).getId()"/>
+                                
+                            </h:link>
+                        </h3>
+                        
+                    </div>
+                </div>
+            </h:column>
+        </h:dataTable>
         </div>
     </ui:define>
 </ui:composition>
