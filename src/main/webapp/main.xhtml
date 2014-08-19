@@ -17,14 +17,14 @@
             <h2>Kobe Bryant</h2>
             
                  
-      <!--      <h:dataTable value="songService.listSongs()" var="oneSong"
+           <h:dataTable value="#{songService.listSongs}" var="song"
                       styleClass="table">
             <h:column>
                 <div class="media">
                     <div class="media-body">
                         <h3 class="media-heading">
-                            <h:link outcome="showitems" includeViewParams="true" value="oneSong.get(0).getName()">
-                                <f:param name="songId" value="oneSong.get(0).getId()"/>
+                            <h:link outcome="showitems" includeViewParams="true" value="#{song.getName}">
+                                <f:param name="songId" value="#{song.getId}"/>
                                 
                             </h:link>
                         </h3>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </h:column>
-        </h:dataTable>--> 
+        </h:dataTable> 
         </div>
     </ui:define>
 </ui:composition>
