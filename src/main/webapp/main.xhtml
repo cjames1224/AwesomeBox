@@ -10,9 +10,9 @@
 
     <ui:define name="body">
         <div style="text-align: center; margin-top:20px">
-           
-            <img src="resources/images/kobe.jpg" border="0" width="500" height="500" align="middle" 
+           <img id="playButton" src="resources/images/kobePlay.png" border="0" onclick="changeImage(this)" align="middle" 
                  alt="Welcome to AwesomeBox"/>
+
 
 			<h2>Kobe Bryant</h2>
 
@@ -37,5 +37,7 @@
             </h:column>
         </h:dataTable> 
         </div>
+        <h:outputScript library="js" name="script.js" />
     </ui:define>
 </ui:composition>
+

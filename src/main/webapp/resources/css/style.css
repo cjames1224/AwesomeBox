@@ -1,7 +1,15 @@
 @CHARSET "UTF-8";
+html {
+	background-color:black;
+}
+
+p {
+	color:white;
+}
 
 .navlist li {
 	display:inline-block;
+	color: white;
 }
 
 .header div {
