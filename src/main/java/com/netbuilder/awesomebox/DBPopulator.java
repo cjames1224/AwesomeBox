@@ -52,14 +52,14 @@ public class DBPopulator {
 		//clearDB();
 
 		initAlbums();
-//		initArtists();
-//		initSongs();
-//		initUsers();
-//		initPlaylists();
-//		initAlbumArtists();
-//		initAlbumSongs();
-//		initPlaylistSongs();
-//		initSongArtists();
+		initArtists();
+		initSongs();
+		initUsers();
+		initPlaylists();
+		initAlbumArtists();
+		initAlbumSongs();
+		initPlaylistSongs();
+		initSongArtists();
 		
 	}
 
@@ -180,7 +180,7 @@ public class DBPopulator {
 		albums.add(new Album("Crush", 2000, "Regular", 5, "Hard Rock"));
 		albums.add(new Album("Birdemic The SoundTrack", 2000, "Compilation", 3,
 				"Movie"));
-		as.createAlbumList(albums);
+		as.persistAlbumList(albums);
 
 	}
 	
