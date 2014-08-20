@@ -61,13 +61,11 @@ public class PlaylistSongService implements Serializable {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
 		
 		for(PlaylistSong a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
 	}
 	
 	/**
@@ -165,11 +163,9 @@ public class PlaylistSongService implements Serializable {
 			throw new ValidationException("Invalid PlaylistSong Update");
 		}
 		
-		em.getTransaction().begin();
 		String query = "UPDATE PlaylistSong SET song = " + newSong.getId() + " WHERE id = " + playlistSong.getId();
 		em.createQuery(query);
 		playlistSong.setSong(newSong);
-		em.getTransaction().commit();
 	}
 	
 	/**
@@ -183,11 +179,9 @@ public class PlaylistSongService implements Serializable {
 			throw new ValidationException("Invalid PlaylistSong Update");
 		}
 		
-		em.getTransaction().begin();
 		String query = "UPDATE PlaylistSong SET trackNumber = \'" + trackNumber + " WHERE id = " + playlistSong.getId();
 		em.createQuery(query);
 		playlistSong.setTrackNumber(trackNumber);
-		em.getTransaction().commit();
 	}
 	
 	/**
@@ -200,10 +194,8 @@ public class PlaylistSongService implements Serializable {
 			throw new ValidationException("Invalid PlaylistSong Update");
 		}
 		
-		em.getTransaction().begin();
 		String query = "DELETE FROM PlaylistSong WHERE id = " + playlistSong.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
-		em.getTransaction().commit();
 	}
 }

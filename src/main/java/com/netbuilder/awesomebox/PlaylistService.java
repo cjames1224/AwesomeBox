@@ -53,13 +53,13 @@ public class PlaylistService implements Serializable{
 			throw new ValidationException("Invalid playlist persist");
 		}
 		
-		em.getTransaction().begin();
+
 		
 		for(Playlist a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+
 	}
 	
 	public void listPlaylists(){
@@ -113,22 +113,21 @@ public class PlaylistService implements Serializable{
 		if (playlist == null || name == null) {
 			throw new ValidationException("Invalid playlist update");
 		}
-		em.getTransaction().begin();
+	
 		String query = "UPDATE Playlist SET name = \'" + name + "\' WHERE id = " + playlist.getId();
 		em.createQuery(query);
 		playlist.setName(name);
-		em.getTransaction().commit();
+	
 	}
 	
 	public void deletePlaylist(Playlist playlist) {
 		if (playlist == null) {
 			throw new ValidationException("Invalid playlist delete");
 		}
-		em.getTransaction().begin();
+	
 		String query = "DELETE FROM Playlist WHERE id = " + playlist.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
-		em.getTransaction().commit();
 	}
 	
 	

@@ -44,13 +44,11 @@ public class UserService implements Serializable {
 			throw new ValidationException("Invalid list");
 		}
 		
-		em.getTransaction().begin();
 		
 		for (User u : list) {
 			em.persist(u);
 			
 		}
-		em.getTransaction().commit();
 	}
 	
 	public List<User> listUsers() {
@@ -105,13 +103,11 @@ public class UserService implements Serializable {
 		}
 		
 		
-		em.getTransaction().begin();
 		String query = "UPDATE User SET password = \'" + password + "\', credits = " + credits + ", isAdmin = " + isAdmin + " WHERE id = " + user.getId();
 		em.createQuery(query);
 		user.setPassword(password);
 		user.setCredits(credits);
 		user.setAdmin(isAdmin);
-		em.getTransaction().commit();
 	}
 	
 	public void updateUserPassword(User user, String password) {
@@ -131,11 +127,9 @@ public class UserService implements Serializable {
 			throw new ValidationException("Invalid user delete");
 		}
 		
-		em.getTransaction().begin();
 		String query = "DELETE FROM User WHERE id = " + user.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
-		em.getTransaction().commit();
 	}
 	
 

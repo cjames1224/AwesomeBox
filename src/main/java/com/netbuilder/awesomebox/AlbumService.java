@@ -43,13 +43,13 @@ public class AlbumService implements Serializable {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
+	
 		
 		for(Album a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+	
 	}
 	
 	public void listAlbums(){
@@ -86,7 +86,7 @@ public class AlbumService implements Serializable {
 			throw new ValidationException("Invalid Album Update");
 		}
 		
-		em.getTransaction().begin();
+
 		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.getType() +" WHERE id = " + album.getId();
 		em.createQuery(query);
 		album.setName(name);
@@ -94,7 +94,7 @@ public class AlbumService implements Serializable {
 		album.setYear(year);
 		album.setGenre(genre);
 		album.setType(type);
-		em.getTransaction().commit();
+	
 	}
 	
 	public void deleteAlbum(Album album) {
@@ -102,10 +102,10 @@ public class AlbumService implements Serializable {
 			throw new ValidationException("Invalid Album");
 		}
 		
-		em.getTransaction().begin();
+
 		String query = "DELETE FROM Album WHERE id = " + album.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
-		em.getTransaction().commit();
+
 	}
 }

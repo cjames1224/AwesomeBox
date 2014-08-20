@@ -44,13 +44,13 @@ public void setAlbumSongList(List<AlbumSong> albumSongList) {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
+		
 		
 		for(AlbumSong a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+		
 	}
 	
 	public List<AlbumSong> listAlbumSongs(){

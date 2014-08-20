@@ -43,13 +43,13 @@ public class AlbumArtistService implements Serializable {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
+		
 		
 		for(AlbumArtist a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+		
 	}
 	
 	public List<AlbumArtist> listAlbumArtists(){
