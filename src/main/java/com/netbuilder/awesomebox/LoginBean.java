@@ -30,10 +30,6 @@ public class LoginBean implements Serializable {
 	public LoginBean(){
 		//em = Persistence.createEntityManagerFactory("awesomebox").createEntityManager();
 	}
-	
-	public LoginBean(EntityManager em){
-		this.em = em;
-	}
 
 	public String getUsername() {
 		return username;
