@@ -3,12 +3,14 @@ package com.netbuilder.awesomebox;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class DBPopulator {
 
+	@Inject
 	private EntityManager em;
 	private ArrayList<User> users;
 	private ArrayList<Artist> artists;

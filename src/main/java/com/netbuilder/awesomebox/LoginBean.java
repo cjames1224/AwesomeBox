@@ -53,7 +53,7 @@ public class LoginBean implements Serializable {
 	
 	public String getloginStatus(){
 	
-		List<User> list = em.createQuery("SELECT u FROM User u WHERE username =\'" + username + "\'",
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
 				User.class).getResultList();
 		if(list == null || list.size() == 0){
 			//throw new ValidationException("Username cannot be found");
