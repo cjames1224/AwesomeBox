@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,57 +18,29 @@ import javax.persistence.Query;
  *
  */
 @Named
-@SessionScoped
+@Stateless
 public class PlaylistSongService implements Serializable {
 
 	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<PlaylistSong> playlistSongList;
-	
-	
 
-	/**
-	 * Class constructor given entityManager parameter
-	 * 
-	 * @param em represents shared entity manager
-	 */
-	public PlaylistSongService(){
-		
-	}
-	
-	@PostConstruct
-	public void updatePlaylistSongList() {
-		List<PlaylistSong> list = em.createQuery("SELECT a FROM PlaylistSong a",
-				PlaylistSong.class).getResultList();
-		this.playlistSongList = list;
-	}
-	
 	public List<PlaylistSong> getPlaylistSongList() {
-		return playlistSongList;
+		return em.createQuery("SELECT a FROM PlaylistSong a",
+				PlaylistSong.class).getResultList();
 	}
 
-	public void setPlaylistSongList(List<PlaylistSong> playlistSongList) {
-		this.playlistSongList = playlistSongList;
-	}
 
-	/**
-	 * populates DB with playlistSongs
-	 * 
-	 * @param list list of PlaylistSongs to add to DB
-	 */
-	public void persistPlaylistSongList(List<PlaylistSong> list){
-		if (list == null) {
+	public void persistPlaylistSongList(List<PlaylistSong> playlistSongList) {
+		if (playlistSongList == null) {
 			throw new ValidationException("Invalid List");
 		}
 		
-		
-		for(PlaylistSong a: list){
-			em.persist(a);
+		for(PlaylistSong ps : playlistSongList){
+			em.persist(ps);
 		}
-		
 	}
-	
+
 	/**
 	 * Adds given song to given playlist by creating new playlistSong 
 	 * 
@@ -136,22 +109,7 @@ public class PlaylistSongService implements Serializable {
 		
 		
 	}
-	
-	/**
-	 * get list of all playlistSongs
-	 * 
-	 * @return list of all playlistSong
-	 */
-	public List<PlaylistSong> listPlaylistSongs(){
-		List<PlaylistSong> list = em.createQuery("SELECT a FROM PlaylistSong a",
-				PlaylistSong.class).getResultList();
-		
-		for(PlaylistSong a: list){
-			System.out.println(a.toString());
-		}
-		return list;
-	}
-	
+
 	/**
 	 * replaces song in playlist.. this is probably in the wrong class.
 	 * 

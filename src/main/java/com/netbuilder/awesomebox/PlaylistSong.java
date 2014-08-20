@@ -18,7 +18,7 @@ public class PlaylistSong {
 
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "Playlist_ID",referencedColumnName = "ID")
