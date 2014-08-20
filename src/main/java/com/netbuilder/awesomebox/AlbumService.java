@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,31 +12,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class AlbumService implements Serializable {
 	
-	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<Album> albumList;
-	
-	public AlbumService(){
-		
-	}
-	
-	@PostConstruct
-	public void updateAlbumList() {
-		List<Album> list = em.createQuery("SELECT a FROM Album a",
-				Album.class).getResultList();
-		this.albumList = list;
-	}
 	
 	public List<Album> getAlbumList() {
-		return albumList;
-	}
-
-	public void setAlbumList(List<Album> albumList) {
-		this.albumList = albumList;
+		return em.createQuery("SELECT a FROM Album a",
+				Album.class).getResultList();
 	}
 
 	public void persistAlbumList(List<Album> list){
@@ -43,23 +28,11 @@ public class AlbumService implements Serializable {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
-		
 		for(Album a: list){
 			em.persist(a);
 		}
-		
-		em.getTransaction().commit();
 	}
 	
-	public void listAlbums(){
-		List<Album> list = em.createQuery("SELECT a FROM Album a",
-				Album.class).getResultList();
-		
-		for(Album a: list){
-			System.out.println(a.toString());
-		}
-	}
 	
 	public void updateAlbumName(Album album,String name) {
 		updateAlbum(album,name,album.getRating(),album.getYear(),album.getGenre(),album.getType());
@@ -86,7 +59,6 @@ public class AlbumService implements Serializable {
 			throw new ValidationException("Invalid Album Update");
 		}
 		
-		em.getTransaction().begin();
 		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.getType() +" WHERE id = " + album.getId();
 		em.createQuery(query);
 		album.setName(name);
@@ -94,18 +66,17 @@ public class AlbumService implements Serializable {
 		album.setYear(year);
 		album.setGenre(genre);
 		album.setType(type);
-		em.getTransaction().commit();
+	
 	}
 	
 	public void deleteAlbum(Album album) {
 		if (album == null) {
 			throw new ValidationException("Invalid Album");
 		}
-		
-		em.getTransaction().begin();
+
 		String query = "DELETE FROM Album WHERE id = " + album.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
-		em.getTransaction().commit();
+
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,32 +13,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class PlaylistService implements Serializable{
 	
 	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<Playlist> playList;
 	
-	public PlaylistService(){
-		
-	}
-	
-	@PostConstruct
-	public void updatePlayList() {
-		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
-				Playlist.class).getResultList();
-		this.playList = list;
-	}
+
 	
 	public List<Playlist> getPlayList() {
-		return playList;
+		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
+				Playlist.class).getResultList();
+		return list;
 	}
-
-	public void setPlayList(List<Playlist> playList) {
-		this.playList = playList;
-	}
+	
 
 	public void createPlaylist(User user, String name) {
 		Playlist playlist = new Playlist(name, user);
@@ -53,13 +43,13 @@ public class PlaylistService implements Serializable{
 			throw new ValidationException("Invalid playlist persist");
 		}
 		
-		em.getTransaction().begin();
+
 		
 		for(Playlist a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+
 	}
 	
 	public void listPlaylists(){
@@ -113,22 +103,21 @@ public class PlaylistService implements Serializable{
 		if (playlist == null || name == null) {
 			throw new ValidationException("Invalid playlist update");
 		}
-		em.getTransaction().begin();
+	
 		String query = "UPDATE Playlist SET name = \'" + name + "\' WHERE id = " + playlist.getId();
 		em.createQuery(query);
 		playlist.setName(name);
-		em.getTransaction().commit();
+	
 	}
 	
 	public void deletePlaylist(Playlist playlist) {
 		if (playlist == null) {
 			throw new ValidationException("Invalid playlist delete");
 		}
-		em.getTransaction().begin();
+	
 		String query = "DELETE FROM Playlist WHERE id = " + playlist.getId();
 		Query q = em.createQuery(query);
 		q.executeUpdate();
-		em.getTransaction().commit();
 	}
 	
 	

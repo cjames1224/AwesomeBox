@@ -42,13 +42,11 @@ private EntityManager em;
 		if(list == null){
 			throw new ValidationException("Invalid SongArtist Update");
 		}
-		em.getTransaction().begin();
 		
 		for(SongArtist sa: list){
 			em.persist(sa);
 		}
 		
-		em.getTransaction().commit();
 	}
 	
 	public List<SongArtist> listSongArtists(){

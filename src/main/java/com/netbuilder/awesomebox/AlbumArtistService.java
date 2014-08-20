@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,57 +12,35 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class AlbumArtistService implements Serializable {
 	
 	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<AlbumArtist> albumArtistList;
 	
-	public AlbumArtistService(){
-		
-	}
-	
-	@PostConstruct
-	public void updateAlbumArtistList() {
-		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
-				AlbumArtist.class).getResultList();
-		this.albumArtistList = list;
-	}
 	
 	public List<AlbumArtist> getAlbumArtistList() {
-		return albumArtistList;
+		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
+				AlbumArtist.class).getResultList();
+		return list;
 	}
-
-	public void setAlbumArtistList(List<AlbumArtist> albumArtistList) {
-		this.albumArtistList = albumArtistList;
-	}
+	
 
 	public void persistAlbumArtistList(List<AlbumArtist> list){
 		if (list == null) {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
+		
 		
 		for(AlbumArtist a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+		
 	}
 	
-	public List<AlbumArtist> listAlbumArtists(){
-		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
-				AlbumArtist.class).getResultList();
-		
-		for(AlbumArtist a: list){
-			System.out.println(a.toString());
-		}
-		
-		return list;
-	}
 	
 //	public void updateAlbumArtist(AlbumArtist albumArtist,Album album,Artist artist) {
 //		em.getTransaction().begin();

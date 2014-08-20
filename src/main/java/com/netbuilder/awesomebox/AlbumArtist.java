@@ -18,7 +18,7 @@ public class AlbumArtist {
 	
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE)

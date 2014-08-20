@@ -3,11 +3,26 @@ package com.netbuilder.awesomebox;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.sql.DataSourceDefinition;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+@Singleton
+@Startup
+@DataSourceDefinition(
+
+	name = "JDNIPool",
+	className = "com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource" ,
+    user = "root",
+    password = "P4ssword"
+		
+)
 public class DBPopulator {
 
 	@Inject
@@ -17,32 +32,40 @@ public class DBPopulator {
 	private ArrayList<Album> albums;
 	private ArrayList<Playlist> playlists;
 	private ArrayList<Song> songs;
+	
+	@Inject private SongService ss;
+	@Inject private ArtistService ars;
+	@Inject private AlbumService as;
+	@Inject private UserService us;
+	@Inject private PlaylistService ps;
+	@Inject private SongArtistService sas;
+	@Inject private PlaylistSongService pss;
+	@Inject private AlbumSongService ass;
+	@Inject private AlbumArtistService aas;
 
-	public static void main(String[] args) {
-		new DBPopulator().populateDB();
-	}
-
+	@PostConstruct
 	public void populateDB() {
 		em = Persistence.createEntityManagerFactory("awesomebox")
 				.createEntityManager();
 
 		//to clear the db, uncomment below
-		clearDB();
+		//clearDB();
 
 		initAlbums();
-		initArtists();
-		initSongs();
-		initUsers();
-		initPlaylists();
-		initAlbumArtists();
-		initAlbumSongs();
-		initPlaylistSongs();
-		initSongArtists();
+//		initArtists();
+//		initSongs();
+//		initUsers();
+//		initPlaylists();
+//		initAlbumArtists();
+//		initAlbumSongs();
+//		initPlaylistSongs();
+//		initSongArtists();
 		
 	}
 
+	
+	@PreDestroy
 	public void clearDB() {
-		em.getTransaction().begin();
 		
 		String[] queries = new String[]{
 				"SET FOREIGN_KEY_CHECKS=0", "TRUNCATE TABLE Album_Song",   "TRUNCATE TABLE Playlist_Song","TRUNCATE TABLE Album_Artist", "TRUNCATE TABLE Song_Artist", 
@@ -51,7 +74,6 @@ public class DBPopulator {
 		for(String s: queries)
 			em.createNativeQuery(s).executeUpdate();
 	
-		em.getTransaction().commit();
 	}
 	
 	private void initArtists() {
@@ -68,7 +90,7 @@ public class DBPopulator {
 		artists.add(new Artist("Damien Carter", 5));
 
 		artists.add(new Artist("Lil Wayne", 1));
-		new ArtistService(em).persistArtistList(artists);
+		ars.persistArtistList(artists);
 	}
 	
 	private void initSongArtists() {
@@ -92,7 +114,7 @@ public class DBPopulator {
 		sa.add(new SongArtist(songs.get(16), artists.get(1)));
 		sa.add(new SongArtist(songs.get(17), artists.get(1)));
 		sa.add(new SongArtist(songs.get(18), artists.get(9)));
-		new SongArtistService(em).persistSongArtistList(sa);
+		sas.persistSongArtistList(sa);
 
 	}
 
@@ -136,7 +158,7 @@ public class DBPopulator {
 				"Hard Rock", 5));
 		songs.add(new Song("Just Hanging Out (With My Family)", 345,
 				"file/loc/birdemic.wav", "Movie", 5));
-		new SongService(em).persistSongList(songs);
+		ss.persistSongList(songs);
 	}
 
 	private void initAlbums() {
@@ -158,7 +180,7 @@ public class DBPopulator {
 		albums.add(new Album("Crush", 2000, "Regular", 5, "Hard Rock"));
 		albums.add(new Album("Birdemic The SoundTrack", 2000, "Compilation", 3,
 				"Movie"));
-		new AlbumService(em).persistAlbumList(albums);
+		as.createAlbumList(albums);
 
 	}
 	
@@ -168,7 +190,7 @@ public class DBPopulator {
 		users.add(new User("Charleigh", "P4ssword"));
 		users.add(new User("David", "P4ssword"));
 		users.add(new User("Daniel", "P4ssword"));
-		new UserService(em).persistUserList(users);
+		us.persistUserList(users);
 	}
 	
 	private void initPlaylistSongs() {
@@ -188,7 +210,7 @@ public class DBPopulator {
 		ps.add(new PlaylistSong(playlists.get(3), songs.get(8),1));
 		ps.add(new PlaylistSong(playlists.get(3), songs.get(9),2));
 		ps.add(new PlaylistSong(playlists.get(3), songs.get(3),3));
-		new PlaylistSongService(em).persistPlaylistSongList(ps);
+		pss.persistPlaylistSongList(ps);
 
 	}
 
@@ -199,7 +221,7 @@ public class DBPopulator {
 		playlists.add(new Playlist("Christian's Playlist", users.get(1)));
 		playlists.add(new Playlist("David's Playlist", users.get(2)));
 		playlists.add(new Playlist("Daniel's Playlist", users.get(3)));
-		new PlaylistService(em).persistPlaylistList(playlists);
+		ps.persistPlaylistList(playlists);
 	}
 
 	private void initAlbumArtists() {
@@ -218,7 +240,7 @@ public class DBPopulator {
 		aa.add(new AlbumArtist(albums.get(8), artists.get(8)));
 		aa.add(new AlbumArtist(albums.get(9), artists.get(1)));
 		aa.add(new AlbumArtist(albums.get(10), artists.get(9)));
-		new AlbumArtistService(em).persistAlbumArtistList(aa);
+		aas.persistAlbumArtistList(aa);
 	}
 
 	private void initAlbumSongs() {
@@ -242,7 +264,7 @@ public class DBPopulator {
 		as.add(new AlbumSong(albums.get(9), songs.get(16), 1));
 		as.add(new AlbumSong(albums.get(9), songs.get(17), 1));
 		as.add(new AlbumSong(albums.get(10), songs.get(18), 1));
-		new AlbumSongService(em).persistAlbumSongList(as);
+		ass.persistAlbumSongList(as);
 	}
 
 

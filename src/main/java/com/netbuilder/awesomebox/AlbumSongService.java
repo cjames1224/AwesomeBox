@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,32 +12,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class AlbumSongService implements Serializable {
 
 	private static final long serialVersionUID = 5443351151396868724L;
 @Inject
 private EntityManager em;
-private List<AlbumSong> albumSongList;
 	
+
 	
 	public List<AlbumSong> getAlbumSongList() {
-	return albumSongList;
-}
-
-public void setAlbumSongList(List<AlbumSong> albumSongList) {
-	this.albumSongList = albumSongList;
-}
-
-	public AlbumSongService(){
-		
-	}
-	
-	@PostConstruct
-	public void updateAlbumSongList() {
 		List<AlbumSong> list = em.createQuery("SELECT a FROM AlbumSong a",
 				AlbumSong.class).getResultList();
-		this.albumSongList = list;
+		return list;
 	}
 	
 	public void persistAlbumSongList(List<AlbumSong> list){
@@ -44,25 +32,15 @@ public void setAlbumSongList(List<AlbumSong> albumSongList) {
 			throw new ValidationException("Invalid List");
 		}
 		
-		em.getTransaction().begin();
+		
 		
 		for(AlbumSong a: list){
 			em.persist(a);
 		}
 		
-		em.getTransaction().commit();
+		
 	}
 	
-	public List<AlbumSong> listAlbumSongs(){
-		List<AlbumSong> list = em.createQuery("SELECT a FROM AlbumSong a",
-				AlbumSong.class).getResultList();
-		
-		for(AlbumSong a: list){
-			System.out.println(a.toString());
-		}
-		
-		return list;
-	}
 	
 //	public void updateAlbumSong(AlbumSong albumSong,Album album,Song song,int trackNumber) {
 //		em.getTransaction().begin();
