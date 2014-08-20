@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,9 @@ import javax.persistence.Query;
  */
 @Named
 @SessionScoped
-public class PlaylistSongService {
+public class PlaylistSongService implements Serializable {
 
+	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
 	private List<PlaylistSong> playlistSongList;
