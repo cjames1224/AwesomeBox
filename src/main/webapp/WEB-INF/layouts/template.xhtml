@@ -37,10 +37,10 @@
 					<li id="AboutNavLink">About</li>
 					<li id="LoginNavLink">
 						<!--  if no one logged in --> <h:link
-							rendered="#{!userController.isLoggedIn}" value="Login"
+							rendered="#{!userController.loginBean.loginStatus}" value="Login"
 							outcome="login"></h:link> <!--  if someone logged in --> <h:link
 							value="#{userController.loginBean.username}" outcome="profile"
-							rendered="#{userController.isLoggedIn}"></h:link>
+							rendered="#{userController.loginBean.loginStatus}"></h:link>
 					</li>
 					<li id="SearchBox">search...</li>
 

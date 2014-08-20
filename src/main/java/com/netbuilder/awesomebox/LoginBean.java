@@ -22,7 +22,7 @@ public class LoginBean implements Serializable {
 	private String username;
 	private String password;
 	private int credits;
-	private String loginStatus;
+	private boolean loginStatus;
 	
 	@Inject
 	private EntityManager em;
@@ -40,7 +40,7 @@ public class LoginBean implements Serializable {
 		this.username = userName;
 	}
 
-	public void setloginStatus(String loginStatus) {
+	public void setLoginStatus(boolean loginStatus) {
 		this.loginStatus = loginStatus;
 	}
 
@@ -57,33 +57,34 @@ public class LoginBean implements Serializable {
 				User.class).getResultList();
 		return list.get(0).getCredits();
 	}
+
 	
-	public String getloginStatus(){
+	public String getLoginStatus(){
 	
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
 				User.class).getResultList();
 		if(list == null || list.size() == 0){
 			//throw new ValidationException("Username cannot be found");
-			setloginStatus("Username cannot be found");
-			return loginStatus;
+			setLoginStatus(false);
+			return "login";
 		}
 		
 		for(User u : list){
 			if(u.getPassword().equals(this.password)){
-				setloginStatus("logged in");
-				return loginStatus;
+				setLoginStatus(true);
+				return "profile";
 			}
 		}
 		//throw new ValidationException("No such User with the password you've input.");
-		setloginStatus("No such User with the password you've input.");
-		return loginStatus;
+		setLoginStatus(false);
+		return "login";
 		
 	}
 	
 	public String logout(){
 		username = null;
 		password = null;
-		loginStatus = null;
+		loginStatus = false;
 		return "logout";
 	}
 	

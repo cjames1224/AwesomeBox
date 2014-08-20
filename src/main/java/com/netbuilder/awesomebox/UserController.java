@@ -15,8 +15,6 @@ public class UserController implements Serializable {
 	
 	@Inject
 	private LoginBean loginBean;
-	
-	private boolean isLoggedIn = false;
 
 	// getters and setters
 
@@ -30,9 +28,6 @@ public class UserController implements Serializable {
 	}
 
 
-	public boolean getIsLoggedIn() {
-		return (loginBean.getloginStatus().equals("logged in")) ;
-	}
 
 	
 
