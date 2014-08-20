@@ -45,8 +45,8 @@ public class DBPopulator {
 
 	@PostConstruct
 	public void populateDB() {
-		em = Persistence.createEntityManagerFactory("awesomebox")
-				.createEntityManager();
+		//em = Persistence.createEntityManagerFactory("awesomebox")
+				//.createEntityManager();
 
 		//to clear the db, uncomment below
 		//clearDB();

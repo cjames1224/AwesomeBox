@@ -52,6 +52,21 @@ private EntityManager em;
 		return list;
 	}
 	
+	public List<Song> listSongsByID(int id){
+		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE s.id = \'"+id+"\'",
+				Song.class).getResultList();
+		
+		if(list == null || list.size()==0) {
+			System.out.println("No songs with such name = "+id);
+			return list;
+		}
+		
+		for(Song s: list){
+			System.out.println(s.toString());
+		}
+		
+		return list;
+	}
 	
 	public List<Song> listSongsByGenre(String genre){
 		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE genre = \'"+genre+"\'",
