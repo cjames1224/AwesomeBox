@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,38 +13,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class UserService implements Serializable {
 	
 	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<User> userList;
 	
 	public List<User> getUserList() {
-		return userList;
-	}
-
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
-	}
-
-	public UserService() {
-		
-	}
-	
-	@PostConstruct
-	public void updateUserList() {
-		List<User> list = em.createQuery("SELECT u FROM User u",
+		return em.createQuery("SELECT u FROM User u",
 				User.class).getResultList();
-		this.userList = list;
 	}
-	
+
+
 	public void persistUserList(List<User> list) {
 		if(list == null){
 			throw new ValidationException("Invalid list");
 		}
-		
 		
 		for (User u : list) {
 			em.persist(u);

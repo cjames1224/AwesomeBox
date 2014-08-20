@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,58 +13,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class SongService implements Serializable {
 	
 private static final long serialVersionUID = 5443351151396868724L;
 
 @Inject
 private EntityManager em;
-private List<Song> songList;
-	
-	public SongService(){
-		
-	}
-	
-	@PostConstruct
-	public void updateSongList() {
-		List<Song> list = em.createQuery("SELECT s FROM Song s",
-				Song.class).getResultList();
-		songList = list;
-	}
 	
 	public void persistSongList(List<Song> list){
 		if(list == null){
 			throw new ValidationException("Invalid list");
 		}
-		
-		
-		
+
 		for(Song a: list){
 			em.persist(a);
 		}
-		
-		songList = list;
 	}
 	
 	public List<Song> getSongList() {
-		return songList;
-	}
-
-	public void setSongList(List<Song> songList) {
-		this.songList = songList;
-	}
-
-
-	public List<Song> listSongs(){
-		List<Song> list = em.createQuery("SELECT s FROM Song s",
+		return em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
-		
-		for(Song s: list){
-			System.out.println(s.toString());
-		}
-		this.songList = list;
-		return list;
 	}
 	
 	public List<Song> listSongsByName(String name){
