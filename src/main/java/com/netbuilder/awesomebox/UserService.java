@@ -3,14 +3,38 @@ package com.netbuilder.awesomebox;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Named
+@SessionScoped
 public class UserService {
-	private EntityManager em;
 	
-	public UserService(EntityManager em) {
-		this.em = em;
+	@Inject
+	private EntityManager em;
+	private List<User> userList;
+	
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+	public UserService() {
+		
+	}
+	
+	@PostConstruct
+	public void updateUserList() {
+		List<User> list = em.createQuery("SELECT u FROM User u",
+				User.class).getResultList();
+		this.userList = list;
 	}
 	
 	public void persistUserList(List<User> list) {

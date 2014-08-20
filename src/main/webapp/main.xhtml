@@ -18,24 +18,24 @@
 
 			<h:form>
 				<h3>Kobe's Song</h3>
-				<h:outputText value="#{songService.songList[0]}" />
-					<!--  <f:param name="songId" value="#{song.id}"/> -->
+				
 
 
 			</h:form>
-			<!-- <h:dataTable value="#{songService.songList}" var="oneSong"
+			 <h:dataTable value="#{songService.songList}" var="oneSong"
                       styleClass="table">
             <h:column>
                 <div class="media">
                     <div class="media-body">
                         <h3 class="media-heading">
-                            
+                            <h:link value="#{oneSong.name}" />
+							 <f:param name="songId" value="#{song.id}"/> 
                         </h3>
                         
                     </div>
                 </div>
             </h:column>
-        </h:dataTable> --> 
+        </h:dataTable> 
         </div>
     </ui:define>
 </ui:composition>

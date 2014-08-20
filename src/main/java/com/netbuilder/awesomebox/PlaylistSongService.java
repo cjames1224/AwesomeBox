@@ -3,6 +3,10 @@ package com.netbuilder.awesomebox;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -11,19 +15,40 @@ import javax.persistence.Query;
  * @author Kobe
  *
  */
+@Named
+@SessionScoped
 public class PlaylistSongService {
 
+	@Inject
 	private EntityManager em;
+	private List<PlaylistSong> playlistSongList;
 	
+	
+
 	/**
 	 * Class constructor given entityManager parameter
 	 * 
 	 * @param em represents shared entity manager
 	 */
-	public PlaylistSongService(EntityManager em){
-		this.em = em;
+	public PlaylistSongService(){
+		
 	}
 	
+	@PostConstruct
+	public void updatePlaylistSongList() {
+		List<PlaylistSong> list = em.createQuery("SELECT a FROM PlaylistSong a",
+				PlaylistSong.class).getResultList();
+		this.playlistSongList = list;
+	}
+	
+	public List<PlaylistSong> getPlaylistSongList() {
+		return playlistSongList;
+	}
+
+	public void setPlaylistSongList(List<PlaylistSong> playlistSongList) {
+		this.playlistSongList = playlistSongList;
+	}
+
 	/**
 	 * populates DB with playlistSongs
 	 * 

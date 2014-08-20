@@ -2,17 +2,40 @@ package com.netbuilder.awesomebox;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Named
+@SessionScoped
 public class AlbumArtistService {
 	
+	@Inject
 	private EntityManager em;
+	private List<AlbumArtist> albumArtistList;
 	
-	public AlbumArtistService(EntityManager em){
-		this.em = em;
+	public AlbumArtistService(){
+		
 	}
 	
+	@PostConstruct
+	public void updateAlbumArtistList() {
+		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
+				AlbumArtist.class).getResultList();
+		this.albumArtistList = list;
+	}
+	
+	public List<AlbumArtist> getAlbumArtistList() {
+		return albumArtistList;
+	}
+
+	public void setAlbumArtistList(List<AlbumArtist> albumArtistList) {
+		this.albumArtistList = albumArtistList;
+	}
+
 	public void persistAlbumArtistList(List<AlbumArtist> list){
 		if (list == null) {
 			throw new ValidationException("Invalid List");

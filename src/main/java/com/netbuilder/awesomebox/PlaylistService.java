@@ -3,17 +3,40 @@ package com.netbuilder.awesomebox;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Named
+@SessionScoped
 public class PlaylistService {
 	
+	@Inject
 	private EntityManager em;
+	private List<Playlist> playList;
 	
-	public PlaylistService(EntityManager em){
-		this.em = em;
+	public PlaylistService(){
+		
 	}
 	
+	@PostConstruct
+	public void updatePlayList() {
+		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
+				Playlist.class).getResultList();
+		this.playList = list;
+	}
+	
+	public List<Playlist> getPlayList() {
+		return playList;
+	}
+
+	public void setPlayList(List<Playlist> playList) {
+		this.playList = playList;
+	}
+
 	public void createPlaylist(User user, String name) {
 		Playlist playlist = new Playlist(name, user);
 		List<Playlist> playlistList = new ArrayList<Playlist>();

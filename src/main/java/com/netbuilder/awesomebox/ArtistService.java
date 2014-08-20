@@ -2,16 +2,39 @@ package com.netbuilder.awesomebox;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Named
+@SessionScoped
 public class ArtistService {
 	
+	@Inject
 	private EntityManager em;
+	private List<Artist> artistList;
 	
 	
-	public ArtistService(EntityManager em){
-		this.em = em;
+	public List<Artist> getArtistList() {
+		return artistList;
+	}
+
+	public void setArtistList(List<Artist> artistList) {
+		this.artistList = artistList;
+	}
+
+	public ArtistService(){
+		
+	}
+	
+	@PostConstruct
+	public void updateArtistList() {
+		List<Artist> list = em.createQuery("SELECT a FROM Artist a",
+				Artist.class).getResultList();
+		this.artistList = list;
 	}
 	
 	public void persistArtistList(List<Artist> list){
