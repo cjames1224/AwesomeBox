@@ -1,7 +1,9 @@
 package com.netbuilder.awesomebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

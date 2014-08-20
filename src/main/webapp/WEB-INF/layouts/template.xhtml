@@ -27,33 +27,38 @@
 		<!-- HEADER -->
 		<div class="header">
 			<div class="logo">
-				<a href="main.xhtml"><h:graphicImage library="images" name="jukebox.png" /></a>
+				<a href="main.xhtml"><h:graphicImage library="images"
+						name="jukebox.png" /></a>
 			</div>
 			<div class="nav">
 				<ul class="navList">
 					<li id="PlaylistNavLink">Playlists</li>
 					<li id="AboutNavLink">About</li>
-					<li id="LoginNavLink">Login</li>
+					<li id="LoginNavLink">
+						<!--  if no one logged in --> <h:link
+							rendered="#{!userController.isLoggedIn}" value="Login"
+							outcome="login"></h:link> <!--  if someone logged in --> <h:outputText
+							value="#{userController.loginBean.username}"
+							rendered="#{userController.isLoggedIn}"></h:outputText>
+					</li>
 					<li id="SearchBox">search...</li>
-					
-				</ul>	
+
+				</ul>
 			</div>
 		</div>
 		<!-- DISPLAY FOR CURRENT SONG IN QUEUE -->
-		<div class="currentPlayer">
-			CURRENT SONG IN QUEUE
-		</div>
+		<div class="currentPlayer">CURRENT SONG IN QUEUE</div>
 		<!-- PAGE CONTENT -->
 		<ui:insert name="body">KOBE Default
 		</ui:insert>
 		<!-- FOOTER -->
-		<div class="footer">
-		FOOTER STUFF, WE ROCK.</div>
-		
+		<div class="footer">FOOTER STUFF, WE ROCK.</div>
+
 		<!-- JAVASCRIPT -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <h:outputScript name="webjars/jquery/1.9.1/jquery.min.js"/>
-        <h:outputScript library="webjars/bootstrap/2.3.2/js" name="bootstrap.min.js"/>
+		<!-- Placed at the end of the document so the pages load faster -->
+		<h:outputScript name="webjars/jquery/1.9.1/jquery.min.js" />
+		<h:outputScript library="webjars/bootstrap/2.3.2/js"
+			name="bootstrap.min.js" />
 	</h:body>
 </f:view>
 </html>
