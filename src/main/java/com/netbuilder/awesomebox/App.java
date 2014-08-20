@@ -42,7 +42,7 @@ public class App
         //System.out.println("listing songs?");
         als.listAlbums();
         
-        SongService ss = new SongService(em);
+        SongService ss = new SongService();
         
         List<Song> songList = populateSongList();
         

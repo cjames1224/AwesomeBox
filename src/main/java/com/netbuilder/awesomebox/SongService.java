@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,15 +16,15 @@ import javax.persistence.Query;
 public class SongService implements Serializable {
 	
 private static final long serialVersionUID = 5443351151396868724L;
+
+@Inject
 private EntityManager em;
 private List<Song> songList;
 	
-	public SongService(EntityManager em){
-		this.em = em;
+	public SongService(){
 		updateSongList();
 	}
 	
-	@PostConstruct
 	public void updateSongList() {
 		List<Song> list = em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
