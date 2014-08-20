@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,11 +21,14 @@ public class LoginBean implements Serializable {
     private static final long serialVersionUID = 5443351151396868724L;
 	private String username;
 	private String password;
+	private String loginStatus;
+	
+	@Inject
 	private EntityManager em;
 	private String login = null;
 	
 	public LoginBean(){
-
+		//em = Persistence.createEntityManagerFactory("awesomebox").createEntityManager();
 	}
 	
 	public LoginBean(EntityManager em){
@@ -39,6 +43,10 @@ public class LoginBean implements Serializable {
 		this.username = userName;
 	}
 
+	public void setloginStatus(String loginStatus) {
+		this.loginStatus = loginStatus;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -47,21 +55,25 @@ public class LoginBean implements Serializable {
 		this.password = password;
 	}
 	
-	public String getlogin(){
+	public String getloginStatus(){
 	
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE username =\'" + username + "\'",
 				User.class).getResultList();
 		if(list == null || list.size() == 0){
-			throw new ValidationException("Username cannot be found");
+			//throw new ValidationException("Username cannot be found");
+			setloginStatus("Username cannot be found");
+			return loginStatus;
 		}
 		
 		for(User u : list){
 			if(u.getPassword().equals(this.password)){
-				System.out.println("Logged in successfully!");
-				return "logged in";
+				setloginStatus("logged in");
+				return loginStatus;
 			}
 		}
-		throw new ValidationException("No such User with the password you've input.");
+		//throw new ValidationException("No such User with the password you've input.");
+		setloginStatus("No such User with the password you've input.");
+		return loginStatus;
 		
 	}
 	
