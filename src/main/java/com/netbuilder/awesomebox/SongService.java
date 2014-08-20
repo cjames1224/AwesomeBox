@@ -22,9 +22,10 @@ private EntityManager em;
 private List<Song> songList;
 	
 	public SongService(){
-		updateSongList();
+		
 	}
 	
+	@PostConstruct
 	public void updateSongList() {
 		List<Song> list = em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
