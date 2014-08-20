@@ -37,9 +37,9 @@
 					<li id="LoginNavLink">
 						<!--  if no one logged in --> <h:link
 							rendered="#{!userController.isLoggedIn}" value="Login"
-							outcome="login"></h:link> <!--  if someone logged in --> <h:outputText
-							value="#{userController.loginBean.username}"
-							rendered="#{userController.isLoggedIn}"></h:outputText>
+							outcome="login"></h:link> <!--  if someone logged in --> <h:link
+							value="#{userController.loginBean.username}" outcome="profile"
+							rendered="#{userController.isLoggedIn}"></h:link>
 					</li>
 					<li id="SearchBox">search...</li>
 

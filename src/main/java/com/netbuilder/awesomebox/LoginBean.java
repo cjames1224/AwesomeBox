@@ -21,6 +21,7 @@ public class LoginBean implements Serializable {
     private static final long serialVersionUID = 5443351151396868724L;
 	private String username;
 	private String password;
+	private int credits;
 	private String loginStatus;
 	
 	@Inject
@@ -51,6 +52,12 @@ public class LoginBean implements Serializable {
 		this.password = password;
 	}
 	
+	public int getCredits() {
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
+				User.class).getResultList();
+		return list.get(0).getCredits();
+	}
+	
 	public String getloginStatus(){
 	
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
@@ -73,8 +80,11 @@ public class LoginBean implements Serializable {
 		
 	}
 	
-	public void logout(){
-		
+	public String logout(){
+		username = null;
+		password = null;
+		loginStatus = null;
+		return "logout";
 	}
 	
 	

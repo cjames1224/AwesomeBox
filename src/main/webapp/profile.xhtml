@@ -11,20 +11,17 @@
 	<ui:define name="body">
 		<h:form>
 			<p>
-				<h:outputText value="Enter username: "></h:outputText>
-				<h:inputText id="username" title="username"
-					value="#{loginBean.username}">
-				</h:inputText>
-			</p>
-			<p>
-			<h:outputText value="Enter password: "></h:outputText>
-				<h:inputText id="password" title="Enter password: "
-					value="#{loginBean.password}">
+				<h:outputText id="username" title="username"
+					value="Hello #{loginBean.username} !">
 
-				</h:inputText>
+				</h:outputText>
 			</p>
+			
+			<p><h:outputText id="credits" title="credits" value="You have #{loginBean.credits} credits."></h:outputText></p>
+
 			<p>
-				<h:commandButton id="submit" value="Submit" action="loggedin" />
+				<h:commandButton id="logout" value="Logout" action="#{loginBean.logout()}" />
+
 			</p>
 		</h:form>
 	</ui:define>
