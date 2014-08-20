@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Named
 @Stateless
 public class AlbumService implements Serializable {
 	
@@ -22,7 +23,7 @@ public class AlbumService implements Serializable {
 				Album.class).getResultList();
 	}
 
-	public void createAlbumList(List<Album> list){
+	public void persistAlbumList(List<Album> list){
 		if (list == null) {
 			throw new ValidationException("Invalid List");
 		}
@@ -32,14 +33,6 @@ public class AlbumService implements Serializable {
 		}
 	}
 	
-	public void listAlbums(){
-		List<Album> list = em.createQuery("SELECT a FROM Album a",
-				Album.class).getResultList();
-		
-		for(Album a: list){
-			System.out.println(a.toString());
-		}
-	}
 	
 	public void updateAlbumName(Album album,String name) {
 		updateAlbum(album,name,album.getRating(),album.getYear(),album.getGenre(),album.getType());

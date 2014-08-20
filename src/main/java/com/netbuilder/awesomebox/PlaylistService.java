@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,32 +13,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class PlaylistService implements Serializable{
 	
 	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<Playlist> playList;
 	
-	public PlaylistService(){
-		
-	}
-	
-	@PostConstruct
-	public void updatePlayList() {
-		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
-				Playlist.class).getResultList();
-		this.playList = list;
-	}
+
 	
 	public List<Playlist> getPlayList() {
-		return playList;
+		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
+				Playlist.class).getResultList();
+		return list;
 	}
-
-	public void setPlayList(List<Playlist> playList) {
-		this.playList = playList;
-	}
+	
 
 	public void createPlaylist(User user, String name) {
 		Playlist playlist = new Playlist(name, user);

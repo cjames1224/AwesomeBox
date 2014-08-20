@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,32 +12,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 @Named
-@SessionScoped
+@Stateless
 public class ArtistService implements Serializable {
 	
 	private static final long serialVersionUID = 5443351151396868724L;
 	@Inject
 	private EntityManager em;
-	private List<Artist> artistList;
 	
+
+
 	
+
 	public List<Artist> getArtistList() {
-		return artistList;
-	}
-
-	public void setArtistList(List<Artist> artistList) {
-		this.artistList = artistList;
-	}
-
-	public ArtistService(){
-		
-	}
-	
-	@PostConstruct
-	public void updateArtistList() {
 		List<Artist> list = em.createQuery("SELECT a FROM Artist a",
 				Artist.class).getResultList();
-		this.artistList = list;
+		return list;
 	}
 	
 	public void persistArtistList(List<Artist> list){
@@ -52,20 +42,7 @@ public class ArtistService implements Serializable {
 
 	}
 	
-	public List<Artist> listArtists(){
-		List<Artist> list = em.createQuery("SELECT a FROM Artist a",
-				Artist.class).getResultList();
-		
-		if (list == null || list.size() == 0) {
-			System.out.println("No Results Were Found");
-		}
-		
-		for(Artist a: list){
-			System.out.println(a.toString());
-		}
-		
-		return list;
-	}
+	
 	
 	public List<Artist> listArtistById(int id) {
 		if (id <= 0) {

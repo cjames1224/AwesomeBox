@@ -17,7 +17,7 @@ public class AlbumSong {
 
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "Album_ID",referencedColumnName = "ID")
