@@ -69,6 +69,15 @@ public class AlbumService implements Serializable {
 	
 	}
 	
+	public void removeAlbumList(List<Album> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(Album a : list){
+			em.remove(em.merge(a));
+		}
+	}
+	
 	public void deleteAlbum(Album album) {
 		if (album == null) {
 			throw new ValidationException("Invalid Album");

@@ -32,15 +32,19 @@ private EntityManager em;
 			throw new ValidationException("Invalid List");
 		}
 		
-		
-		
 		for(AlbumSong a: list){
 			em.persist(a);
 		}
-		
-		
 	}
 	
+	public void removeAlbumSongList(List<AlbumSong> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(AlbumSong a : list){
+			em.remove(em.merge(a));
+		}
+	}
 	
 //	public void updateAlbumSong(AlbumSong albumSong,Album album,Song song,int trackNumber) {
 //		em.getTransaction().begin();

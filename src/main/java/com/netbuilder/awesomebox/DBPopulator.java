@@ -8,6 +8,8 @@ import javax.annotation.PreDestroy;
 import javax.annotation.sql.DataSourceDefinition;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.Stateful;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -25,14 +27,14 @@ import javax.persistence.Query;
 )
 public class DBPopulator {
 
-	@Inject
-	private EntityManager em;
+	
 	private ArrayList<User> users;
 	private ArrayList<Artist> artists;
 	private ArrayList<Album> albums;
 	private ArrayList<Playlist> playlists;
 	private ArrayList<Song> songs;
-	
+
+	@Inject private EntityManager em;
 	@Inject private SongService ss;
 	@Inject private ArtistService ars;
 	@Inject private AlbumService as;
@@ -45,12 +47,12 @@ public class DBPopulator {
 
 	@PostConstruct
 	public void populateDB() {
-		//em = Persistence.createEntityManagerFactory("awesomebox")
-				//.createEntityManager();
-
+		em = Persistence.createEntityManagerFactory("awesomebox")
+				.createEntityManager();
 		//to clear the db, uncomment below
-		//clearDB();
 
+		//clearDB();
+		
 		initAlbums();
 		initArtists();
 		initSongs();
@@ -61,19 +63,6 @@ public class DBPopulator {
 		initPlaylistSongs();
 		initSongArtists();
 		
-	}
-
-	
-	@PreDestroy
-	public void clearDB() {
-		
-		String[] queries = new String[]{
-				"SET FOREIGN_KEY_CHECKS=0", "TRUNCATE TABLE Album_Song",   "TRUNCATE TABLE Playlist_Song","TRUNCATE TABLE Album_Artist", "TRUNCATE TABLE Song_Artist", 
-				"TRUNCATE TABLE Album","TRUNCATE TABLE Artist","TRUNCATE TABLE Song","TRUNCATE TABLE Playlist",  "TRUNCATE TABLE User", "SET FOREIGN_KEY_CHECKS=0"
-		};
-		for(String s: queries)
-			em.createNativeQuery(s).executeUpdate();
-	
 	}
 	
 	private void initArtists() {

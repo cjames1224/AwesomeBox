@@ -19,6 +19,15 @@ public class SongArtistService implements Serializable {
 	private EntityManager em;
 	
 	
+	public void removeSongArtistList(List<SongArtist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(SongArtist a : list){
+			em.remove(em.merge(a));
+		}
+	}
+	
 	public List<SongArtist> getSongArtistList() {
 		return em.createQuery("SELECT a FROM SongArtist a",
 				SongArtist.class).getResultList();

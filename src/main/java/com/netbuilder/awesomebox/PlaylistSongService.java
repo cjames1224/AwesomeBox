@@ -25,6 +25,16 @@ public class PlaylistSongService implements Serializable {
 	@Inject
 	private EntityManager em;
 
+	public void removePlaylistSongList(List<PlaylistSong> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(PlaylistSong a : list){
+			em.remove(em.merge(a));
+		}
+	}
+	
+	
 	public List<PlaylistSong> getPlaylistSongList() {
 		return em.createQuery("SELECT a FROM PlaylistSong a",
 				PlaylistSong.class).getResultList();

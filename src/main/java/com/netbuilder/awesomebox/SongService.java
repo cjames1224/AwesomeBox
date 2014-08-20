@@ -21,6 +21,15 @@ private static final long serialVersionUID = 5443351151396868724L;
 @Inject
 private EntityManager em;
 	
+	public void removeSongList(List<Song> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(Song a : list){
+			em.remove(em.merge(a));
+		}
+	}
+
 	public void persistSongList(List<Song> list){
 		if(list == null){
 			throw new ValidationException("Invalid list");

@@ -21,6 +21,15 @@ public class PlaylistService implements Serializable{
 	private EntityManager em;
 	
 
+	public void removePlaylistList(List<Playlist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(Playlist a : list){
+			em.remove(em.merge(a));
+		}
+	}
+	
 	
 	public List<Playlist> getPlayList() {
 		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
@@ -42,9 +51,7 @@ public class PlaylistService implements Serializable{
 		if (list == null) {
 			throw new ValidationException("Invalid playlist persist");
 		}
-		
 
-		
 		for(Playlist a: list){
 			em.persist(a);
 		}
@@ -119,6 +126,8 @@ public class PlaylistService implements Serializable{
 		Query q = em.createQuery(query);
 		q.executeUpdate();
 	}
+
+
 	
 	
 

@@ -36,9 +36,16 @@ public class AlbumArtistService implements Serializable {
 		
 		for(AlbumArtist a: list){
 			em.persist(a);
+		}	
+	}
+	
+	public void removeAlbumArtistList(List<AlbumArtist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
 		}
-		
-		
+		for(AlbumArtist a : list){
+			em.remove(em.merge(a));
+		}
 	}
 	
 	

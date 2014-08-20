@@ -20,7 +20,14 @@ public class ArtistService implements Serializable {
 	private EntityManager em;
 	
 
-
+	public void removeArtistList(List<Artist> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(Artist a : list){
+			em.remove(em.merge(a));
+		}
+	}
 	
 
 	public List<Artist> getArtistList() {

@@ -24,6 +24,15 @@ public class UserService implements Serializable {
 		return em.createQuery("SELECT u FROM User u",
 				User.class).getResultList();
 	}
+	
+	public void removeUserList(List<User> list){
+		if (list == null) {
+			throw new ValidationException("Invalid List");
+		}
+		for(User a : list){
+			em.remove(em.merge(a));
+		}
+	}
 
 
 	public void persistUserList(List<User> list) {
