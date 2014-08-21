@@ -13,12 +13,18 @@ import javax.persistence.EntityManager;
 @SessionScoped
 public class SongController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6538703322718372302L;
+
+
 	@Inject
 	private SongService songService;
 	
 
-	@Inject
-	private AlbumService albumService;
+//	@Inject
+//	private AlbumService albumService;
 	
 	private int songId = 1;
 
@@ -32,7 +38,7 @@ public class SongController implements Serializable{
 	}
 
 	public String getSongName() {
-		List<Song> songs = songService.listSongsByID(this.songId);
+		List<Song> songs = songService.listSongsByID(songId);
 		return songs.get(0).getName();
 	}
 

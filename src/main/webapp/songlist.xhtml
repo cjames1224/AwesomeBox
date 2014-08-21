@@ -16,10 +16,11 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="media-heading">
-                            <h:link value="#{oneSong.name}" outcome="song" includeViewParams="true" />
+                        	<h:form>
+                            <h:commandLink value="#{oneSong.name}" action="song" includeViewParams="true" />
 								<f:param name="songId" value="oneSong.Id"/>
-								<f:param name="scid" value="#{songController.setSongId[oneSong.id]}"/>
-
+								<f:param name="scid" value="#{songController.getSongDetails[songId]}"/>
+							</h:form>
                         </h3>
                         
                     </div>
