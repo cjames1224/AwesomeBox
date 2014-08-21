@@ -22,6 +22,9 @@ public class SongController implements Serializable{
 	@Inject
 	private SongService songService;
 	
+	@Inject
+	private SearchV2 search;
+	
 
 //	@Inject
 //	private AlbumService albumService;
@@ -50,11 +53,12 @@ public class SongController implements Serializable{
 		return songId;
 	}
 	
-	public void getSongAlbum() {
-		//List<Song> songList = songService.listSongsByName(songName);
-		//song = songList.get(0);
-		
-		
+	public Album getSongAlbum() {
+		return search.searchAlbumName(songId).get(0);	
+	}
+	
+	public Artist getSongArtist() {
+		return search.searchArtistName(songId).get(0);
 	}
 	
 	public Song getSong() {
