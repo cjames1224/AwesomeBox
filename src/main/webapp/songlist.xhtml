@@ -17,9 +17,9 @@
                     <div class="media-body">
                         <h3 class="media-heading">
                         	<h:form>
-                            <h:commandLink value="#{oneSong.name}" action="song" includeViewParams="true" />
-								<f:param name="songId" value="oneSong.Id"/>
-								<f:param name="scid" value="#{songController.getSongDetails[songId]}"/>
+                            <h:commandLink value="#{oneSong.name}" action="#{songController.getSongDetails(oneSong.id)}" />
+                            	<!-- <f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" /> -->
+					
 							</h:form>
                         </h3>
                         

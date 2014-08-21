@@ -6,12 +6,12 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	template="WEB-INF/layouts/template.xhtml">
-	
+	<!-- 
 	<f:metadata>
         <f:viewParam name="songId" value="#{songController.songId}" required="true"/>
-       <!--  <f:event type="preRenderView" listener="#{songController.setSongId[songId]}"/> -->
+  
     </f:metadata>
-
+ -->
 	<ui:define name="title"><h:outputText id="songName" title="songName"
 					value="#{songController.getSong().name}" ></h:outputText></ui:define>
 
