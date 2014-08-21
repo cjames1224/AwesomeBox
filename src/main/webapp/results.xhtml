@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="WEB-INF/layouts/template.xhtml">
+    <ui:define name="title">Search Results</ui:define>
+
+    <ui:define name="body">
+     <h:dataTable value="#{songService.songList}" var="oneSong"
+                      styleClass="table">
+            <h:column>
+                <div class="media">
+                    <div class="media-body">
+                        <p class="media-heading">
+                            <h:link value="#{oneSong.name}" />
+							 <f:param name="songId" value="#{song.id}"/> 
+                        </p>
+                        
+                    </div>
+                </div>
+            </h:column>
+        </h:dataTable> 
+    </ui:define>
+</ui:composition>

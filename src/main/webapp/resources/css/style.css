@@ -3,8 +3,26 @@ html {
 	background-color:black;
 }
 
+h1 {
+	color: #B29BFF;
+}
+
+h2, h3 {
+	color: #5E23B0;
+}
+
 p {
 	color:white;
+}
+
+.container-fluid {
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1200px;
+}
+
+.nav {
+	width:100%;
 }
 
 .navlist li {

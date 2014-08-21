@@ -13,6 +13,8 @@
 		<title><ui:insert name="title">AwesomeBox Default</ui:insert></title>
 		<ui:insert name="meta"></ui:insert>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/icon" href="#{request.contextPath}/resources/images/favicon.ico" />
+     
 		<!-- Bootstrap -->
 		<h:outputStylesheet library="css" name="style.css" />
 		<h:outputStylesheet library="webjars/bootstrap/2.3.2/css"
@@ -25,6 +27,8 @@
         <![endif]-->
 	</h:head>
 	<h:body>
+	<!-- CONTAINER FOR EVERYTHING -->
+	<div class="container-fluid">
 		<!-- HEADER -->
 		<div class="header">
 			<div class="logo">
@@ -42,7 +46,10 @@
 							value="#{userController.loginBean.username}" outcome="profile"
 							rendered="#{userController.loginBean.loginStatus}"></h:link>
 					</li>
-					<li id="SearchBox">search...</li>
+					<li id="SearchBox"><h:inputText id="username" title="username"
+					value="#{loginBean.username}"><h:graphicImage library="images"
+						name="search.png" />
+				</h:inputText></li>
 
 				</ul>
 			</div>
@@ -54,6 +61,8 @@
 		</ui:insert>
 		<!-- FOOTER -->
 		<div class="footer">FOOTER STUFF, WE ROCK.</div>
+</div>
+
 
 		<!-- JAVASCRIPT -->
 		<!-- Placed at the end of the document so the pages load faster -->
