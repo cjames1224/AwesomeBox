@@ -27,10 +27,11 @@ public class UserController implements Serializable {
 		return loginBean;
 	}
 
+	public String addCredit() {
+		int currentCredits = loginBean.getCredits();
+		loginBean.setCredits(currentCredits+1);
+		return "profile";
+	}
 
-
-	
-
-	
 
 }

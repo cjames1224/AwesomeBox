@@ -80,14 +80,14 @@ public class UserService implements Serializable {
 			throw new ValidationException("Invalid user name");
 		}
 		
-		List<User> list = em.createQuery("SELECT u FROM User u WHERE username=\'"+name+"\'",
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username=\'"+name+"\'",
 				User.class).getResultList();
 		
 		if(list == null || list.size() == 0){
 			throw new ValidationException("No such user with name = "+name);
 		}
 		
-		System.out.println( list.get(0).toString() );
+		//System.out.println( list.get(0).toString() );
 		
 		return list;
 	}
@@ -126,7 +126,5 @@ public class UserService implements Serializable {
 		Query q = em.createQuery(query);
 		q.executeUpdate();
 	}
-	
-
 
 }

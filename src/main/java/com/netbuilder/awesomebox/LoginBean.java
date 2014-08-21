@@ -28,6 +28,9 @@ public class LoginBean implements Serializable {
 	private EntityManager em;
 	private String login = null;
 	
+	@Inject
+	private UserService userService;
+	
 	public LoginBean(){
 		//em = Persistence.createEntityManagerFactory("awesomebox").createEntityManager();
 	}
@@ -83,6 +86,16 @@ public class LoginBean implements Serializable {
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
 				User.class).getResultList();
 		return list.get(0).getCredits();
+	}
+	
+	public void setCredits(int credits) {
+		List<User> users = userService.getUser(username);
+		User user = users.get(0);
+		//user.setCredits(credits);
+		userService.updateUserCredits(user, credits);
+		this.credits = credits;
+		
+		
 	}
 
 	

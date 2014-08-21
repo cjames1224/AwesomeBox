@@ -20,7 +20,10 @@
 				</h:outputText>
 			</p>
 			
-			<p><h:outputText id="credits" title="credits" value="You have #{loginBean.credits} credits."></h:outputText></p>
+			<p>
+			<h:outputText id="credits" title="credits" value="You have #{loginBean.credits} credits."></h:outputText>
+			<h:commandButton id="addCredits" value="Click here to add a credit" action="#{userController.addCredit()}" />
+			</p>
 
 			<p>
 				<h:commandButton id="logout" value="Logout" action="#{loginBean.logout()}" />
