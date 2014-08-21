@@ -15,8 +15,11 @@
                 <div class="media">
                     <div class="media-body">
                         <p class="media-heading">
-                            <h:link value="#{oneSong.name}" />
-							 <f:param name="songId" value="#{song.id}"/> 
+                        <h:form>
+                        	
+                            <h:commandLink value="#{oneSong.name}" action="#{songController.getSongDetails(oneSong.id)}" />
+						
+							 </h:form>
                         </p>
                         
                     </div>

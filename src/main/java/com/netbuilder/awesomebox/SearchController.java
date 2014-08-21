@@ -37,10 +37,10 @@ public class SearchController implements Serializable {
 		this.searchService = searchService;
 	}
 
-	public String search() {
-		results = searchService.generalSearch(searchTerm);
-		return "results";
-	}
+//	public String search() {
+//		results = searchService.generalSearch(searchTerm);
+//		return "results";
+//	}
 
 	public List<Song> getResults() {
 		return results;
@@ -48,6 +48,14 @@ public class SearchController implements Serializable {
 
 	public void setResults(List<Song> results) {
 		this.results = results;
+	}
+	
+	public String generalSearch() {
+		List<Song> list = searchService.searchSongByAlbum(searchTerm).search();
+		list.addAll(searchService.searchSongByArtist(searchTerm).search());
+		list.addAll(searchService.searchSongName(searchTerm).search());
+		setResults(list);
+		return "results";
 	}
 	
 	

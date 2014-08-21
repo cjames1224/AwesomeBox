@@ -50,11 +50,13 @@
 								outcome="profile"
 								rendered="#{userController.loginBean.loginStatus}"></h:link>
 						</li>
-						<li id="SearchBox"><h:inputText id="search" title="search"
+						<li id="SearchBox">
+						<h:form>
+						<h:inputText id="search" title="search"
 								value="#{searchController.searchTerm}"></h:inputText>
-							<h:form styleClass="searchButton">
-								<h:commandLink id="searchLink" action="#{searchController.search()}"><h:graphicImage library="images"
-							name="search.png" /></h:commandLink>
+							<div class="searchButton">
+								<h:commandLink id="searchLink" action="#{searchController.generalSearch()}"><h:graphicImage library="images"
+							name="search.png" /></h:commandLink></div>
 							</h:form></li>
 
 					</ul>
