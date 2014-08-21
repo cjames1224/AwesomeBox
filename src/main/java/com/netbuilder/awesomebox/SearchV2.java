@@ -75,7 +75,7 @@ public class SearchV2 {
 	
 	public SearchV2 searchSongName(String songName) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE s.name = \'"+songName+"\' ");
+		searchBuilder.append("SELECT s FROM Song s WHERE s.name LIKE \'%"+songName+"%\' ");
 		return this;		
 	}
 	
@@ -93,7 +93,7 @@ public class SearchV2 {
 	
 	public SearchV2 searchSongGenre(String songGenre) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s WHERE s.genre = \'"+songGenre+"\'");
+		searchBuilder.append("SELECT s FROM Song s WHERE s.genre LIKE \'%"+songGenre+"%\'");
 		return this;		
 	}
 	
@@ -107,19 +107,19 @@ public class SearchV2 {
 	
 	public SearchV2 searchSongByArtist(String artist) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Artist a, SongArtist sa WHERE s = sa.song AND a = sa.artist AND a.name = '"+artist+"'");
+		searchBuilder.append("SELECT s FROM Song s, Artist a, SongArtist sa WHERE s = sa.song AND a = sa.artist AND a.name LIKE '%"+artist+"%'");
 		return this;
 	}
 	
 	public SearchV2 searchSongByAlbum(String album) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s = als.song AND al = als.album AND al.name = '"+album+"'");
+		searchBuilder.append("SELECT s FROM Song s, Album al, AlbumSong als WHERE s = als.song AND al = als.album AND al.name LIKE '%"+album+"%'");
 		return this;
 	}
 	
 	public SearchV2 searchSongByPlaylist(String playlist) {
 		initAndConnCheck();
-		searchBuilder.append("SELECT s FROM Song s, Playlist p, PlaylistSong ps WHERE s = ps.song AND p = ps.playlist AND p.name = '"+playlist+"'");
+		searchBuilder.append("SELECT s FROM Song s, Playlist p, PlaylistSong ps WHERE s = ps.song AND p = ps.playlist AND p.name LIKE '%"+playlist+"%'");
 		return this;
 	}
 	
