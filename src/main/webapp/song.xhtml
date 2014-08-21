@@ -24,8 +24,10 @@
 			<h:outputText id="songName" title="songName"
 					value="#{songController.getSong().name}" ></h:outputText></p>
 					<p>Song Length is:
-			<h:outputText id="songLength" title="songLength"
-					value="#{songController.getSong().length}" ></h:outputText></p>
+			<h:outputText id="songLengthMin" title="songLengthMin"
+					value="#{(songController.getSong().length/60).intValue()}" ></h:outputText> Minutes and
+					<h:outputText id="songLengthSec" title="songLengthSec"
+					value="#{songController.getSong().length%60}" ></h:outputText> Seconds </p>
 					<p>Number of Plays:
 			<h:outputText id="songPlays" title="songPlays"
 					value="#{songController.getSong().plays}" ></h:outputText></p>
