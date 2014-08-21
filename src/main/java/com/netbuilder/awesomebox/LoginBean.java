@@ -44,24 +44,29 @@ public class LoginBean implements Serializable {
 		this.loginStatus = loginStatus;
 	}
 	
-	public boolean getLoginStatus(){
-		
+	public String login() {
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
 				User.class).getResultList();
 		if(list == null || list.size() == 0){
 			//throw new ValidationException("Username cannot be found");
 			loginStatus = false;
-			return loginStatus;
+			return "login";
 		}
 		
 		for(User u : list){
 			if(u.getPassword().equals(this.password)){
 				loginStatus = true;
-				return loginStatus;
+				return "profile";
 			}
 		}
 		//throw new ValidationException("No such User with the password you've input.");
 		loginStatus = false;
+		return "login";
+	}
+	
+	public boolean getLoginStatus(){
+		
+
 		return loginStatus;
 		
 	}

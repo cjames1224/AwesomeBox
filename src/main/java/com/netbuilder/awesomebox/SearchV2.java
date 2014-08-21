@@ -64,6 +64,14 @@ public class SearchV2 {
 		}
 	}
 	
+	
+	public List<Song> generalSearch(String searchTerm) {
+		List<Song> list = this.searchSongByAlbum(searchTerm).search();
+		list.addAll(this.searchSongByArtist(searchTerm).search());
+		list.addAll(this.searchSongName(searchTerm).search());
+		return list;
+	}
+	
 	public SearchV2 searchSongName(String songName) {
 		initAndConnCheck();
 		searchBuilder.append("SELECT s FROM Song s WHERE name = \'"+songName+"\' ");

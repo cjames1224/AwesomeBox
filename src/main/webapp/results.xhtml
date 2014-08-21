@@ -9,7 +9,7 @@
     <ui:define name="title">Search Results</ui:define>
 
     <ui:define name="body">
-     <h:dataTable value="#{songService.songList}" var="oneSong"
+     <h:dataTable value="#{searchController.results}" var="oneSong"
                       styleClass="table">
             <h:column>
                 <div class="media">

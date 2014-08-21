@@ -13,9 +13,11 @@
 		<title><ui:insert name="title">AwesomeBox Default</ui:insert></title>
 		<ui:insert name="meta"></ui:insert>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/icon" href="#{request.contextPath}/resources/images/favicon.ico" />
-	    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo" />
-  
+		<link rel="icon" type="image/icon"
+			href="#{request.contextPath}/resources/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css"
+			href="http://fonts.googleapis.com/css?family=Arvo" />
+
 		<!-- Bootstrap -->
 		<h:outputStylesheet library="css" name="style.css" />
 		<h:outputStylesheet library="webjars/bootstrap/2.3.2/css"
@@ -28,41 +30,44 @@
         <![endif]-->
 	</h:head>
 	<h:body>
-	<!-- CONTAINER FOR EVERYTHING -->
-	<div class="container-fluid">
-		<!-- HEADER -->
-		<div class="header">
-			<div class="logo">
-				<a href="main.xhtml"><h:graphicImage library="images"
-						name="jukebox.png" /></a>
-			</div>
-			<div class="nav">
-				<ul class="navList">
-					<a href="songlist.xhtml"><li id="PlaylistNavLink">Playlists</li></a>
-					<li id="AboutNavLink">About</li>
-					<li id="LoginNavLink">
-						<!--  if no one logged in --> <h:link
-							rendered="#{!userController.loginBean.loginStatus}" value="Login"
-							outcome="login"></h:link> <!--  if someone logged in --> <h:link
-							value="#{userController.loginBean.username}" outcome="profile"
-							rendered="#{userController.loginBean.loginStatus}"></h:link>
-					</li>
-					<li id="SearchBox"><h:inputText id="search" title="search"
-					value="#{loginBean.username}"></h:inputText><h:graphicImage library="images"
-						name="search.png" />
-				</li>
+		<!-- CONTAINER FOR EVERYTHING -->
+		<div class="container-fluid">
+			<!-- HEADER -->
+			<div class="header">
+				<div class="logo">
+					<a href="main.xhtml"><h:graphicImage library="images"
+							name="jukebox.png" /></a>
+				</div>
+				<div class="nav">
+					<ul class="navList">
+						<a href="songlist.xhtml"><li id="PlaylistNavLink">Play lists</li></a>
+						<li id="AboutNavLink">About</li>
+						<li id="LoginNavLink">
+							<!--  if no one logged in --> <h:link
+								rendered="#{!userController.loginBean.loginStatus}"
+								value="Login" outcome="login"></h:link> <!--  if someone logged in -->
+							<h:link value="#{userController.loginBean.username}"
+								outcome="profile"
+								rendered="#{userController.loginBean.loginStatus}"></h:link>
+						</li>
+						<li id="SearchBox"><h:inputText id="search" title="search"
+								value="#{searchController.searchTerm}"></h:inputText>
+							<h:form styleClass="searchButton">
+								<h:commandLink id="searchLink" action="#{searchController.search()}"><h:graphicImage library="images"
+							name="search.png" /></h:commandLink>
+							</h:form></li>
 
-				</ul>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<!-- DISPLAY FOR CURRENT SONG IN QUEUE -->
-		<div class="currentPlayer">CURRENT SONG IN QUEUE</div>
-		<!-- PAGE CONTENT -->
-		<ui:insert name="body">KOBE Default
+			<!-- DISPLAY FOR CURRENT SONG IN QUEUE -->
+			<div class="currentPlayer">CURRENT SONG IN QUEUE</div>
+			<!-- PAGE CONTENT -->
+			<ui:insert name="body">KOBE Default
 		</ui:insert>
-		<!-- FOOTER -->
-		<div class="footer">FOOTER STUFF, WE ROCK.</div>
-</div>
+			<!-- FOOTER -->
+			<div class="footer">FOOTER STUFF, WE ROCK.</div>
+		</div>
 
 
 		<!-- JAVASCRIPT -->
