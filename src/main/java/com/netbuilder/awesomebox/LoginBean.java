@@ -43,6 +43,28 @@ public class LoginBean implements Serializable {
 	public void setLoginStatus(boolean loginStatus) {
 		this.loginStatus = loginStatus;
 	}
+	
+	public boolean getLoginStatus(){
+		
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
+				User.class).getResultList();
+		if(list == null || list.size() == 0){
+			//throw new ValidationException("Username cannot be found");
+			loginStatus = false;
+			return loginStatus;
+		}
+		
+		for(User u : list){
+			if(u.getPassword().equals(this.password)){
+				loginStatus = true;
+				return loginStatus;
+			}
+		}
+		//throw new ValidationException("No such User with the password you've input.");
+		loginStatus = false;
+		return loginStatus;
+		
+	}
 
 	public String getPassword() {
 		return password;
@@ -59,27 +81,7 @@ public class LoginBean implements Serializable {
 	}
 
 	
-	public String getLoginStatus(){
-	
-		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
-				User.class).getResultList();
-		if(list == null || list.size() == 0){
-			//throw new ValidationException("Username cannot be found");
-			setLoginStatus(false);
-			return "login";
-		}
-		
-		for(User u : list){
-			if(u.getPassword().equals(this.password)){
-				setLoginStatus(true);
-				return "profile";
-			}
-		}
-		//throw new ValidationException("No such User with the password you've input.");
-		setLoginStatus(false);
-		return "login";
-		
-	}
+
 	
 	public String logout(){
 		username = null;
