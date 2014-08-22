@@ -106,14 +106,11 @@ public class PlaylistService implements Serializable{
 		return list;
 	}
 	
-	public void updatePlaylist(Playlist playlist,String name) {
-		if (playlist == null || name == null) {
+	public void updatePlaylist(Playlist playlist) {
+		if (playlist == null) {
 			throw new ValidationException("Invalid playlist update");
 		}
-	
-		String query = "UPDATE Playlist SET name = \'" + name + "\' WHERE id = " + playlist.getId();
-		em.createQuery(query);
-		playlist.setName(name);
+		em.persist(em.merge(playlist));
 	
 	}
 	
@@ -121,10 +118,7 @@ public class PlaylistService implements Serializable{
 		if (playlist == null) {
 			throw new ValidationException("Invalid playlist delete");
 		}
-	
-		String query = "DELETE FROM Playlist WHERE id = " + playlist.getId();
-		Query q = em.createQuery(query);
-		q.executeUpdate();
+		em.remove(em.merge(playlist));
 	}
 
 

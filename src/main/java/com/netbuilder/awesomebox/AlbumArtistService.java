@@ -23,6 +23,7 @@ public class AlbumArtistService implements Serializable {
 	public List<AlbumArtist> getAlbumArtistList() {
 		List<AlbumArtist> list = em.createQuery("SELECT a FROM AlbumArtist a",
 				AlbumArtist.class).getResultList();
+		
 		return list;
 	}
 	
@@ -31,8 +32,6 @@ public class AlbumArtistService implements Serializable {
 		if (list == null) {
 			throw new ValidationException("Invalid List");
 		}
-		
-		
 		
 		for(AlbumArtist a: list){
 			em.persist(a);

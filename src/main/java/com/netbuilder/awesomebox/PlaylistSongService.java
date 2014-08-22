@@ -126,14 +126,13 @@ public class PlaylistSongService implements Serializable {
 	 * @param playlistSong  song to be replaced
 	 * @param newSong song to be replaced with
 	 */
-	public void updatePlaylistSong(PlaylistSong playlistSong, Song newSong) {
-		if (playlistSong == null || newSong == null) {
+	public void updatePlaylistSong(PlaylistSong playlistSong) {
+		if (playlistSong == null) {
 			throw new ValidationException("Invalid PlaylistSong Update");
 		}
 		
-		String query = "UPDATE PlaylistSong SET song = " + newSong.getId() + " WHERE id = " + playlistSong.getId();
-		em.createQuery(query);
-		playlistSong.setSong(newSong);
+		em.persist(em.merge(playlistSong));
+
 	}
 	
 	/**
@@ -162,8 +161,6 @@ public class PlaylistSongService implements Serializable {
 			throw new ValidationException("Invalid PlaylistSong Update");
 		}
 		
-		String query = "DELETE FROM PlaylistSong WHERE id = " + playlistSong.getId();
-		Query q = em.createQuery(query);
-		q.executeUpdate();
+		em.remove(em.merge(playlistSong));
 	}
 }

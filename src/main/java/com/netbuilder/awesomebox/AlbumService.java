@@ -33,40 +33,8 @@ public class AlbumService implements Serializable {
 		}
 	}
 	
-	
-	public void updateAlbumName(Album album,String name) {
-		updateAlbum(album,name,album.getRating(),album.getYear(),album.getGenre(),album.getType());
-	}
-	
-	public void updateAlbumRating(Album album,int rating) {
-		updateAlbum(album,album.getName(),rating,album.getYear(),album.getGenre(),album.getType());
-	}
-	
-	public void updateAlbumYear(Album album,int year) {
-		updateAlbum(album,album.getName(),album.getRating(),year,album.getGenre(),album.getType());
-	}
-	
-	public void updateAlbumGenre(Album album,String genre) {
-		updateAlbum(album,album.getName(),album.getRating(),album.getYear(),genre,album.getType());
-	}
-	
-	public void updateAlbumType(Album album,String type) {
-		updateAlbum(album,album.getName(),album.getRating(),album.getYear(),album.getGenre(),type);
-	}
-
-	public void updateAlbum(Album album,String name,int rating,int year,String genre,String type) {
-		if (album == null || name == null || type == null) {
-			throw new ValidationException("Invalid Album Update");
-		}
-		
-		String query = "UPDATE Album SET name = \'" + name + "\', rating = " + rating + ", year = " + year + ", genre = \'" + genre + "\', type = " + album.getType() +" WHERE id = " + album.getId();
-		em.createQuery(query);
-		album.setName(name);
-		album.setRating(rating);
-		album.setYear(year);
-		album.setGenre(genre);
-		album.setType(type);
-	
+	public void updateAlbum(Album album){
+		em.persist(em.merge(album));
 	}
 	
 	public void removeAlbumList(List<Album> list){
@@ -82,10 +50,7 @@ public class AlbumService implements Serializable {
 		if (album == null) {
 			throw new ValidationException("Invalid Album");
 		}
-
-		String query = "DELETE FROM Album WHERE id = " + album.getId();
-		Query q = em.createQuery(query);
-		q.executeUpdate();
+		em.remove(em.merge(album));
 
 	}
 }

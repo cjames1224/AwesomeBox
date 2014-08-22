@@ -92,29 +92,8 @@ public class UserService implements Serializable {
 		return list;
 	}
 	
-	public void updateUser(User user,String password,int credits, boolean isAdmin) {
-		if(user == null || password == null){
-			throw new ValidationException("Invalid user update");
-		}
-		
-		
-		String query = "UPDATE User SET password = \'" + password + "\', credits = " + credits + ", isAdmin = " + isAdmin + " WHERE id = " + user.getId();
-		em.createQuery(query);
-		user.setPassword(password);
-		user.setCredits(credits);
-		user.setAdmin(isAdmin);
-	}
-	
-	public void updateUserPassword(User user, String password) {
-		updateUser(user, password, user.getCredits(), user.isAdmin());
-	}
-	
-	public void updateUserCredits(User user, int credits) {
-		updateUser(user, user.getPassword(), credits, user.isAdmin());
-	}
-	
-	public void updateUserIsAdmin(User user, boolean isAdmin) {
-		updateUser(user, user.getPassword(), user.getCredits(), isAdmin);
+	public void updateUser(User user){
+		em.persist(em.merge(user));
 	}
 	
 	public void deleteUser(User user) {
@@ -122,9 +101,7 @@ public class UserService implements Serializable {
 			throw new ValidationException("Invalid user delete");
 		}
 		
-		String query = "DELETE FROM User WHERE id = " + user.getId();
-		Query q = em.createQuery(query);
-		q.executeUpdate();
+		em.remove(em.merge(user));
 	}
 
 }

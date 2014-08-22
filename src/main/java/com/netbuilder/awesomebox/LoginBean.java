@@ -92,7 +92,8 @@ public class LoginBean implements Serializable {
 		List<User> users = userService.getUser(username);
 		User user = users.get(0);
 		//user.setCredits(credits);
-		userService.updateUserCredits(user, credits);
+		user.setCredits(credits);
+		userService.updateUser(user);
 		this.credits = credits;
 		
 		

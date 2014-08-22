@@ -41,14 +41,10 @@ public class ArtistService implements Serializable {
 			throw new ValidationException("Invalid Artist persist");
 		}
 
-		
 		for(Artist a: list){
 			em.persist(a);
 		}
-		
-
 	}
-	
 	
 	
 	public List<Artist> listArtistById(int id) {
@@ -108,25 +104,8 @@ public class ArtistService implements Serializable {
 		return list;
 	}
 	
-	public void updateArtistName(Artist artist,String name) {
-		updateArtist(artist,name,artist.getRating());
-	}
-	
-	public void updateArtistRating(Artist artist,int rating) {
-		updateArtist(artist,artist.getName(),rating);
-	}
-	
-	public void updateArtist(Artist artist,String name,int rating) {
-		if (artist == null || name == null) {
-			throw new ValidationException("Invalid artist update");
-		}
-		
-	
-		String query = "UPDATE Artist SET name = \'" + name + "\', rating = " + rating + " WHERE id = " + artist.getId();
-		em.createQuery(query);
-		artist.setName(name);
-		artist.setRating(rating);
-	
+	public void updateArtist(Artist artist){
+		em.persist(em.merge(artist));
 	}
 	
 	public void deleteArtist(Artist artist) {
@@ -134,10 +113,7 @@ public class ArtistService implements Serializable {
 			throw new ValidationException("Invalid artist delete");
 		}
 	
-		String query = "DELETE FROM Artist WHERE id = " + artist.getId();
-		Query q = em.createQuery(query);
-		q.executeUpdate();
-	
+		em.remove(em.merge(artist));
 	}
 
 }

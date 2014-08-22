@@ -70,6 +70,10 @@ private EntityManager em;
 		return ais;
 	}
 	
+	public void updateSong(Song song){
+		em.persist(em.merge(song));
+	}
+	
 	public List<Song> listSongsByName(String name){
 		List<Song> list = em.createQuery("SELECT s FROM Song s WHERE name = \'"+name+"\'",
 				Song.class).getResultList();
@@ -150,49 +154,11 @@ private EntityManager em;
 		return list;
 	}
 	
-	
-	public void updateSong(Song song,String name,int length, String fileLocation, String genre, int rating) {
-		if(song == null || name == null || fileLocation == null || genre == null){
-			throw new ValidationException("Invalid song update");
-		}
-		
-		String query = "UPDATE Song SET name = \'" + name + "\', length = " + length + ", fileLocation = \'" + fileLocation + "\', genre = \'" + genre + 
-				"\', rating = " + rating + " WHERE id = " + song.getId();
-		em.createQuery(query);
-		song.setName(name);
-		song.setLength(length);
-		song.setFileLocation(fileLocation);
-		song.setGenre(genre);
-		song.setRating(rating);
-	}
-	
-	public void updateSongName(Song song, String name){
-		updateSong(song, name, song.getLength(), song.getFileLocation(), song.getGenre(), song.getRating());
-	}
-	
-	public void updateSongLength(Song song, int length){
-		updateSong(song, song.getName(), length, song.getFileLocation(), song.getGenre(), song.getRating());
-	}
-	
-	public void updateSongFileLocation(Song song, String fileLocation){
-		updateSong(song, song.getName(), song.getLength(), fileLocation, song.getGenre(), song.getRating());
-	}
-	
-	public void updateSongGenre(Song song, String genre){
-		updateSong(song, song.getName(), song.getLength(), song.getFileLocation(), genre, song.getRating());
-	}
-	
-	public void updateSongRating(Song song, int rating){
-		updateSong(song, song.getName(), song.getLength(), song.getFileLocation(), song.getGenre(), rating);
-	}
-	
 	public void deleteSong(Song song) {
 		if(song == null){
 			throw new ValidationException("Invalid song delete");
 		}
-		String query = "DELETE FROM Song WHERE id = " + song.getId();
-		Query q = em.createQuery(query);
-		q.executeUpdate();
+		em.remove(em.merge(song));
 	}
 
 	public List<Song> listSongsByID(int id) {
