@@ -116,9 +116,28 @@ public class SearchController implements Serializable {
 		this.searchService.searchSongGenre(term);
 	}
 	
-	public String search() {
+	public List<Song> search() {
+		List<Song> list = this.searchService.search();
+		List<Song> list2 = searchService.searchSongByAlbum(searchTerm).search();
+		list2.addAll(searchService.searchSongByArtist(searchTerm).search());
+		list2.addAll(searchService.searchSongName(searchTerm).search());
+		List<Song> list3 = new ArrayList<Song>();
+		for (int i = 0;i < list.size();i++) {
+			for (int j = 0;j < list2.size();j++) {
+				if (list.get(i).getId() == list2.get(j).getId()) {
+					list3.add(list2.get(j));
+				}
+			}
+		}
+		for (int i = 0;i < list3.size();i++) {
+			for (int j = i+1;j < list3.size();j++) {
+				if (list3.get(i).getId() == list3.get(j).getId()) {
+					list3.remove(j);
+				}
+			}
+		}
 		
-		return "results";
+		return list3;
 	}
 	
 	public String generalSearch() {

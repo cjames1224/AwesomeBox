@@ -164,11 +164,11 @@ public class AdvancedSearchBean implements Serializable {
 		this.playsValue = playsValue;
 	}
 
-	public int getGenreValue() {
+	public String getGenreValue() {
 		return genreValue;
 	}
 
-	public void setGenreValue(int genreValue) {
+	public void setGenreValue(String genreValue) {
 		this.genreValue = genreValue;
 	}
 
