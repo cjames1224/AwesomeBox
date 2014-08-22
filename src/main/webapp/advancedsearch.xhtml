@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="WEB-INF/layouts/template.xhtml">
+
+	<ui:define name="title">Advanced Search</ui:define>
+
+	<ui:define name="body">
+	<h:form>
+		<p>Keyword Search</p>
+		<p><h:inputText id="search" title="search"
+			value="#{searchController.searchTerm}"></h:inputText></p>
+			<p>
+			<h:selectBooleanCheckbox value="songRating" id="songRating"/>Song Rating
+			<h:inputText id="ratingSearch" title="ratingSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+			<p>
+			<h:selectBooleanCheckbox value="songPlays" id="songPlays"/>Song Plays
+			<h:inputText id="playsSearch" title="playsSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+			<p>
+			<h:selectBooleanCheckbox value="songGenre" id="songGenre"/>Song Genre
+			<h:inputText id="genreSearch" title="genreSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+			<p>
+			<h:selectBooleanCheckbox value="albumRating" id="albumRating"/>Album Rating
+			<h:inputText id="ratingAlbumearch" title="ratingAlbumSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+			<p>
+			<h:selectBooleanCheckbox value="artistRating" id="artistRating"/>Artist Rating
+			<h:inputText id="ratingArtistSearch" title="ratingArtistSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+			<p>
+			<h:selectBooleanCheckbox value="songYear" id="songYear"/>Song Year
+			<h:inputText id="yearSearch" title="yearSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+			<p>
+			<h:selectBooleanCheckbox value="songLength" id="songLength"/>Song Length
+			<h:inputText id="lengthSearch" title="lengthSearch" styleClass="hidden"
+			value="#{searchController.searchTerm}"/>
+			</p>
+		<div class="searchButton">
+			<h:commandButton id="searchLink" value="Submit"
+				action="#{searchController.generalSearch()}"/>
+				
+			
+		</div>
+	</h:form>
+
+	</ui:define>
+</ui:composition>

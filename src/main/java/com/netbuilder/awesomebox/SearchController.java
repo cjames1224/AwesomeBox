@@ -52,6 +52,14 @@ public class SearchController implements Serializable {
 		this.results = results;
 	}
 	
+	public void searchRating(int equality,int rating) {
+		if (equality > 0) {
+			
+		}
+	}
+	
+	
+	
 	public String generalSearch() {
 		List<Song> list = searchService.searchSongByAlbum(searchTerm).search();
 		list.addAll(searchService.searchSongByArtist(searchTerm).search());
