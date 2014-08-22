@@ -36,41 +36,14 @@ public class AdvancedSearchBean implements Serializable {
 				 albumRatingCheck, artistRatingCheck, songYearCheck, songLengthCheck};
 		for(int i = 0; i < checks.length; i++){
 			if(checks[i]){
-				caseSearch(i);
+				//caseSearch(i);
 			}
 		}
 		sc.search();
 		return "results";
 	}
 	
-	public void caseSearch(int i){
-		switch(i){
-		case 0:
-			sc.searchRating(starEquality, starValue);
-			break;
-		case 1:
-			sc.searchPlays(playsEquality, playsValue);
-			break;
-		case 2:
-			sc.searchGenre(genreValue);
-			break;
-		case 3:
-			sc.searchAlbumRating(albumStarEquality, albumStarValue);
-			break;
-		case 4:
-			sc.searchArtistRating(artistStarEquality, artistStarValue);
-			break;
-		case 5:
-			sc.searchYear(songYearEquality, songYearValue);
-			break;
-		case 6:
-			sc.searchLength(songLengthEquality, songLengthValue);
-			break;
-		default:
-			break;
-		}
-	}
-
+	
 	public boolean toggleSongRatingCheck() {
 		songRatingCheck = !songRatingCheck;
 		return songRatingCheck;

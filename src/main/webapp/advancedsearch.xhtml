@@ -18,15 +18,15 @@
 			</p>
 			<p>
 				<h:selectBooleanCheckbox onclick="toggleRating(); return false" id="songRating"
-					value="#{advancedSearchBean.songRatingCheck}"/>
+					value="#{searchController.songRatingCheck}"/>
 				Song Rating
-					<h:selectOneMenu styleClass="hiddenRating rating" value = "#{advancedSearchBean.starEquality}">
+					<h:selectOneMenu styleClass="hiddenRating rating" value = "#{searchController.starEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-					<h:selectOneMenu styleClass="hiddenRating rating" value = "#{advancedSearchBean.starValue}">
+					<h:selectOneMenu styleClass="hiddenRating rating" value = "#{searchController.starValue}">
 						<f:selectItem itemValue="0" itemLabel="&#9734;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="1" itemLabel="&#9733;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="2" itemLabel="&#9733;&#9733;&#9734;&#9734;&#9734;" />
@@ -39,31 +39,31 @@
 			<p>
 				<h:selectBooleanCheckbox value="songPlays" id="songPlays" />
 				Song Plays
-				<h:selectOneMenu styleClass="advancedHidden" value = "#{advancedSearchBean.playsEquality}">
+				<h:selectOneMenu styleClass="advancedHidden" value = "#{searchController.playsEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
 				<h:inputText id="playsSearch" title="playsSearch"
-					value="#{advancedSearchBean.playsValue}" />
+					value="#{searchController.playsValue}" />
 			</p>
 			<p>
 				<h:selectBooleanCheckbox value="songGenre" id="songGenre" />
 				Song Genre
 				<h:inputText id="genreSearch" title="genreSearch"
-					 value="#{advancedSearchBean.genreValue}" />
+					 value="#{searchController.genreValue}" />
 			</p>
 			<p>
 				<h:selectBooleanCheckbox value="albumRating" id="albumRating" />
 				Album Rating
-				<h:selectOneMenu value = "#{advancedSearchBean.albumStarEquality}">
+				<h:selectOneMenu value = "#{searchController.albumStarEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-					<h:selectOneMenu value = "#{advancedSearchBean.albumStarValue}">
+					<h:selectOneMenu value = "#{searchController.albumStarValue}">
 						<f:selectItem itemValue="0" itemLabel="&#9734;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="1" itemLabel="&#9733;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="2" itemLabel="&#9733;&#9733;&#9734;&#9734;&#9734;" />
@@ -75,13 +75,13 @@
 			<p>
 				<h:selectBooleanCheckbox value="artistRating" id="artistRating" />
 				Artist Rating
-				<h:selectOneMenu value = "#{advancedSearchBean.artistStarEquality}">
+				<h:selectOneMenu value = "#{searchController.artistStarEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-					<h:selectOneMenu value = "#{advancedSearchBean.artistStarValue}">
+					<h:selectOneMenu value = "#{searchController.artistStarValue}">
 						<f:selectItem itemValue="0" itemLabel="&#9734;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="1" itemLabel="&#9733;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="2" itemLabel="&#9733;&#9733;&#9734;&#9734;&#9734;" />
@@ -93,31 +93,31 @@
 			<p>
 				<h:selectBooleanCheckbox value="songYear" id="songYear" />
 				Song Year
-				<h:selectOneMenu value = "#{advancedSearchBean.songYearEquality}">
+				<h:selectOneMenu value = "#{searchController.songYearEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				<h:inputText id="yearSearch" title="yearSearch" 
-					value="#{advancedSearchBean.songYearValue}" />
+					value="#{searchController.songYearValue}" />
 			</p>
 			<p>
 				<h:selectBooleanCheckbox value="songLength" id="songLength" />
 				Song Length
-				<h:selectOneMenu value = "#{advancedSearchBean.songLengthEquality}">
+				<h:selectOneMenu value = "#{searchController.songLengthEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				<h:inputText id="lengthSearch" title="lengthSearch"
-					value="#{advancedSearchBean.songLengthValue}">
+					value="#{searchController.songLengthValue}">
 					<f:convertNumber type="number"/>
 				</h:inputText>
 					
 			</p>
 			<div class="searchButton">
 				<h:commandButton id="searchLink" value="Submit"
-					action="#{advancedSearchBean.search()}" />
+					action="#{searchController.search()}" />
 
 
 			</div>

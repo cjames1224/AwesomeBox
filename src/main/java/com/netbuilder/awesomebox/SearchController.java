@@ -14,6 +14,11 @@ import javax.inject.Named;
 @SessionScoped
 public class SearchController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 746095038289392329L;
+
 	// attributes
 	private String searchTerm;
 
@@ -21,6 +26,21 @@ public class SearchController implements Serializable {
 	private SearchV2 searchService;
 	
 	private List<Song> results;
+	
+	private boolean songRatingCheck = false, 
+			songPlaysCheck = false,
+			songGenreCheck = false, 
+			albumRatingCheck = false,
+			artistRatingCheck = false, 
+			songYearCheck = false,
+			songLengthCheck = false;
+	private int starEquality = 0, starValue = 3, 
+			playsEquality = 0, playsValue = 10, 
+			albumStarEquality = 0, albumStarValue = 3, 
+			artistStarEquality = 0, artistStarValue = 3, 
+			songYearEquality = 0, songYearValue = 1999,
+			songLengthEquality = 0, songLengthValue = 175;
+	private String genreValue = "";
 
 	// getters and setters
 	public String getSearchTerm() {
@@ -38,6 +58,47 @@ public class SearchController implements Serializable {
 	public void setSearchService(SearchV2 searchService) {
 		this.searchService = searchService;
 	}
+	
+	public String search(){
+		boolean[] checks = new boolean[]{songRatingCheck, songPlaysCheck, songGenreCheck,
+				 albumRatingCheck, artistRatingCheck, songYearCheck, songLengthCheck};
+		for(int i = 0; i < checks.length; i++){
+			if(checks[i]){
+				caseSearch(i);
+			}
+		}
+		search2();
+		return "results";
+	}
+	
+	public void caseSearch(int i){
+		switch(i){
+		case 0:
+			searchRating(starEquality, starValue);
+			break;
+		case 1:
+			searchPlays(playsEquality, playsValue);
+			break;
+		case 2:
+			searchGenre(genreValue);
+			break;
+		case 3:
+			searchAlbumRating(albumStarEquality, albumStarValue);
+			break;
+		case 4:
+			searchArtistRating(artistStarEquality, artistStarValue);
+			break;
+		case 5:
+			searchYear(songYearEquality, songYearValue);
+			break;
+		case 6:
+			searchLength(songLengthEquality, songLengthValue);
+			break;
+		default:
+			break;
+		}
+	}
+
 
 //	public String search() {
 //		results = searchService.generalSearch(searchTerm);
@@ -116,7 +177,172 @@ public class SearchController implements Serializable {
 		this.searchService.searchSongGenre(term);
 	}
 	
-	public List<Song> search() {
+	public boolean toggleSongRatingCheck() {
+		songRatingCheck = !songRatingCheck;
+		return songRatingCheck;
+	}
+
+	public boolean isSongRatingCheck() {
+		return songRatingCheck;
+	}
+
+	public void setSongRatingCheck(boolean songRatingCheck) {
+		this.songRatingCheck = songRatingCheck;
+	}
+
+	public boolean isSongPlaysCheck() {
+		return songPlaysCheck;
+	}
+
+	public void setSongPlaysCheck(boolean songPlaysCheck) {
+		this.songPlaysCheck = songPlaysCheck;
+	}
+
+	public boolean isSongGenreCheck() {
+		return songGenreCheck;
+	}
+
+	public void setSongGenreCheck(boolean songGenreCheck) {
+		this.songGenreCheck = songGenreCheck;
+	}
+
+	public boolean isAlbumRatingCheck() {
+		return albumRatingCheck;
+	}
+
+	public void setAlbumRatingCheck(boolean albumRatingCheck) {
+		this.albumRatingCheck = albumRatingCheck;
+	}
+
+	public boolean isArtistRatingCheck() {
+		return artistRatingCheck;
+	}
+
+	public void setArtistRatingCheck(boolean artistRatingCheck) {
+		this.artistRatingCheck = artistRatingCheck;
+	}
+
+	public boolean isSongYearCheck() {
+		return songYearCheck;
+	}
+
+	public void setSongYearCheck(boolean songYearCheck) {
+		this.songYearCheck = songYearCheck;
+	}
+
+	public boolean isSongLengthCheck() {
+		return songLengthCheck;
+	}
+
+	public void setSongLengthCheck(boolean songLengthCheck) {
+		this.songLengthCheck = songLengthCheck;
+	}
+
+	public int getStarEquality() {
+		return starEquality;
+	}
+
+	public void setStarEquality(int starEquality) {
+		this.starEquality = starEquality;
+	}
+
+	public int getStarValue() {
+		return starValue;
+	}
+
+	public void setStarValue(int starValue) {
+		this.starValue = starValue;
+	}
+
+	public int getPlaysEquality() {
+		return playsEquality;
+	}
+
+	public void setPlaysEquality(int playsEquality) {
+		this.playsEquality = playsEquality;
+	}
+
+	public int getPlaysValue() {
+		return playsValue;
+	}
+
+	public void setPlaysValue(int playsValue) {
+		this.playsValue = playsValue;
+	}
+
+	public String getGenreValue() {
+		return genreValue;
+	}
+
+	public void setGenreValue(String genreValue) {
+		this.genreValue = genreValue;
+	}
+
+	public int getAlbumStarEquality() {
+		return albumStarEquality;
+	}
+
+	public void setAlbumStarEquality(int albumStarEquality) {
+		this.albumStarEquality = albumStarEquality;
+	}
+
+	public int getAlbumStarValue() {
+		return albumStarValue;
+	}
+
+	public void setAlbumStarValue(int albumStarValue) {
+		this.albumStarValue = albumStarValue;
+	}
+
+	public int getArtistStarEquality() {
+		return artistStarEquality;
+	}
+
+	public void setArtistStarEquality(int artistStarEquality) {
+		this.artistStarEquality = artistStarEquality;
+	}
+
+	public int getArtistStarValue() {
+		return artistStarValue;
+	}
+
+	public void setArtistStarValue(int artistStarValue) {
+		this.artistStarValue = artistStarValue;
+	}
+
+	public int getSongYearEquality() {
+		return songYearEquality;
+	}
+
+	public void setSongYearEquality(int songYearEquality) {
+		this.songYearEquality = songYearEquality;
+	}
+
+	public int getSongYearValue() {
+		return songYearValue;
+	}
+
+	public void setSongYearValue(int songYearValue) {
+		this.songYearValue = songYearValue;
+	}
+
+	public int getSongLengthEquality() {
+		return songLengthEquality;
+	}
+
+	public void setSongLengthEquality(int songLengthEquality) {
+		this.songLengthEquality = songLengthEquality;
+	}
+
+	public int getSongLengthValue() {
+		return songLengthValue;
+	}
+
+	public void setSongLengthValue(int songLengthValue) {
+		this.songLengthValue = songLengthValue;
+	}
+	
+	public List<Song> search2() {
 		List<Song> list = this.searchService.search();
 		List<Song> list2 = searchService.searchSongByAlbum(searchTerm).search();
 		list2.addAll(searchService.searchSongByArtist(searchTerm).search());
