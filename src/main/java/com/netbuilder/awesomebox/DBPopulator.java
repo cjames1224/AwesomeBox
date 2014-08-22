@@ -141,7 +141,7 @@ public class DBPopulator {
 				"Musical", 3));
 		songs.add(new Song("The Trolls", 102, "file/loc/thetrolls.wav",
 				"Musical", 1));
-		songs.add(new Song("It's My Life", 224, "file/loc/itsmylife.wav",
+		songs.add(new Song("It's My Life", 224, "awesomebox/resources/sound/br.wav",
 				"Hard Rock", 5));
 		songs.add(new Song("One Wild Night", 283, "file/loc/oneWildnight.wav",
 				"Hard Rock", 5));

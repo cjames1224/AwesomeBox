@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 
 @Named
 @Stateless
@@ -43,6 +47,27 @@ private EntityManager em;
 	public List<Song> getSongList() {
 		return em.createQuery("SELECT s FROM Song s",
 				Song.class).getResultList();
+	}
+	
+	public AudioInputStream getStreamFromSongById(Integer id){
+		AudioInputStream ais = null;
+		try{
+			ais = AudioSystem.getAudioInputStream(new File(em.find(Song.class, id).getFileLocation()));
+			AudioFormat format = ais.getFormat();
+			if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
+				format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+						format.getSampleRate(),
+						format.getSampleSizeInBits() * 2,
+						format.getChannels(),
+						format.getFrameSize() * 2,
+						format.getFrameRate(),
+						true);
+				ais = AudioSystem.getAudioInputStream(format, ais);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ais;
 	}
 	
 	public List<Song> listSongsByName(String name){
