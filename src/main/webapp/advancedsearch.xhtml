@@ -10,52 +10,67 @@
 	<ui:define name="title">Advanced Search</ui:define>
 
 	<ui:define name="body">
-	<h:form>
-		<p>Keyword Search</p>
-		<p><h:inputText id="search" title="search"
-			value="#{searchController.searchTerm}"></h:inputText></p>
+		<h:form>
+			<p>Keyword Search</p>
 			<p>
-			<h:selectBooleanCheckbox value="songRating" id="songRating"/>Song Rating
-			<h:inputText id="ratingSearch" title="ratingSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:inputText id="search" title="search"
+					value="#{searchController.searchTerm}"></h:inputText>
 			</p>
 			<p>
-			<h:selectBooleanCheckbox value="songPlays" id="songPlays"/>Song Plays
-			<h:inputText id="playsSearch" title="playsSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:selectBooleanCheckbox id="songRating"
+					value="#{advancedSearchBean.songRatingCheck}"/>
+				Song Rating
+					<h:inputText id="ratingSearch" title="ratingSearch"
+						rendered="#{advancedSearchBean.toggleSongRatingCheck()}" 
+						value="#{searchController.searchTerm}">
+						
+					</h:inputText>
+
+
 			</p>
 			<p>
-			<h:selectBooleanCheckbox value="songGenre" id="songGenre"/>Song Genre
-			<h:inputText id="genreSearch" title="genreSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:selectBooleanCheckbox value="songPlays" id="songPlays" />
+				Song Plays
+				<h:inputText id="playsSearch" title="playsSearch"
+					styleClass="hidden" value="#{searchController.searchTerm}" />
 			</p>
 			<p>
-			<h:selectBooleanCheckbox value="albumRating" id="albumRating"/>Album Rating
-			<h:inputText id="ratingAlbumearch" title="ratingAlbumSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:selectBooleanCheckbox value="songGenre" id="songGenre" />
+				Song Genre
+				<h:inputText id="genreSearch" title="genreSearch"
+					styleClass="hidden" value="#{searchController.searchTerm}" />
 			</p>
 			<p>
-			<h:selectBooleanCheckbox value="artistRating" id="artistRating"/>Artist Rating
-			<h:inputText id="ratingArtistSearch" title="ratingArtistSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:selectBooleanCheckbox value="albumRating" id="albumRating" />
+				Album Rating
+				<h:inputText id="ratingAlbumearch" title="ratingAlbumSearch"
+					styleClass="hidden" value="#{searchController.searchTerm}" />
 			</p>
 			<p>
-			<h:selectBooleanCheckbox value="songYear" id="songYear"/>Song Year
-			<h:inputText id="yearSearch" title="yearSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:selectBooleanCheckbox value="artistRating" id="artistRating" />
+				Artist Rating
+				<h:inputText id="ratingArtistSearch" title="ratingArtistSearch"
+					styleClass="hidden" value="#{searchController.searchTerm}" />
 			</p>
 			<p>
-			<h:selectBooleanCheckbox value="songLength" id="songLength"/>Song Length
-			<h:inputText id="lengthSearch" title="lengthSearch" styleClass="hidden"
-			value="#{searchController.searchTerm}"/>
+				<h:selectBooleanCheckbox value="songYear" id="songYear" />
+				Song Year
+				<h:inputText id="yearSearch" title="yearSearch" styleClass="hidden"
+					value="#{searchController.searchTerm}" />
 			</p>
-		<div class="searchButton">
-			<h:commandButton id="searchLink" value="Submit"
-				action="#{searchController.generalSearch()}"/>
-				
-			
-		</div>
-	</h:form>
+			<p>
+				<h:selectBooleanCheckbox value="songLength" id="songLength" />
+				Song Length
+				<h:inputText id="lengthSearch" title="lengthSearch"
+					styleClass="hidden" value="#{searchController.searchTerm}" />
+			</p>
+			<div class="searchButton">
+				<h:commandButton id="searchLink" value="Submit"
+					action="#{searchController.generalSearch()}" />
+
+
+			</div>
+		</h:form>
 
 	</ui:define>
 </ui:composition>
