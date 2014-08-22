@@ -1,8 +1,10 @@
 package com.netbuilder.awesomebox;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.management.Query;
@@ -11,9 +13,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 @Named
-@Stateless
-public class SearchV2 {
+@SessionScoped
+public class SearchV2 implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2929733577632404256L;
 	@Inject
 	private EntityManager em;
 	private StringBuilder searchBuilder = null;
@@ -38,12 +44,18 @@ public class SearchV2 {
 	public List<Song> search(){
 		for(int i = 0; i < endParens; i++)
 			searchBuilder.append(" ) ");
+		
+		System.out.println(searchBuilder.toString());
+		System.out.println(em.createQuery(searchBuilder.toString(), Song.class));
+		System.out.println(em.createQuery(searchBuilder.toString(), Song.class).getResultList());
+		
+		
 		List<Song> list = em.createQuery(searchBuilder.toString(), Song.class).getResultList();
 		if(list == null || list.size() == 0){
 			searchBuilder = null;
 			return list;
 		}
-		
+		System.out.println(list);
 		//System.out.println(searchBuilder.toString());
 		
 //		for(Song s: list){
@@ -80,13 +92,13 @@ public class SearchV2 {
 	}
 	
 	public List<Album> searchAlbumName(int id) {
-		
+		initAndConnCheck();
 		List<Album> list = em.createQuery("SELECT al FROM Song s, AlbumSong als, Album al WHERE s = als.song AND al = als.album AND s.id = "+id+" ",Album.class).getResultList();
 		return list;		
 	}
 	
 	public List<Artist> searchArtistName(int id) {
-	
+		initAndConnCheck();
 		List<Artist> list = em.createQuery("SELECT a FROM Song s, SongArtist sa, Artist a WHERE s = sa.song AND a = sa.artist AND s.id = "+id+" ",Artist.class).getResultList();
 		return list;		
 	}

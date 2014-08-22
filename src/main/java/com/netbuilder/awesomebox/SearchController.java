@@ -63,7 +63,9 @@ public class SearchController implements Serializable {
 		boolean[] checks = new boolean[]{songRatingCheck, songPlaysCheck, songGenreCheck,
 				 albumRatingCheck, artistRatingCheck, songYearCheck, songLengthCheck};
 		for(int i = 0; i < checks.length; i++){
+			System.out.println("goes thru checks");
 			if(checks[i]){
+				System.out.println("does stuff");
 				caseSearch(i);
 			}
 		}
@@ -177,10 +179,48 @@ public class SearchController implements Serializable {
 		this.searchService.searchSongGenre(term);
 	}
 	
+	
+//	ongRatingCheck = false, 
+//			songPlaysCheck = false,
+//			songGenreCheck = false, 
+//			albumRatingCheck = false,
+//			artistRatingCheck = false, 
+//			songYearCheck = false,
+//			songLengthCheck = false;
+	public boolean toggleSongPlaysCheck() {
+		songPlaysCheck = !songPlaysCheck;
+		return songPlaysCheck;
+	}
+	
+	public boolean toggleSongGenreCheck() {
+		songGenreCheck = !songGenreCheck;
+		return songGenreCheck;
+	}
+	
+	public boolean toggleAlbumRatingCheck() {
+		albumRatingCheck = !albumRatingCheck;
+		return albumRatingCheck;
+	}
+	
+	public boolean toggleArtistRatingCheck() {
+		artistRatingCheck = !artistRatingCheck;
+		return artistRatingCheck;
+	}
+	
+	public boolean toggleSongYearCheck() {
+		songYearCheck = !songYearCheck;
+		return songYearCheck;
+	}
+	public boolean toggleSongLengthCheck() {
+		songLengthCheck = !songLengthCheck;
+		return songLengthCheck;
+	}
 	public boolean toggleSongRatingCheck() {
 		songRatingCheck = !songRatingCheck;
 		return songRatingCheck;
 	}
+	
+	
 
 	public boolean isSongRatingCheck() {
 		return songRatingCheck;
