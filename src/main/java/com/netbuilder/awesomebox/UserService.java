@@ -46,6 +46,11 @@ public class UserService implements Serializable {
 		}
 	}
 	
+	public void createAndPersistUser(String username, String password){
+		User user = new User(username, password);
+		em.persist(em.merge(user));
+	}
+	
 	public List<User> listUsers() {
 		List<User> list = em.createQuery("SELECT u FROM User u",
 				User.class).getResultList();

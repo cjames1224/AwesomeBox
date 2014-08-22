@@ -17,10 +17,10 @@ import javax.persistence.Persistence;
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
-
-    private static final long serialVersionUID = 5443351151396868724L;
+	
+	static final long serialVersionUID = -3381107953172847546L;
 	private String username;
-	private String password;
+	private String password, passwordValidation;
 	private int credits;
 	private boolean loginStatus;
 	
@@ -32,7 +32,6 @@ public class LoginBean implements Serializable {
 	private UserService userService;
 	
 	public LoginBean(){
-		//em = Persistence.createEntityManagerFactory("awesomebox").createEntityManager();
 	}
 
 	public String getUsername() {
@@ -53,7 +52,7 @@ public class LoginBean implements Serializable {
 		if(list == null || list.size() == 0){
 			//throw new ValidationException("Username cannot be found");
 			loginStatus = false;
-			return "login";
+			return "register";
 		}
 		
 		for(User u : list){
@@ -67,6 +66,18 @@ public class LoginBean implements Serializable {
 		return "login";
 	}
 	
+	public String register(){
+		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
+				User.class).getResultList();
+		if(password.equals(passwordValidation) && list.size() == 0){
+			userService.createAndPersistUser(username, password);
+			return "profile";
+		}
+		else{
+			return "register";
+		}
+	}
+	
 	public boolean getLoginStatus(){
 		
 
@@ -76,6 +87,14 @@ public class LoginBean implements Serializable {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getPasswordValidation() {
+		return passwordValidation;
+	}
+
+	public void setPasswordValidation(String passwordValidation) {
+		this.passwordValidation = passwordValidation;
 	}
 
 	public void setPassword(String password) {

@@ -6,30 +6,38 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	template="WEB-INF/layouts/template.xhtml">
-	<ui:define name="title">Login</ui:define>
-
+	<ui:define name="title">Register</ui:define>
+	
 	<ui:define name="body">
 		<h:form>
 			<p>
-				<h:outputText value="Enter username: "></h:outputText>
+				<h:outputText value="Choose your Username: "></h:outputText>
 				<h:inputText id="username" title="username"
 					value="#{loginBean.username}">
 				</h:inputText>
 			</p>
 			<p>
-			<h:outputText value="Enter password: "></h:outputText>
-				<h:inputText id="password" type="password" title="Enter password: "
+			<h:outputText value="Create a Password: "></h:outputText>
+				<h:inputText id="password" title="Create password: "
 					value="#{loginBean.password}">
+
+				</h:inputText>
+				</p>
+				<p>
+			<h:outputText value="Confirm your Password: "></h:outputText>	
+				<h:inputText id="password2" title="Confirm password: "
+					value="#{loginBean.passwordValidation}">
 
 				</h:inputText>
 			</p>
 			<p>
-				<h:commandButton id="submit" value="Submit" action="#{loginBean.login()}" />
+				<h:commandButton id="submit" value="Finish" action="#{loginBean.register()}" />
 				
-				<h:commandButton id="submit2" value="Register" action="#{loginBean.register()}" />
-				
-			
 			</p>
+			
 		</h:form>
 	</ui:define>
+	
+	
+	
 </ui:composition>
