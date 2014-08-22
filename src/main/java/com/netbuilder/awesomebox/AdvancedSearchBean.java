@@ -3,24 +3,72 @@ package com.netbuilder.awesomebox;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
 @SessionScoped
 public class AdvancedSearchBean implements Serializable {
 
+	@Inject
+	private SearchController sc;
 	private static final long serialVersionUID = 4380233612056317331L;
-	private boolean songRatingCheck = false, songPlaysCheck = false,
-			songGenreCheck = false, albumRatingCheck = false,
-			artistRatingCheck = false, songYearCheck = false,
+	private boolean songRatingCheck = false, 
+			songPlaysCheck = false,
+			songGenreCheck = false, 
+			albumRatingCheck = false,
+			artistRatingCheck = false, 
+			songYearCheck = false,
 			songLengthCheck = false;
-	private int starEquality = 0, starValue = 3, playsEquality = 0,
-			playsValue = 10, genreValue = 0, albumStarEquality = 0,
-			albumStarValue = 3, artistStarEquality = 0,
-			artistStarValue = 3, songYearEquality = 0, songYearValue = 1999,
+	private int starEquality = 0, starValue = 3, 
+			playsEquality = 0, playsValue = 10, 
+			albumStarEquality = 0, albumStarValue = 3, 
+			artistStarEquality = 0, artistStarValue = 3, 
+			songYearEquality = 0, songYearValue = 1999,
 			songLengthEquality = 0, songLengthValue = 175;
+	private String genreValue = "";
 
 	public AdvancedSearchBean() {
+	}
+	
+	public String search(){
+		boolean[] checks = new boolean[]{songRatingCheck, songPlaysCheck, songGenreCheck,
+				 albumRatingCheck, artistRatingCheck, songYearCheck, songLengthCheck};
+		for(int i = 0; i < checks.length; i++){
+			if(checks[i]){
+				caseSearch(i);
+			}
+		}
+		sc.search();
+		return "results";
+	}
+	
+	public void caseSearch(int i){
+		switch(i){
+		case 0:
+			sc.searchRating(starEquality, starValue);
+			break;
+		case 1:
+			sc.searchPlays(playsEquality, playsValue);
+			break;
+		case 2:
+			sc.searchGenre(genreValue);
+			break;
+		case 3:
+			sc.searchAlbumRating(albumStarEquality, albumStarValue);
+			break;
+		case 4:
+			sc.searchArtistRating(artistStarEquality, artistStarValue);
+			break;
+		case 5:
+			sc.searchYear(songYearEquality, songYearValue);
+			break;
+		case 6:
+			sc.searchLength(songLengthEquality, songLengthValue);
+			break;
+		default:
+			break;
+		}
 	}
 
 	public boolean toggleSongRatingCheck() {
