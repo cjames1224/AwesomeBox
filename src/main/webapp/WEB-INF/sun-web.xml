@@ -1,0 +1,6 @@
+<sun-web>
+<session-config>
+      <session-manager/>
+   </session-config>
+   <property name="alternatedocroot_1" value="from=/songs/* dir=C:/"/>
+</sun-web>
