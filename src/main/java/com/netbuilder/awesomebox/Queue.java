@@ -1,10 +1,17 @@
 package com.netbuilder.awesomebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Queue {
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
+@Named
+@SessionScoped
+public class Queue implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Song> queue;
 	private boolean isShuffle;
 	
