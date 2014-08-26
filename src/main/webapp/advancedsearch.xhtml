@@ -69,7 +69,7 @@
 					 value="#{searchController.genreValue}" />
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="albumRating" onclick="#{searchController.toggleAlbumRatingCheck()}"  id="albumRating" />
+				<h:selectBooleanCheckbox value="albumRating" onclick="toggleAlbumRating(),#{searchController.toggleAlbumRatingCheck()}"  id="albumRating" />
 				Album Rating
 				<h:selectOneMenu value = "#{searchController.albumStarEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
@@ -87,7 +87,7 @@
 					</h:selectOneMenu>
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="artistRating" onclick="toggleARating(),#{searchController.toggleArtistRatingCheck()}"   id="artistRating" />
+				<h:selectBooleanCheckbox value="artistRating" onclick="toggleArtistRating(),#{searchController.toggleArtistRatingCheck()}"   id="artistRating" />
 				Artist Rating
 				<h:selectOneMenu value = "#{searchController.artistStarEquality}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />

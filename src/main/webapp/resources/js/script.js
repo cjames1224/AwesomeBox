@@ -19,12 +19,12 @@ function toggleGenre() {
 	$('input[name="j_idt27:genreSearch"]').toggle();
 }
 
-function togglePlays() {
+function toggleAlbumRating() {
 	$('select[name="j_idt27:j_idt52"]').toggle();
 	$('select[name="j_idt27:j_idt56"]').toggle();
 }
 
-function toggleARating() {
+function toggleArtistRating() {
 	$('select[name="j_idt27:j_idt65"]').toggle();
 	$('select[name="j_idt27:j_idt69"]').toggle();
 }
