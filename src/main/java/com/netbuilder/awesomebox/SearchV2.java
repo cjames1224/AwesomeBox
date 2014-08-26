@@ -85,13 +85,13 @@ public class SearchV2 implements Serializable{
 	}
 	
 	public List<Album> searchAlbumName(int id) {
-		initAndConnCheck();
+		//initAndConnCheck();
 		List<Album> list = em.createQuery("SELECT al FROM Song s, AlbumSong als, Album al WHERE s = als.song AND al = als.album AND s.id = "+id+" ",Album.class).getResultList();
 		return list;		
 	}
 	
 	public List<Artist> searchArtistName(int id) {
-		initAndConnCheck();
+		//initAndConnCheck();
 		List<Artist> list = em.createQuery("SELECT a FROM Song s, SongArtist sa, Artist a WHERE s = sa.song AND a = sa.artist AND s.id = "+id+" ",Artist.class).getResultList();
 		return list;		
 	}
