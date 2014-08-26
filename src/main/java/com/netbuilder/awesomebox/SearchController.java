@@ -199,37 +199,37 @@ public class SearchController implements Serializable {
 //			artistRatingCheck = false, 
 //			songYearCheck = false,
 //			songLengthCheck = false;
-	public boolean toggleSongPlaysCheck() {
+	public void toggleSongPlaysCheck() {
 		songPlaysCheck = !songPlaysCheck;
-		return songPlaysCheck;
+		//return songPlaysCheck;
 	}
 	
-	public boolean toggleSongGenreCheck() {
+	public void toggleSongGenreCheck() {
 		songGenreCheck = !songGenreCheck;
-		return songGenreCheck;
+	//	return songGenreCheck;
 	}
 	
-	public boolean toggleAlbumRatingCheck() {
+	public void toggleAlbumRatingCheck() {
 		albumRatingCheck = !albumRatingCheck;
-		return albumRatingCheck;
+		//return albumRatingCheck;
 	}
 	
-	public boolean toggleArtistRatingCheck() {
+	public void toggleArtistRatingCheck() {
 		artistRatingCheck = !artistRatingCheck;
-		return artistRatingCheck;
+		//return artistRatingCheck;
 	}
 	
-	public boolean toggleSongYearCheck() {
+	public void toggleSongYearCheck() {
 		songYearCheck = !songYearCheck;
-		return songYearCheck;
+		//return songYearCheck;
 	}
-	public boolean toggleSongLengthCheck() {
+	public void toggleSongLengthCheck() {
 		songLengthCheck = !songLengthCheck;
-		return songLengthCheck;
+		//return songLengthCheck;
 	}
-	public boolean toggleSongRatingCheck() {
+	public void toggleSongRatingCheck() {
 		songRatingCheck = !songRatingCheck;
-		return songRatingCheck;
+		//return songRatingCheck;
 	}
 	
 	

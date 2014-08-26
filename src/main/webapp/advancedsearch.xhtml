@@ -31,7 +31,7 @@
 					value="#{searchController.searchTerm}"></h:inputText>
 			</p>
 			<p>
-				<h:selectBooleanCheckbox onclick="toggleRating()" id="songRating"
+				<h:selectBooleanCheckbox onclick="toggleRating(),#{searchController.toggleSongRatingCheck()}" id="songRating"
 					value="#{searchController.songRatingCheck}"/>
 				Song Rating
 					<h:selectOneMenu styleClass="ratingOperator" value = "#{searchController.starEquality}">
