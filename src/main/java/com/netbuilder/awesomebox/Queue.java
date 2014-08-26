@@ -40,6 +40,10 @@ public class Queue implements Serializable{
 		queue.remove(song);
 	}
 	
+	public ArrayList<Song> getQueue(){
+		return queue;
+	}
+	
 	public boolean isPlaying(){
 		return Playback.getInstance().isPlaying();
 	}
