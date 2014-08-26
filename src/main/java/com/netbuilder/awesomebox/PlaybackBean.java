@@ -1,14 +1,19 @@
 package com.netbuilder.awesomebox;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Line.Info;
 import javax.sound.sampled.LineUnavailableException;
@@ -28,10 +33,12 @@ public class PlaybackBean implements Serializable{
 	public PlaybackBean(){
 	}
 	
-	public void initAndStartLine(int id){
-		stream = ss.getStreamFromSongById(id);
-		//System.out.println(ss.listSongsByID(id));
+	public String initAndStartLine(int id){
+/*		stream = ss.getStreamFromSongById(id);
+		System.out.println(ss.listSongsByID(id));
+		
 		try {
+			System.out.println("inside try block");
 			line = (SourceDataLine) AudioSystem.getLine(
 					new DataLine.Info(SourceDataLine.class, stream.getFormat(),
 						((int) stream.getFrameLength() * stream.getFormat().getFrameSize())));
@@ -40,7 +47,25 @@ public class PlaybackBean implements Serializable{
 			System.err.println("Could not initiate Line from songId and inputstream");
 			e.printStackTrace();
 		}
-		startLine();
+		startLine();*/
+		
+		//File audioFile = new File("http://localhost:8080/awesomebox/songs/br.wav");
+
+		try {
+			URL url = new URL("http://localhost:8080/awesomebox/songs/br.wav");
+			//AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+			AudioInputStream audioStream1 = AudioSystem.getAudioInputStream(url);
+			AudioFormat format = audioStream1.getFormat();
+			DataLine.Info info = new DataLine.Info(Clip.class, format);
+			Clip audioClip = (Clip) AudioSystem.getLine(info);
+			//audioClip.addLineListener(this);
+			audioClip.open(audioStream1);
+			audioClip.start();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
 	}
 	
 	public void startLine(){

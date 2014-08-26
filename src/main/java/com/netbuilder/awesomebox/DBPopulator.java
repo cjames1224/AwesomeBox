@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.sql.DataSourceDefinition;
+import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.Stateful;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+@LocalBean
 @Singleton
 @Startup
 @DataSourceDefinition(
@@ -110,43 +112,43 @@ public class DBPopulator {
 	private void initSongs() {
 		songs = new ArrayList<Song>();
 		songs.add(new Song("I'm a Slave 4 U", 204,
-				"file/location/I'maASlave4U.wav", "Pop", 2));
+				"/songs/br.mp3", "Pop", 2));
 		songs.add(new Song("Oops!... I Did it Again", 211,
-				"file/location/OppsDidItAgain.wav", "Pop", 5));
+				"/songs/br.mp3", "Pop", 5));
 		songs.add(new Song("Don't Let Me Be the Last to Know", 230,
-				"file/locaiton/DontLetMeBeTheLast.wav", "Pop", 3));
+				"/songs/br.mp3", "Pop", 3));
 		songs.add(new Song("Through the Fire and Flames", 441,
-				"file/location/Throughthefireandflames.wav", "Power Metal", 5));
+				"/songs/br.mp3", "Power Metal", 5));
 		songs.add(new Song("The Flame of Youth", 401,
-				"file/location/Theflameofyouth.wav", "Power Metal", 1));
-		songs.add(new Song("Ring of Fire", 195, "file/location/ringoffire.wav",
+				"/songs/br.mp3", "Power Metal", 1));
+		songs.add(new Song("Ring of Fire", 195, "/songs/br.mp3",
 				"Power Metal", 4));
 		songs.add(new Song("21st Century Breakdown", 309,
-				"file/location/21stcenture.wav", "Punk Rock", 3));
+				"/songs/br.mp3", "Punk Rock", 3));
 		songs.add(new Song("American Idiot", 174,
-				"file/location/americanidiot.wav", "Punk Rock", 5));
+				"/songs/br.mp3", "Punk Rock", 5));
 		songs.add(new Song("Wake Me Up When September Ends", 285,
-				"file/location/wakemeup.wav", "Punk Rock", 4));
+				"/songs/br.mp3", "Punk Rock", 4));
 		songs.add(new Song("Boulevard of Broken Dreams", 265,
-				"file/location/boulevardofbrokendreams.wav", "Punk Rock", 5));
-		songs.add(new Song("K.O.B.E.", 239, "file/location/kobe.wav",
+				"/songs/br.mp3", "Punk Rock", 5));
+		songs.add(new Song("K.O.B.E.", 239, "/songs/br.mp3",
 				"Hip-hop", 5));
-		songs.add(new Song("Kobe Bryant", 305, "file/location/kobebryant.wav",
+		songs.add(new Song("Kobe Bryant", 305, "/songs/br.mp3",
 				"Rap", 1));
 		songs.add(new Song("Do You Want To Build A Snowman", 207,
-				"file/loc/doyouwanta.wav", "Musical", 2));
-		songs.add(new Song("Let It Go", 224, "file/loc/letitgo.wav", "Musical",
+				"/songs/br.mp3", "Musical", 2));
+		songs.add(new Song("Let It Go", 224, "/songs/br.mp3", "Musical",
 				5));
-		songs.add(new Song("Let It Go", 226, "file/location/letitgov2.wav",
+		songs.add(new Song("Let It Go", 226, "/songs/br.mp3",
 				"Musical", 3));
-		songs.add(new Song("The Trolls", 102, "file/loc/thetrolls.wav",
+		songs.add(new Song("The Trolls", 102, "/songs/br.mp3",
 				"Musical", 1));
-		songs.add(new Song("It's My Life", 224, "awesomebox/resources/sound/br.wav",
+		songs.add(new Song("It's My Life", 224, "/songs/br.mp3",
 				"Hard Rock", 5));
-		songs.add(new Song("One Wild Night", 283, "file/loc/oneWildnight.wav",
+		songs.add(new Song("One Wild Night", 283, "/songs/br.mp3",
 				"Hard Rock", 5));
 		songs.add(new Song("Just Hanging Out (With My Family)", 345,
-				"file/loc/birdemic.wav", "Movie", 5));
+				"/songs/br.mp3", "Movie", 5));
 		ss.persistSongList(songs);
 	}
 

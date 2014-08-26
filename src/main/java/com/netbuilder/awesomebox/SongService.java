@@ -49,7 +49,7 @@ private EntityManager em;
 				Song.class).getResultList();
 	}
 	
-	public AudioInputStream getStreamFromSongById(Integer id){
+	public AudioInputStream getStreamFromSongById(int id){
 		AudioInputStream ais = null;
 		try{
 			ais = AudioSystem.getAudioInputStream(new File(em.find(Song.class, id).getFileLocation()));
