@@ -107,17 +107,26 @@ p {
 	display: none;
 }
 
-.hiddenRating {
-	display:none;
-}
 
+select[name="j_idt27:j_idt31"] {display:none;}
+select[name="j_idt27:j_idt35"] {display:none;}
 
+select[name="j_idt27:j_idt44"] {display:none;}
+input[name="j_idt27:playsSearch"] {display:none;}
 
+input[name="j_idt27:genreSearch"] {display:none;}
 
+select[name="j_idt27:j_idt52"] {display:none;}
+select[name="j_idt27:j_idt56"] {display:none;}
 
+select[name="j_idt27:j_idt65"] {display:none;}
+select[name="j_idt27:j_idt69"] {display:none;}
 
+select[name="j_idt27:j_idt78"] {display:none;}
+input[name="j_idt27:yearSearch"] {display:none;}
 
-
+select[name="j_idt27:j_idt84"] {display:none;}
+input[name="j_idt27:lengthSearch"] {display:none;}
 
 
 

@@ -3,15 +3,39 @@ function changeImage(element) {
      element.bln = !element.bln;  /* assigns opposite boolean value always */
  }
 
-function toggleRating(className) {
 
-	
+
+function toggleRating() {
+	$('select[name="j_idt27:j_idt35"]').toggle();
+	$('select[name="j_idt27:j_idt31"]').toggle();
 }
 
-function toggle_visibility(id) {
-    var e = document.getElementById(id);
-    if(e.style.display == 'block')
-       e.style.display = 'none';
-    else
-       e.style.display = 'block';
- }
+function togglePlays() {
+	$('select[name="j_idt27:j_idt44"]').toggle();
+	$('input[name="j_idt27:playsSearch"]').toggle();
+}
+
+function toggleGenre() {
+	$('input[name="j_idt27:genreSearch"]').toggle();
+}
+
+function togglePlays() {
+	$('select[name="j_idt27:j_idt52"]').toggle();
+	$('select[name="j_idt27:j_idt56"]').toggle();
+}
+
+function toggleARating() {
+	$('select[name="j_idt27:j_idt65"]').toggle();
+	$('select[name="j_idt27:j_idt69"]').toggle();
+}
+
+function toggleYear() {
+	$('select[name="j_idt27:j_idt78"]').toggle();
+	$('input[name="j_idt27:yearSearch"]').toggle();
+}
+
+function toggleLength() {
+	$('select[name="j_idt27:j_idt84"]').toggle();
+	$('input[name="j_idt27:lengthSearch"]').toggle();
+}
+
