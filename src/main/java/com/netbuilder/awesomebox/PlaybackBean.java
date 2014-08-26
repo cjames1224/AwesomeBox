@@ -29,11 +29,12 @@ public class PlaybackBean implements Serializable{
 	private SongService ss;
 	private AudioInputStream stream;
 	private SourceDataLine line = null;
+	private Clip audioClip;
 	
 	public PlaybackBean(){
 	}
 	
-	public String initAndStartLine(int id){
+	public String initAndStartLine(){
 /*		stream = ss.getStreamFromSongById(id);
 		System.out.println(ss.listSongsByID(id));
 		
@@ -57,7 +58,7 @@ public class PlaybackBean implements Serializable{
 			AudioInputStream audioStream1 = AudioSystem.getAudioInputStream(url);
 			AudioFormat format = audioStream1.getFormat();
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
-			Clip audioClip = (Clip) AudioSystem.getLine(info);
+			audioClip = (Clip) AudioSystem.getLine(info);
 			//audioClip.addLineListener(this);
 			audioClip.open(audioStream1);
 			audioClip.start();
@@ -98,6 +99,25 @@ public class PlaybackBean implements Serializable{
 
 		new Thread(playing).start();
 		
+	}
+	
+	public void pause() {
+		audioClip.stop();
+	}
+	
+	public void play() {
+		audioClip.start();
+	}
+	
+	public String togglePlay() {
+		if (audioClip == null) {
+			initAndStartLine();
+		} else if(audioClip.isRunning()) {
+			pause();
+		} else {
+			play();
+		}
+		return null;
 	}
 	
 
