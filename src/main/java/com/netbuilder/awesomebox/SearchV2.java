@@ -45,10 +45,10 @@ public class SearchV2 implements Serializable{
 		for(int i = 0; i < endParens; i++)
 			searchBuilder.append(" ) ");
 		List<Song> list = em.createQuery(searchBuilder.toString(), Song.class).getResultList();
-		if(list == null || list.size() == 0){
-			searchBuilder = null;
-			return list;
-		}
+//		if(list == null || list.size() == 0){
+//			searchBuilder = null;
+//			return list;
+//		}
 		//System.out.println(searchBuilder.toString());
 		
 //		for(Song s: list){
