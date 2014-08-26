@@ -13,7 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 @Named
-@SessionScoped
+@Stateless
 public class SearchV2 implements Serializable{
 	
 	/**
@@ -56,6 +56,7 @@ public class SearchV2 implements Serializable{
 //		}
 //		
 		searchBuilder = null;
+		endParens = 0;
 		
 		return list;
 		

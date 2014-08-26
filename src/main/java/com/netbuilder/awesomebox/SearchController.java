@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Startup;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,13 +29,13 @@ public class SearchController implements Serializable {
 	
 	private List<Song> results;
 	
-	private boolean songRatingCheck = false, 
-			songPlaysCheck = false,
-			songGenreCheck = false, 
-			albumRatingCheck = false,
-			artistRatingCheck = false, 
-			songYearCheck = false,
-			songLengthCheck = false;
+	private boolean songRatingCheck, 
+			songPlaysCheck,
+			songGenreCheck, 
+			albumRatingCheck,
+			artistRatingCheck, 
+			songYearCheck,
+			songLengthCheck;
 	private int starEquality = 0, starValue = 3, 
 			playsEquality = 0, playsValue = 10, 
 			albumStarEquality = 0, albumStarValue = 3, 
@@ -42,6 +44,16 @@ public class SearchController implements Serializable {
 			songLengthEquality = 0, songLengthValue = 175;
 	private String genreValue = "";
 
+	@PostConstruct
+	public void setup() {
+		this.songRatingCheck = false;
+		this.songPlaysCheck = false;
+		this.songGenreCheck = false;
+		this.albumRatingCheck = false;
+		this.artistRatingCheck = false;
+		this.songYearCheck = false;
+		this.songLengthCheck = false;
+	}
 	// getters and setters
 	public String getSearchTerm() {
 		return searchTerm;
@@ -391,7 +403,7 @@ public class SearchController implements Serializable {
 		for (int i = 0;i < list.size();i++) {
 			for (int j = 0;j < list2.size();j++) {
 				if (list.get(i).getId() == list2.get(j).getId()) {
-					list3.add(list2.get(j));
+					list3.add(list.get(i));
 				}
 			}
 		}
@@ -402,7 +414,7 @@ public class SearchController implements Serializable {
 				}
 			}
 		}
-		
+		setResults(list3);
 		return list3;
 	}
 	
