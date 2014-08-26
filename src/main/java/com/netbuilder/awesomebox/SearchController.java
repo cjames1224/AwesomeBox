@@ -396,6 +396,9 @@ public class SearchController implements Serializable {
 	
 	public List<Song> search2() {
 		List<Song> list = this.searchService.search();
+		if (list == null) {
+			return list;
+		}
 		List<Song> list2 = searchService.searchSongByAlbum(searchTerm).search();
 		list2.addAll(searchService.searchSongByArtist(searchTerm).search());
 		list2.addAll(searchService.searchSongName(searchTerm).search());
