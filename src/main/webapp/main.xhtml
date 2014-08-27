@@ -11,9 +11,7 @@
     <ui:define name="body">
         <div style="text-align: center; margin-top:20px">
           <h:form>
-          
-           <img id="playButton" src="resources/images/kobePlay.png" border="0" onclick="changeImage(this);#{playbackBean.togglePlay()}" align="middle" 
-                 alt="Welcome to AwesomeBox"/>
+           <h:commandButton id="playButton" image="#{playbackBean.image}" action="#{playbackBean.togglePlay()}"  />
 			
 			<h2>Kobe Bryant</h2>
 

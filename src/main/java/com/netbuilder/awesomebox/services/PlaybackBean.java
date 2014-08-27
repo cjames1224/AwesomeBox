@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.enterprise.context.SessionScoped;
@@ -33,102 +34,61 @@ public class PlaybackBean implements Serializable{
 	private SongService ss;
 	private AudioInputStream stream;
 	private SourceDataLine line = null;
-	private AudioClip audioClip;
+	private Clip audioClip;
 	private boolean isPlaying = false;
+	private String[] buttonToggle= new String[]{"resources/images/kobePlay.png", "resources/images/kobePause.png"};
+	private String image = buttonToggle[0];
 	
 	public PlaybackBean(){
 	}
 	
+	public void setImage(String image){
+		this.image = image;
+	}
+	
+	public String getImage(){
+		return image;
+	}
+	
 	public String initAndStartLine(){
-/*		stream = ss.getStreamFromSongById(id);
-		System.out.println(ss.listSongsByID(id));
-		
-		try {
-			System.out.println("inside try block");
-			line = (SourceDataLine) AudioSystem.getLine(
-					new DataLine.Info(SourceDataLine.class, stream.getFormat(),
-						((int) stream.getFrameLength() * stream.getFormat().getFrameSize())));
-			line.open(stream.getFormat());
-		} catch (LineUnavailableException e) {
-			System.err.println("Could not initiate Line from songId and inputstream");
-			e.printStackTrace();
-		}
-		startLine();*/
-		
-		//File audioFile = new File("http://localhost:8080/awesomebox/songs/br.wav");
-
 		try {
 			URL url = new URL("http://localhost:8080/awesomebox/songs/br.wav");
-			/*AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-			AudioInputStream audioStream1 = AudioSystem.getAudioInputStream(url);
-			AudioFormat format = audioStream1.getFormat();
-			DataLine.Info info = new DataLine.Info(AudioClip.class, format);
-			audioClip = (AudioClip) AudioSystem.getLine(info);
-			audioClip.addLineListener(this);
-			((Clip) audioClip).open(audioStream1);
-			audioClip.start();*/
-			audioClip = JApplet.newAudioClip(url);
-			audioClip.play();
+			audioClip = AudioSystem.getClip();
+
+			AudioInputStream ais = AudioSystem.getAudioInputStream(url);
+			audioClip.open(ais);
+			audioClip.start();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		return null;
 	}
-	
-	public void startLine(){
-		line.start();
 		
-		byte[] buffer = new byte[32];
-		Runnable playing = new Runnable(){
-			public void run() {
-				int totals = 0;
-				int numRead, offset;
-				try {
-					while((numRead = stream.read(buffer, 0 , buffer.length)) >= 0){
-						offset = 0;
-						while(offset < numRead){
-							offset += line.write(buffer, offset, numRead - offset);
-						}
-
-						stream.mark(totals);
-						totals += 32;
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				line.drain();
-				line.stop();
-				line.close();
-
-			}
-		};
-
-		new Thread(playing).start();
-		
-	}
-	
 	public void pause() {
 		audioClip.stop();
 	}
 	
 	public void play() {
-		audioClip.play();
+		audioClip.start();
 	}
 	
 	public String togglePlay() {
-		System.out.println("inside Toggle Play");
 		if (audioClip == null) {
 			initAndStartLine();
+			audioClip.start();
 			isPlaying = true;
-			System.out.println("audio clip is null");
-		} else if(isPlaying) {
-			System.out.println("is running, stopped");
-			audioClip.stop();
-			isPlaying=false;
-		} else {
-			play();
-			System.out.println("is stopped, play");
+			image = buttonToggle[1];
+		}else{
+
+			if(isPlaying) {
+				image = buttonToggle[0];
+				audioClip.stop();
+				isPlaying=false;
+			} else {
+				image = buttonToggle[1];
+				audioClip.start();
+				isPlaying = true;
+			}
 		}
 		return null;
 	}
