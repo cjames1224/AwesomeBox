@@ -17,16 +17,16 @@
 					value="#{searchController.searchTerm}"></h:inputText>
 			</p>
 			<p>
-				<h:selectBooleanCheckbox onclick="toggleRating();#{searchController.toggleSongRatingCheck()}" id="songRating"
+				<h:selectBooleanCheckbox onclick="#{searchController.toggleSongRatingCheck()}" id="songRating"
 					value="#{searchController.songRatingCheck}"/>
 				Song Rating
-					<h:selectOneMenu styleClass="ratingOperator" value = "#{searchController.starEquality}">
+					<h:selectOneMenu value = "#{searchController.starEquality}" rendered="#{searchController.songRatingCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-					<h:selectOneMenu styleClass="ratingValue" value = "#{searchController.starValue}">
+					<h:selectOneMenu  value = "#{searchController.starValue}" rendered="#{searchController.songRatingCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#9734;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="1" itemLabel="&#9733;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="2" itemLabel="&#9733;&#9733;&#9734;&#9734;&#9734;" />
@@ -37,33 +37,33 @@
 					
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="#{searchController.songPlaysCheck}" onclick="togglePlays();#{searchController.toggleSongPlaysCheck()}"   id="songPlays" />
+				<h:selectBooleanCheckbox value="#{searchController.songPlaysCheck}" onclick="#{searchController.toggleSongPlaysCheck()}"   id="songPlays" />
 				Song Plays
-				<h:selectOneMenu styleClass="advancedHidden" value = "#{searchController.playsEquality}">
+				<h:selectOneMenu value = "#{searchController.playsEquality}" rendered="#{searchController.songPlaysCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-				<h:inputText id="playsSearch" title="playsSearch"
+				<h:inputText id="playsSearch" title="playsSearch" rendered="#{searchController.songPlaysCheck}"
 					value="#{searchController.playsValue}" />
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="#{searchController.songGenreCheck}" id="songGenre"  onclick="toggleGenre();#{searchController.toggleSongGenreCheck()}" />
+				<h:selectBooleanCheckbox value="#{searchController.songGenreCheck}" id="songGenre"  onclick="#{searchController.toggleSongGenreCheck()}" />
 				Song Genre
 				<h:inputText id="genreSearch" title="genreSearch"
-					 value="#{searchController.genreValue}" />
+					 value="#{searchController.genreValue}" rendered="#{searchController.songGenreCheck}"/>
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="#{searchController.albumRatingCheck}" onclick="toggleAlbumRating();#{searchController.toggleAlbumRatingCheck()}"  id="albumRating" />
+				<h:selectBooleanCheckbox value="#{searchController.albumRatingCheck}" onclick="#{searchController.toggleAlbumRatingCheck()}"  id="albumRating" />
 				Album Rating
-				<h:selectOneMenu value = "#{searchController.albumStarEquality}">
+				<h:selectOneMenu value = "#{searchController.albumStarEquality}" rendered="#{searchController.albumRatingCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-					<h:selectOneMenu value = "#{searchController.albumStarValue}">
+					<h:selectOneMenu value = "#{searchController.albumStarValue}" rendered="#{searchController.albumRatingCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#9734;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="1" itemLabel="&#9733;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="2" itemLabel="&#9733;&#9733;&#9734;&#9734;&#9734;" />
@@ -73,15 +73,15 @@
 					</h:selectOneMenu>
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="#{searchController.artistRatingCheck}" onclick="toggleArtistRating();#{searchController.toggleArtistRatingCheck()}"   id="artistRating" />
+				<h:selectBooleanCheckbox value="#{searchController.artistRatingCheck}" onclick="#{searchController.toggleArtistRatingCheck()}"   id="artistRating" />
 				Artist Rating
-				<h:selectOneMenu value = "#{searchController.artistStarEquality}">
+				<h:selectOneMenu value = "#{searchController.artistStarEquality}" rendered="#{searchController.artistRatingCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
 				
-					<h:selectOneMenu value = "#{searchController.artistStarValue}">
+					<h:selectOneMenu value = "#{searchController.artistStarValue}" rendered="#{searchController.artistRatingCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#9734;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="1" itemLabel="&#9733;&#9734;&#9734;&#9734;&#9734;" />
 						<f:selectItem itemValue="2" itemLabel="&#9733;&#9733;&#9734;&#9734;&#9734;" />
@@ -91,25 +91,25 @@
 					</h:selectOneMenu>
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="#{searchController.songYearCheck}" onclick="toggleYear();#{searchController.toggleSongYearCheck()}"   id="songYear" />
+				<h:selectBooleanCheckbox value="#{searchController.songYearCheck}" onclick="#{searchController.toggleSongYearCheck()}"   id="songYear" />
 				Song Year
-				<h:selectOneMenu value = "#{searchController.songYearEquality}">
+				<h:selectOneMenu value = "#{searchController.songYearEquality}" rendered="#{searchController.songYearCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
-				<h:inputText id="yearSearch" title="yearSearch" 
+				<h:inputText id="yearSearch" title="yearSearch" rendered="#{searchController.songYearCheck}" 
 					value="#{searchController.songYearValue}" />
 			</p>
 			<p>
-				<h:selectBooleanCheckbox value="#{searchController.songLengthCheck}" onclick="toggleLength();#{searchController.toggleSongLengthCheck()}"  id="songLength" />
+				<h:selectBooleanCheckbox value="#{searchController.songLengthCheck}" onclick="#{searchController.toggleSongLengthCheck()}"  id="songLength" />
 				Song Length
-				<h:selectOneMenu value = "#{searchController.songLengthEquality}">
+				<h:selectOneMenu value = "#{searchController.songLengthEquality}" rendered="#{searchController.songLengthCheck}">
 						<f:selectItem itemValue="0" itemLabel="&#60;" />
 						<f:selectItem itemValue="1" itemLabel="&#62;" />
 						<f:selectItem itemValue="2" itemLabel="&#61;" />
 					</h:selectOneMenu>
-				<h:inputText id="lengthSearch" title="lengthSearch"
+				<h:inputText id="lengthSearch" title="lengthSearch" rendered="#{searchController.songLengthCheck}"
 					value="#{searchController.songLengthValue}">
 					<f:convertNumber type="number"/>
 				</h:inputText>
