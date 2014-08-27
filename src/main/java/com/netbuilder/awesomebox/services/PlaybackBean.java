@@ -54,9 +54,9 @@ public class PlaybackBean implements Serializable{
 		return image;
 	}
 	
-	public String initAndStartLine(){
+	public String initAndStartLine(String urls){
 		try {
-			URL url = new URL("http://localhost:8080/awesomebox/songs/br.wav");
+			URL url = new URL(urls);
 			audioClip = AudioSystem.getClip();
 
 			try(AudioInputStream stream = AudioSystem.getAudioInputStream(url)){
@@ -88,9 +88,9 @@ public class PlaybackBean implements Serializable{
 		audioClip.start();
 	}
 	
-	public String togglePlay() {
+	public String togglePlay(String url) {
 		if (audioClip == null) {
-			initAndStartLine();
+			initAndStartLine(url);
 			audioClip.start();
 			isPlaying = true;
 			image = buttonToggle[1];
@@ -107,6 +107,14 @@ public class PlaybackBean implements Serializable{
 			}
 		}
 		return null;
+	}
+
+	public boolean isPlaying() {
+		return isPlaying;
+	}
+
+	public void setPlaying(boolean isPlaying) {
+		this.isPlaying = isPlaying;
 	}
 	
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.netbuilder.awesomebox.ValidationException;
@@ -18,6 +19,9 @@ public class Queue implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Song> queue;
 	private boolean isShuffle;
+	private Song currentSong;
+	@Inject
+	private PlaybackBean playback;
 	
 	public Queue() {
 		queue = new ArrayList<Song>();
@@ -85,5 +89,12 @@ public class Queue implements Serializable{
 		} else {
 			Playback.getInstance().createLineFromPath(queue.remove(0).getFileLocation());
 		}
+	}
+
+	public void togglePlay() {
+		if (currentSong == null) {
+			currentSong = queue.remove(0);
+		}
+		playback.togglePlay(currentSong.getFileLocation());
 	}
 }
