@@ -5,7 +5,7 @@
 <f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" contentType="text/html"
+	xmlns:f="http://java.sun.com/jsf/core" contentType="text/html" 
 	encoding="UTF-8">
 
 	<!--HEAD-->
@@ -21,7 +21,8 @@
 		<!-- Bootstrap -->
 		<h:outputStylesheet library="css" name="style.css" />
 		<!--  <h:outputStylesheet library="css" name="bootstrap.min.css" />-->
-		<h:outputStylesheet library="css" name="bootstrap.css" rel="stylesheet" />
+		<h:outputStylesheet library="css" name="bootstrap.css"
+			rel="stylesheet" />
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -29,81 +30,100 @@
 	</h:head>
 	<h:body>
 
-			<!-- HEADER -->
-			    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="main.xhtml">KobeBox</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><h:link outcome="playlist.xhtml" value="Playlist"
-            			rendered="#{userController.loginBean.isAdmin()}"/></li>
-            <li><h:link outcome="about.xhtml" value="About"/></li>
-            <li>
-			<!--  if no one logged in --> 
-				<h:link rendered="#{!userController.loginBean.loginStatus}"
-						value="Login" outcome="login"></h:link> 
-			<!--  if someone logged in -->
-				<h:link value="#{userController.loginBean.username}"
-						outcome="profile"
-						rendered="#{userController.loginBean.loginStatus}"></h:link>
-			</li>
-            <li><h:link outcome="advancedsearch.xhtml" value="Advanced Search"/></li>
-            
-          </ul></div><!--/.nav-collapse -->
-          <div class="navSearch">
-				<h:form>
-					<h:inputText id="search" title="search"
-								 value="#{searchController.searchTerm}"></h:inputText>
-					<div class="searchButton">
-							<h:commandLink id="searchLink" action="#{searchController.generalSearch()}"><h:graphicImage library="images"
-							name="search.png" /></h:commandLink></div>
-				</h:form></div>
-			
-      </div>
-    </div>
-    <div class="row">
-    	<!-- Player on left here -->
-    	<div class="col-lg-6 "><div class="left">
-    	          <h:form>
-          
-           
-           <h:commandButton id="playButton" image="#{playbackBean.image}" action="#{playbackBean.togglePlay()}"  />
-	
-				
-			</h:form>
-    	
-    	</div></div>
-    	<!-- PAGE CONTENT -->
-    	<div class="col-lg-6"> <div class="right">
-    	<ui:insert name="body">KOBE Default Content
-		</ui:insert>
-    	</div></div>
-    </div>
-			
-
-			<!-- DISPLAY FOR CURRENT SONG IN QUEUE -->
-			<div class="currentPlayer">CURRENT SONG IN QUEUE</div>
-			
-
-			<!-- FOOTER -->
-			<div class="footer">FOOTER STUFF, WE ROCK.</div>
+		<!-- HEADER -->
+		<h:form id="Frm1"> 
 		
+			<h:commandButton id="vendbtn" value=""	action="#{playbackBean.closePlayback()}" immediate="true" 
+			style="visibility:hidden;" /> 
+		</h:form>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="main.xhtml">KobeBox</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><h:link outcome="playlist.xhtml" value="Playlist"
+								rendered="#{userController.loginBean.isAdmin()}" /></li>
+						<li><h:link outcome="about.xhtml" value="About" /></li>
+						<li>
+							<!--  if no one logged in --> <h:link
+								rendered="#{!userController.loginBean.loginStatus}"
+								value="Login" outcome="login"></h:link> <!--  if someone logged in -->
+							<h:link value="#{userController.loginBean.username}"
+								outcome="profile"
+								rendered="#{userController.loginBean.loginStatus}"></h:link>
+						</li>
+						<li><h:link outcome="advancedsearch.xhtml"
+								value="Advanced Search" /></li>
+
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+				<div class="navSearch">
+					<h:form>
+						<h:inputText id="search" title="search"
+							value="#{searchController.searchTerm}"></h:inputText>
+						<div class="searchButton">
+							<h:commandLink id="searchLink"
+								action="#{searchController.generalSearch()}">
+								<h:graphicImage library="images" name="search.png" />
+							</h:commandLink>
+						</div>
+					</h:form>
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="container">
+				<!-- Player on left here -->
+				<div class="col-lg-6 ">
+					<div class="left">
+						<h:form>
+	
+	
+							<h:commandButton id="playButton" image="#{playbackBean.image}"
+								action="#{playbackBean.togglePlay()}" />
+	
+	
+						</h:form>
+	
+					</div>
+				</div>
+				<!-- PAGE CONTENT -->
+				<div class="col-lg-6">
+					<div class="right">
+						<ui:insert name="body">KOBE Default Content
+			</ui:insert>
+					</div>
+				</div>
+			</div>
+		</div>
+		 
+		DISPLAY FOR CURRENT SONG IN QUEUE
+		<div class="currentPlayer">CURRENT SONG IN QUEUE</div>
+
+
+		<!-- FOOTER -->
+		<div class="footer">FOOTER STUFF, WE ROCK.</div>
+
 
 
 		<!-- JAVASCRIPT -->
 		<!-- Placed at the end of the document so the pages load faster -->
 
-			<h:outputScript library="js"  name="bootstrap.min.js" />
-		 <h:outputScript library="js" name="script.js" />
-		 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<h:outputScript library="js" name="bootstrap.min.js" />
+		<h:outputScript library="js" name="script.js" />
+
+		<script
+			src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</h:body>
 </f:view>
 </html>

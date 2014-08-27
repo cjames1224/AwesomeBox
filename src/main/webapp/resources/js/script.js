@@ -1,9 +1,9 @@
+
+
 function changeImage(element) {
      element.src = element.bln ? "resources/images/kobePlay.png" : "resources/images/kobePause.png";
      element.bln = !element.bln;  /* assigns opposite boolean value always */
  }
-
-
 
 function toggleRating() {
 	$('select[name="j_idt27:j_idt35"]').toggle();
@@ -38,3 +38,14 @@ function toggleLength() {
 	$('select[name="j_idt27:j_idt84"]').toggle();
 	$('input[name="j_idt27:lengthSearch"]').toggle();
 }
+
+$( window ).load(function() {
+	var inFormOrLink;
+	$('a').live('click', function() { inFormOrLink = true; });
+	$('form').bind('submit', function() { inFormOrLink = true; });
+	
+	$(window).bind('onbeforeunload', function() { 
+//	    inFormOrLink ? document.getElementById("Frm1" + ":vendbtn").click() : null;
+	}); 
+});
+

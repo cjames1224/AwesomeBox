@@ -71,7 +71,6 @@ public class DBPopulator {
 
 		//clearDB();
 		
-		
 		if(em.createNativeQuery("SELECT * FROM Song").getResultList().size() == 0){
 			initAlbums();
 			initArtists();

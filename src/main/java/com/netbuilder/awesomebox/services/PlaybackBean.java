@@ -9,10 +9,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -26,14 +29,14 @@ import javax.swing.JApplet;
 import com.netbuilder.awesomebox.entityservices.SongService;
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class PlaybackBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private SongService ss;
-	private AudioInputStream stream;
+	//private AudioInputStream stream;
 	private SourceDataLine line = null;
 	private Clip audioClip;
 	private boolean isPlaying = false;
@@ -56,8 +59,10 @@ public class PlaybackBean implements Serializable{
 			URL url = new URL("http://localhost:8080/awesomebox/songs/br.wav");
 			audioClip = AudioSystem.getClip();
 
-			AudioInputStream ais = AudioSystem.getAudioInputStream(url);
-			audioClip.open(ais);
+			try(AudioInputStream stream = AudioSystem.getAudioInputStream(url)){
+				audioClip.open(stream);
+			}
+				
 			audioClip.start();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -65,10 +70,14 @@ public class PlaybackBean implements Serializable{
 		return null;
 	}
 		
-	@PreDestroy
-	public void closePlayback(){
+	public String closePlayback(){
+		System.out.println("CALLING CLOSE PLAYBACK");
 		audioClip.stop();
 		audioClip.close();
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+	            .getExternalContext().getSession(false);
+	    session.invalidate();
+	    return null;
 	}
 	
 	public void pause() {
