@@ -20,9 +20,9 @@
 
 	<ui:define name="body">
 		<h:form>
-		<p>Song Name is:
+		<h1>
 			<h:outputText id="songName" title="songName"
-					value="#{songController.getSong().name}" ></h:outputText></p>
+					value="#{songController.getSong().name}" ></h:outputText></h1>
 					<p>Song Length is:
 			<h:outputText id="songLengthMin" title="songLengthMin"
 					value="#{(songController.getSong().length/60).intValue()}" ></h:outputText> Minutes and

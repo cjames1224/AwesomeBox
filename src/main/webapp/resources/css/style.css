@@ -130,6 +130,10 @@ p {
 
 
 /* General Content Styles */
+.h1 {
+	color: #FFEA98;
+	font-size: large;
+}
 
 .left, .right {
 	padding-top:20px;
@@ -172,6 +176,7 @@ input[name="j_idt31:advancedSearchLink"] {
 /*  table styles  */
 th {
 	color: #d7d7d7;
+	
 }
 
 .table a {

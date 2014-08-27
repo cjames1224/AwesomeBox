@@ -10,10 +10,11 @@
 
 	<ui:define name="body">
 		<h:form>
+		<h:outputText value="Playlists" styleClass="h1"></h:outputText>
 			<h:dataTable value="#{playlistService.playList}" var="onePlaylist"
 				styleClass="table">
 				<h:column>
-					<f:facet name="header">PLAYLISTS</f:facet>
+				
 					<h:link value="#{onePlaylist.name}"
 						outcome="#{playlistController.getPlaylistDetails(onePlaylist.id)}" />
 				</h:column>
