@@ -15,7 +15,7 @@ import org.hibernate.usertype.UserType;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
-@Table(name="album")
+@Table(name="Album")
 public class Album {
 	
 	@Id

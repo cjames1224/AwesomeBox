@@ -49,21 +49,21 @@ public class DBPopulator {
 
 	@PostConstruct
 	public void populateDB() {
-		em = Persistence.createEntityManagerFactory("awesomebox")
-				.createEntityManager();
-		//to clear the db, uncomment below
 
 		//clearDB();
 		
-		initAlbums();
-		initArtists();
-		initSongs();
-		initUsers();
-		initPlaylists();
-		initAlbumArtists();
-		initAlbumSongs();
-		initPlaylistSongs();
-		initSongArtists();
+		
+		if(em.createNativeQuery("SELECT * FROM Song").getResultList().size() == 0){
+			initAlbums();
+			initArtists();
+			initSongs();
+			initUsers();
+			initPlaylists();
+			initAlbumArtists();
+			initAlbumSongs();
+			initPlaylistSongs();
+			initSongArtists();
+		}
 		
 	}
 	

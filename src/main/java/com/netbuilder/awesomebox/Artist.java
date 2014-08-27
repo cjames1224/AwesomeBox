@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="artist")
+@Table(name="Artist")
 public class Artist {
 	
 	@Id
