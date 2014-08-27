@@ -426,6 +426,7 @@ public class SearchController implements Serializable {
 			for (int j = i+1;j < list3.size();j++) {
 				if (list3.get(i).getId() == list3.get(j).getId()) {
 					list3.remove(j);
+					j--;
 				}
 			}
 		}
@@ -442,6 +443,7 @@ public class SearchController implements Serializable {
 			for (int j = i+1;j < list.size();j++) {
 				if (list.get(i).getId() == list.get(j).getId()) {
 					list.remove(j);
+					j--;
 				}
 			}
 		}
