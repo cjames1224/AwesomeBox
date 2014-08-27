@@ -117,6 +117,16 @@ public class LoginBean implements Serializable {
 		
 		
 	}
+	
+	public boolean isAdmin() {
+		if (loginStatus) {
+			List<User> users = userService.getUser(username);
+			User user = users.get(0);
+			return user.isAdmin();
+		} else {
+			return false;
+		}
+	}
 
 	
 

@@ -60,7 +60,7 @@
 					</h:selectOneMenu>
 					
 					</p>
-					<p><h:commandButton id="addPlaylist" value="Add to Playlist" action="#{songController.getSongArtist()}" />
+					<p><h:commandButton id="addPlaylist" value="Add to Playlist" action="#{songController.getSongArtist()}" rendered="#{userController.loginBean.isAdmin()}" />
 					<h:commandButton id="addQueue" value="Add to Queue" action="#{queue.addSong(songController.getSong())}" />
 					</p>
 					<p>

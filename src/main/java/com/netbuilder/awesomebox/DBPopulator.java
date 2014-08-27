@@ -177,7 +177,7 @@ public class DBPopulator {
 	
 	private void initUsers() {
 		users = new ArrayList<User>();
-		users.add(new User("Christian", "P4ssword"));
+		users.add(new User("Christian", "P4ssword",0,true));
 		users.add(new User("Charleigh", "P4ssword"));
 		users.add(new User("David", "P4ssword"));
 		users.add(new User("Daniel", "P4ssword"));
