@@ -70,8 +70,12 @@ public class LoginBean implements Serializable {
 	}
 	
 	public String register(){
+		if(username == null || password == null || username.equals("") || password.equals("")){
+			return "register";
+		}
 		List<User> list = em.createQuery("SELECT u FROM User u WHERE u.username =\'" + username + "\'",
 				User.class).getResultList();
+
 		if(password.equals(passwordValidation) && list.size() == 0){
 			userService.createAndPersistUser(username, password);
 			return "profile";

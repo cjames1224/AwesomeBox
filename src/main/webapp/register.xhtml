@@ -18,17 +18,17 @@
 			</p>
 			<p>
 			<h:outputText value="Create a Password: "></h:outputText>
-				<h:inputText id="password" title="Create password: "
-					value="#{loginBean.password}">
+				<h:inputSecret id="password" title="Create password: "
+					value="#{loginBean.password}" autocomplete="off">
 
-				</h:inputText>
+				</h:inputSecret>
 				</p>
 				<p>
 			<h:outputText value="Confirm your Password: "></h:outputText>	
-				<h:inputText id="password2" title="Confirm password: "
-					value="#{loginBean.passwordValidation}">
+				<h:inputSecret id="password2" title="Confirm password: "
+					value="#{loginBean.passwordValidation}" autocomplete="off">
 
-				</h:inputText>
+				</h:inputSecret>
 			</p>
 			<p>
 				<h:commandButton id="submit" value="Finish" action="#{loginBean.register()}" />
