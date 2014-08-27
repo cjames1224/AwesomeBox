@@ -72,6 +72,7 @@ public class SearchController implements Serializable {
 	}
 	
 	public String search(){
+		searchService.clear();
 		boolean[] checks = new boolean[]{songRatingCheck, songPlaysCheck, songGenreCheck,
 				 albumRatingCheck, artistRatingCheck, songYearCheck, songLengthCheck};
 		for(int i = 0; i < checks.length; i++){
@@ -82,6 +83,7 @@ public class SearchController implements Serializable {
 			}
 		}
 		search2();
+		this.setup();
 		return "results";
 	}
 	
@@ -396,9 +398,6 @@ public class SearchController implements Serializable {
 	
 	public List<Song> search2() {
 		List<Song> list = this.searchService.search();
-		if (list == null) {
-			return list;
-		}
 		List<Song> list2 = searchService.searchSongByAlbum(searchTerm).search();
 		list2.addAll(searchService.searchSongByArtist(searchTerm).search());
 		list2.addAll(searchService.searchSongName(searchTerm).search());
@@ -422,6 +421,7 @@ public class SearchController implements Serializable {
 	}
 	
 	public String generalSearch() {
+		searchService.clear();
 		List<Song> list = searchService.searchSongByAlbum(searchTerm).search();
 		list.addAll(searchService.searchSongByArtist(searchTerm).search());
 		list.addAll(searchService.searchSongName(searchTerm).search());

@@ -41,6 +41,11 @@ public class SearchV2 implements Serializable{
 		return searchBuilder;
 	}
 	
+	public void clear() {
+		searchBuilder = null;
+		endParens = 0;
+	}
+	
 	public List<Song> search(){
 		if (searchBuilder == null) {
 			return null;
