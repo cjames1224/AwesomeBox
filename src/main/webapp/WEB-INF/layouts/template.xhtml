@@ -110,7 +110,12 @@
 		<div class="currentPlayer">	
 		<div class="container">
 		
-		<p>Current Song info here.</p>
+		<p>Current Song:</p>
+		<p>
+			<h:form>
+				<h:commandLink id="currentSong" value="#{queue.currentSong.name}" action="#{songController.getSongDetails(queue.currentSong.id)}"/>
+			</h:form>
+		</p>
 
 		</div></div>
 
