@@ -44,9 +44,11 @@ public class PlaybackBean implements Serializable{
 	private boolean isPlaying = false;
 	private String[] buttonToggle= new String[]{"resources/images/kobePlay.png", "resources/images/kobePause.png"};
 	private String image = buttonToggle[0];
+
 	
 	public PlaybackBean(){
 	}
+	
 	
 	public void setImage(String image){
 		this.image = image;

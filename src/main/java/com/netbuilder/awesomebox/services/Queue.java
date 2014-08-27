@@ -23,10 +23,20 @@ public class Queue implements Serializable{
 	private Song currentSong;
 	@Inject
 	private PlaybackBean playback;
+	private String[] shuffleToggle = new String[]{"resources/images/kobe_Shuffle_Off.png", "resources/images/kobe_Shuffle_On.png"};
+	private String shuffleImage = shuffleToggle[0];
 	
 	public Queue() {
 		queue = new ArrayList<Song>();
 		isShuffle = false;
+	}
+	
+	public void setShuffleImage(String shuffleImage){
+		this.shuffleImage = shuffleImage;
+	}
+	
+	public String getShuffleImage(){
+		return shuffleImage;
 	}
 	
 	public boolean isEmpty() {
@@ -83,6 +93,11 @@ public class Queue implements Serializable{
 	public void toggleShuffle(boolean isAdmin) {
 		if (isAdmin) {
 			isShuffle = !isShuffle;
+			if (shuffleImage.equals("resources/images/kobe_Shuffle_Off.png")) {
+				shuffleImage = shuffleToggle[1];		
+			} else {
+				shuffleImage = shuffleToggle[0];
+			}
 		} else {
 			throw new ValidationException("User is not an Admin and cannot toggle shuffle");
 		}

@@ -130,43 +130,43 @@ public class DBPopulator {
 	private void initSongs() {
 		songs = new ArrayList<Song>();
 		songs.add(new Song("I'm a Slave 4 U", 204,
-				"/songs/br.mp3", "Pop", 2));
+				"http://localhost:8080/awesomebox/songs/slave4u.wav", "Pop", 2));
 		songs.add(new Song("Oops!... I Did it Again", 211,
-				"/songs/br.mp3", "Pop", 5));
+				"http://localhost:8080/awesomebox/songs/oops.wav", "Pop", 5));
 		songs.add(new Song("Don't Let Me Be the Last to Know", 230,
-				"/songs/br.mp3", "Pop", 3));
+				"http://localhost:8080/awesomebox/songs/br.wav", "Pop", 3));
 		songs.add(new Song("Through the Fire and Flames", 441,
-				"/songs/br.mp3", "Power Metal", 5));
+				"http://localhost:8080/awesomebox/songs/fireandflames.wav", "Power Metal", 5));
 		songs.add(new Song("The Flame of Youth", 401,
-				"/songs/br.mp3", "Power Metal", 1));
-		songs.add(new Song("Ring of Fire", 195, "/songs/br.mp3",
+				"http://localhost:8080/awesomebox/songs/br.wav", "Power Metal", 1));
+		songs.add(new Song("Ring of Fire", 195, "http://localhost:8080/awesomebox/songs/br.wav",
 				"Power Metal", 4));
 		songs.add(new Song("21st Century Breakdown", 309,
-				"/songs/br.mp3", "Punk Rock", 3));
+				"http://localhost:8080/awesomebox/songs/br.wav", "Punk Rock", 3));
 		songs.add(new Song("American Idiot", 174,
-				"/songs/br.mp3", "Punk Rock", 5));
+				"http://localhost:8080/awesomebox/songs/br.wav", "Punk Rock", 5));
 		songs.add(new Song("Wake Me Up When September Ends", 285,
-				"/songs/br.mp3", "Punk Rock", 4));
+				"http://localhost:8080/awesomebox/songs/september.wav", "Punk Rock", 4));
 		songs.add(new Song("Boulevard of Broken Dreams", 265,
-				"/songs/br.mp3", "Punk Rock", 5));
-		songs.add(new Song("K.O.B.E.", 239, "/songs/br.mp3",
+				"http://localhost:8080/awesomebox/songs/br.wav", "Punk Rock", 5));
+		songs.add(new Song("K.O.B.E.", 239, "http://localhost:8080/awesomebox/songs/br.wav",
 				"Hip-hop", 5));
-		songs.add(new Song("Kobe Bryant", 305, "/songs/br.mp3",
+		songs.add(new Song("Kobe Bryant", 305, "http://localhost:8080/awesomebox/songs/br.wav",
 				"Rap", 1));
 		songs.add(new Song("Do You Want To Build A Snowman", 207,
-				"/songs/br.mp3", "Musical", 2));
-		songs.add(new Song("Let It Go", 224, "/songs/br.mp3", "Musical",
+				"http://localhost:8080/awesomebox/songs/snowman.wav", "Musical", 2));
+		songs.add(new Song("Let It Go", 224, "http://localhost:8080/awesomebox/songs/demi-letitgo.wav", "Musical",
 				5));
-		songs.add(new Song("Let It Go", 226, "/songs/br.mp3",
+		songs.add(new Song("Let It Go", 226, "http://localhost:8080/awesomebox/songs/let_it_go.wav",
 				"Musical", 3));
-		songs.add(new Song("The Trolls", 102, "/songs/br.mp3",
+		songs.add(new Song("The Trolls", 102, "http://localhost:8080/awesomebox/songs/trolls.wav",
 				"Musical", 1));
-		songs.add(new Song("It's My Life", 224, "/songs/br.mp3",
+		songs.add(new Song("It's My Life", 224, "http://localhost:8080/awesomebox/songs/itsmylife.wav",
 				"Hard Rock", 5));
-		songs.add(new Song("One Wild Night", 283, "/songs/br.mp3",
+		songs.add(new Song("One Wild Night", 283, "http://localhost:8080/awesomebox/songs/onewildnight.wav",
 				"Hard Rock", 5));
 		songs.add(new Song("Just Hanging Out (With My Family)", 345,
-				"/songs/br.mp3", "Movie", 5));
+				"http://localhost:8080/awesomebox/songs/just_hanging_out.wav", "Movie", 5));
 		ss.persistSongList(songs);
 	}
 

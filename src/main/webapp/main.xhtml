@@ -11,17 +11,32 @@
     <ui:define name="body">
         <div style="text-align: center; margin-top:20px">
 <h:form>
-			
+			<h:outputText styleClass="h1" value="My Queue" rendered="#{queue.isNotEmpty()}"></h:outputText>
  			<h:dataTable value="#{queue.queue}" var="oneSong"
                       styleClass="table" rendered="#{queue.isNotEmpty()}">
             <h:column>
-
-                        	
+                        	<f:facet name="header">Song Name</f:facet>
                             <h:commandLink value="#{oneSong.name}" action="#{songController.getSongDetails(oneSong.id)}" />
-                            	<f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" />
-					
-
+                            	<f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" />				
             </h:column>
+            <h:column>
+					<f:facet name="header">Artist</f:facet>
+					<h:outputText  value="#{songController.getSongArtist(oneSong.id).name}" />
+		</h:column>
+			<h:column>
+					<f:facet name="header">Album</f:facet>
+					<h:outputText  value="#{songController.getSongAlbum(oneSong.id).name}" />
+
+				</h:column>
+								<h:column>
+					<f:facet name="header">Length</f:facet>
+					<h:outputText id="songLengthMin" title="songLengthMin"
+					value="#{(songController.getSong(oneSong.id).length/60).intValue()}:" />
+					<h:outputText id="songLengthSec" title="songLengthSec"
+					value="#{songController.getSong(oneSong.id).length%60}" />
+
+				</h:column>
+								
         </h:dataTable> 
         
       <h:outputText styleClass ="h2" value="Use one of our two search options above to find a song and add it to the queue"

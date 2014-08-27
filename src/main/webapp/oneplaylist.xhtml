@@ -44,7 +44,10 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Length</f:facet>
-					<h:outputText value="styleLength(#{oneSong.length})" />
+					<h:outputText id="songLengthMin" title="songLengthMin"
+					value="#{(songController.getSong(oneSong.id).length/60).intValue()}:" />
+					<h:outputText id="songLengthSec" title="songLengthSec"
+					value="#{songController.getSong(oneSong.id).length%60}" />
 
 				</h:column>
 			</h:dataTable>

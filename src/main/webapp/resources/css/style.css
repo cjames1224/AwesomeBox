@@ -32,7 +32,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	padding-top: 77px;
+	padding-top: 60px;
 	margin-bottom: 160px;
 }
 ol, ul {
@@ -112,8 +112,12 @@ p {
 
 /* special nav styles  */
 
+div.navbar.navbar-inverse.navbar-fixed-top {
+	height: 60px;
+}
 
-@media (min-width: 768px) {
+
+@media (max-width: 768px) {
   .navSearch {
     display:none;
 
@@ -166,8 +170,8 @@ a:hover.h2  {
 
 .row {
 	background: #000;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 

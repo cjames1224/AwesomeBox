@@ -88,7 +88,9 @@
 							<h:commandButton id="playButton" image="#{playbackBean.image}"
 								action="#{queue.togglePlay()}" />
 								
-								<h:commandButton id="shuffleButton" value="Shuffle" action="#{queue.toggleShuffle(userController.loginBean.isAdmin())}" rendered="#{userController.loginBean.isAdmin()}" />
+								<h:commandButton id="shuffleButton" image="#{queue.shuffleImage}" 
+								action="#{queue.toggleShuffle(userController.loginBean.isAdmin())}" 
+								rendered="#{userController.loginBean.isAdmin()}" />
 	
 	
 						</h:form>
@@ -109,11 +111,10 @@
 				<!-- FOOTER -->
 		<div class="currentPlayer">	
 		<div class="container">
-		
-		<p>Current Song:</p>
+
 		<p>
 			<h:form>
-				<h:commandLink id="currentSong" value="#{queue.currentSong.name}" action="#{songController.getSongDetails(queue.currentSong.id)}"/>
+				<h:commandLink id="currentSong" value="Current Song: #{queue.currentSong.name}" action="#{songController.getSongDetails(queue.currentSong.id)}"/>
 			</h:form>
 		</p>
 
