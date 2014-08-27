@@ -25,11 +25,11 @@
         </h:dataTable> 
         
       <h:outputText styleClass ="h2" value="Use one of our two search options above to find a song and add it to the queue"
-      				rendered="#{queue.isEmpty() and UserController.loginStatus}" />
+      				rendered="#{queue.isEmpty() and userController.loginBean.loginStatus}" />
       <h:outputText styleClass ="h2" value="Please "
-      				rendered="#{!UserController.loginStatus}" />      <h:link styleClass ="h2" value="log in" outcome="login.xhtml"
-      				rendered="#{!UserController.loginStatus}" />      <h:outputText styleClass ="h2" value=" to see your queue"
-      				rendered="#{!UserController.loginStatus}" />
+      				rendered="#{!userController.loginBean.loginStatus}" />      <h:link styleClass ="h2" value="log in" outcome="login.xhtml"
+      				rendered="#{!userController.loginBean.loginStatus}" />      <h:outputText styleClass ="h2" value=" to see your queue"
+      				rendered="#{!userController.loginBean.loginStatus}" />
         
 							</h:form>
         </div>

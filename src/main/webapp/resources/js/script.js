@@ -39,6 +39,12 @@ function toggleLength() {
 	$('input[name="j_idt27:lengthSearch"]').toggle();
 }
 
+function styleLength(i) { 
+	var minutes = Math.floor(i/60).toString();
+	var seconds = (i%60).toString();
+	return minutes.concat(":",seconds);
+}
+
 $( window ).load(function() {
 	var inFormOrLink;
 	$('a').live('click', function() { inFormOrLink = true; });

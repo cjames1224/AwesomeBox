@@ -31,11 +31,7 @@
 	<h:body>
 
 		<!-- HEADER -->
-		<h:form id="Frm1"> 
-		
-			<h:commandButton id="vendbtn" value=""	action="#{playbackBean.closePlayback()}" immediate="true" 
-			style="visibility:hidden;" /> 
-		</h:form>
+
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
@@ -107,12 +103,27 @@
 			</div>
 		</div>
 		 
-		DISPLAY FOR CURRENT SONG IN QUEUE
-		<div class="currentPlayer">CURRENT SONG IN QUEUE</div>
+		<!--  DISPLAY FOR CURRENT SONG IN QUEUE-->
+				<!-- FOOTER -->
+		<div class="currentPlayer">	
+		<div class="container">
+		
+		<p>Current Song info here.</p>
+
+		</div></div>
 
 
 		<!-- FOOTER -->
-		<div class="footer">FOOTER STUFF, WE ROCK.</div>
+		<div class="footer">	
+		<div class="container">
+		
+		<p>Brought to you by the Kobe (c) Foundation.</p>
+		<h:form id="Frm1"> 
+		
+			<h:commandButton id="vendbtn" value=""	action="#{playbackBean.closePlayback()}" immediate="true" 
+			style="visibility:hidden;" /> 
+		</h:form>
+		</div></div>
 
 
 
