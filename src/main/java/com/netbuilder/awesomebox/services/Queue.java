@@ -24,6 +24,17 @@ public class Queue implements Serializable{
 		isShuffle = false;
 	}
 	
+	public boolean isEmpty() {
+		if (queue == null) {
+			return true;
+		} else {
+			return queue.size() < 1;
+		}
+	}
+	public boolean isNotEmpty() {
+		return !this.isEmpty();
+	}
+	
 	public void addSong(Song song) {
 		if (song == null) {
 			throw new ValidationException("Invalid Song");

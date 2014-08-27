@@ -134,7 +134,19 @@ p {
 	color: #FFEA98;
 	font-size: large;
 }
+.h2 {
+	color: #f9f9f9;
+	font-size: medium;
+}
 
+a:hover.h2  {
+	color: #BCA9F5;
+
+}
+
+.p {
+	color: white;
+}
 .left, .right {
 	padding-top:20px;
 }
@@ -174,6 +186,9 @@ input[name="j_idt31:advancedSearchLink"] {
 
 
 /*  table styles  */
+td {
+	color:white;
+}
 th {
 	color: #d7d7d7;
 	
@@ -188,7 +203,9 @@ th {
 
 
 
-
+option {
+	color:black;
+}
 
 
 /* Styles for the toggle on advanced search */

@@ -63,7 +63,14 @@ public class SongController implements Serializable{
 		return search.searchAlbumName(songId).get(0);	
 	}
 	
+	public Album getSongAlbum(int songId) {
+		return search.searchAlbumName(songId).get(0);	
+	}
+	
 	public Artist getSongArtist() {
+		return search.searchArtistName(songId).get(0);
+	}
+	public Artist getSongArtist(int songId) {
 		return search.searchArtistName(songId).get(0);
 	}
 	

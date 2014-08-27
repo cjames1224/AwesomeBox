@@ -10,28 +10,30 @@
 
     <ui:define name="body">
         <div style="text-align: center; margin-top:20px">
-
+<h:form>
 			
  			<h:dataTable value="#{queue.queue}" var="oneSong"
-                      styleClass="table">
+                      styleClass="table" rendered="#{queue.isNotEmpty()}">
             <h:column>
-                <div class="media">
-                    <div class="media-body">
-                        <h3 class="media-heading">
-                        	<h:form>
+
+                        	
                             <h:commandLink value="#{oneSong.name}" action="#{songController.getSongDetails(oneSong.id)}" />
                             	<f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" />
 					
-							</h:form>
-                        </h3>
-                        
-                    </div>
-                </div>
+
             </h:column>
         </h:dataTable> 
         
+      <h:outputText styleClass ="h2" value="Use one of our two search options above to find a song and add it to the queue"
+      				rendered="#{queue.isEmpty() and UserController.loginStatus}" />
+      <h:outputText styleClass ="h2" value="Please "
+      				rendered="#{!UserController.loginStatus}" />      <h:link styleClass ="h2" value="log in" outcome="login.xhtml"
+      				rendered="#{!UserController.loginStatus}" />      <h:outputText styleClass ="h2" value=" to see your queue"
+      				rendered="#{!UserController.loginStatus}" />
+        
+							</h:form>
         </div>
-        <h:outputScript library="js" name="script.js" />
+       
     </ui:define>
 </ui:composition>
 

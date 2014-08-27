@@ -32,10 +32,19 @@
 						outcome="#{songController.getSongDetails(oneSong.id)}" />
 
 				</h:column>
-								<h:column>
+				<h:column>
+					<f:facet name="header">Artist</f:facet>
+					<h:outputText  value="#{songController.getSongArtist(oneSong.id).name}" />
+
+				</h:column>
+				<h:column>
+					<f:facet name="header">Album</f:facet>
+					<h:outputText  value="#{songController.getSongAlbum(oneSong.id).name}" />
+
+				</h:column>
+				<h:column>
 					<f:facet name="header">Length</f:facet>
-					<h:link value="#{oneSong.length}"
-						outcome="#{songController.getSongDetails(oneSong.id)}" />
+					<h:outputText value="#{oneSong.length}%60" />
 
 				</h:column>
 			</h:dataTable>
