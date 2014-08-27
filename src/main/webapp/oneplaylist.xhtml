@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="WEB-INF/layouts/template.xhtml">
+	<!-- 
+	<f:metadata>
+        <f:viewParam name="songId" value="#{songController.songId}" required="true"/>
+  
+    </f:metadata>
+ -->
+ 
+ <ui:define name="title"><h:outputText id="thisPlaylistName" title="thisPlaylistName"
+					value="#{playlistController.getThisPlaylist().name}" ></h:outputText></ui:define>
+	<ui:define name="body">
+	<h:form>
+	<p>Playlist Name is:
+			<h:outputText id="playlistName" title="playlistName"
+					value="#{playlistController.getThisPlaylist().name}" ></h:outputText></p>
+					
+					<p>
+					Songs:
+					</p>
+	</h:form>
+
+	<h:dataTable value="#{playlistController.songsInPlaylist()}" var="oneSong"
+                      styleClass="table">
+            <h:column>
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="media-heading">
+                        	<h:form>
+                            <h:commandLink value="#{oneSong.name}" action="#{songController.getSongDetails(oneSong.id)}" />
+                            	<!-- <f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" /> -->
+					
+							</h:form>
+                        </h3>
+                        
+                    </div>
+                </div>
+            </h:column>
+        </h:dataTable> 
+
+	</ui:define>
+</ui:composition>

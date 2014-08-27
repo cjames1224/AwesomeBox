@@ -20,6 +20,7 @@ public class PlaylistService implements Serializable{
 	@Inject
 	private EntityManager em;
 	
+	
 
 	public void removePlaylistList(List<Playlist> list){
 		if (list == null) {
@@ -30,7 +31,7 @@ public class PlaylistService implements Serializable{
 		}
 	}
 	
-	
+
 	public List<Playlist> getPlayList() {
 		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a",
 				Playlist.class).getResultList();
@@ -92,12 +93,12 @@ public class PlaylistService implements Serializable{
 			throw new ValidationException("Invalid playlist id");
 		}
 		
-		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a where id ="+id,
+		List<Playlist> list = em.createQuery("SELECT a FROM Playlist a where a.id ="+(long)id,
 				Playlist.class).getResultList();
 		
-		if(list == null || list.size() == 0){
-			System.out.println("No such playlist with id = " + id);
-		}
+//		if(list == null || list.size() == 0){
+//			System.out.println("No such playlist with id = " + id);
+//		}
 		
 		for(Playlist a: list){
 			System.out.println(a.toString());

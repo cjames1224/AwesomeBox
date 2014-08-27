@@ -9,6 +9,24 @@
     <ui:define name="title">Playlist</ui:define>
 
     <ui:define name="body">
-    
-    </ui:define>
+
+	<h:dataTable value="#{playlistService.playList}" var="onePlaylist"
+                      styleClass="table">
+            <h:column>
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="media-heading">
+                        	<h:form>
+                            <h:commandLink value="#{onePlaylist.name}" action="#{playlistController.getPlaylistDetails(onePlaylist.id)}" />
+                            	<!-- <f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" /> -->
+					
+							</h:form>
+                        </h3>
+                        
+                    </div>
+                </div>
+            </h:column>
+        </h:dataTable> 
+
+	</ui:define>
 </ui:composition>

@@ -105,6 +105,10 @@ public class SearchV2 implements Serializable{
 		return list;		
 	}
 	
+	public List<Song> searchPlaylist(int id) {
+		return em.createQuery("SELECT s FROM Song s, Playlist p, PlaylistSong ps WHERE s = ps.song AND p = ps.playlist AND p.id = "+id+" ",Song.class).getResultList();
+	}
+	
 	public SearchV2 searchSongGenre(String songGenre) {
 		initAndConnCheck();
 		searchBuilder.append("SELECT s FROM Song s WHERE s.genre LIKE \'%"+songGenre+"%\'");
