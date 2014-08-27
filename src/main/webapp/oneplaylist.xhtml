@@ -48,6 +48,8 @@
 
 				</h:column>
 			</h:dataTable>
+			<p><h:commandButton id="addQueue" value="Add Playlist to Queue" action="#{queue.addPlaylist(playlistController.songsInPlaylist())}" />
+			</p>
 		</h:form>
 	</ui:define>
 </ui:composition>

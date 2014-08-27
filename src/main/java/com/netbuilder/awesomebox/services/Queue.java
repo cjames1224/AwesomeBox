@@ -2,6 +2,7 @@ package com.netbuilder.awesomebox.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.enterprise.context.SessionScoped;
@@ -51,6 +52,14 @@ public class Queue implements Serializable{
 		queue.add(song);
 	}
 	
+	public void addPlaylist(List<Song> playlist) {
+		queue.addAll(playlist);
+	}
+	
+	public Song getCurrentSong() {
+		return currentSong;
+	}
+
 	public void removeSong(Song song) {
 		if (song == null) {
 			throw new ValidationException("Invalid Song");
@@ -71,8 +80,8 @@ public class Queue implements Serializable{
 		queue.clear();
 	}
 	
-	public void toggleShuffle(User user) {
-		if (user.isAdmin()) {
+	public void toggleShuffle(boolean isAdmin) {
+		if (isAdmin) {
 			isShuffle = !isShuffle;
 		} else {
 			throw new ValidationException("User is not an Admin and cannot toggle shuffle");
@@ -93,7 +102,11 @@ public class Queue implements Serializable{
 
 	public void togglePlay() {
 		if (currentSong == null) {
-			currentSong = queue.remove(0);
+			if (isShuffle) {
+				currentSong = queue.remove(new Random().nextInt(queue.size()));
+			} else {
+				currentSong = queue.remove(0);
+			}
 		}
 		playback.togglePlay(currentSong.getFileLocation());
 	}

@@ -87,6 +87,8 @@
 	
 							<h:commandButton id="playButton" image="#{playbackBean.image}"
 								action="#{queue.togglePlay()}" />
+								
+								<h:commandButton id="shuffleButton" value="Shuffle" action="#{queue.toggleShuffle(userController.loginBean.isAdmin())}" rendered="#{userController.loginBean.isAdmin()}" />
 	
 	
 						</h:form>
