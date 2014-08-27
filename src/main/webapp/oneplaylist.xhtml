@@ -28,8 +28,8 @@
 				var="oneSong" styleClass="table">
 				<h:column>
 					<f:facet name="header">Song Name</f:facet>
-					<h:link value="#{oneSong.name}"
-						outcome="#{songController.getSongDetails(oneSong.id)}" />
+					<h:commandLink value="#{oneSong.name}"
+						action="#{songController.getSongDetails(oneSong.id)}" />
 
 				</h:column>
 				<h:column>

@@ -15,8 +15,8 @@
 				styleClass="table">
 				<h:column>
 				
-					<h:link value="#{onePlaylist.name}"
-						outcome="#{playlistController.getPlaylistDetails(onePlaylist.id)}" />
+					<h:commandLink value="#{onePlaylist.name}"
+						action="#{playlistController.getPlaylistDetails(onePlaylist.id)}" />
 				</h:column>
 			</h:dataTable>
 		</h:form>
