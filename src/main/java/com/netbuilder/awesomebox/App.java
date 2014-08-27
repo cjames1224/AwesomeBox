@@ -7,6 +7,26 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.netbuilder.awesomebox.dbaccess.Search;
+import com.netbuilder.awesomebox.entities.Album;
+import com.netbuilder.awesomebox.entities.AlbumArtist;
+import com.netbuilder.awesomebox.entities.AlbumSong;
+import com.netbuilder.awesomebox.entities.Artist;
+import com.netbuilder.awesomebox.entities.Playlist;
+import com.netbuilder.awesomebox.entities.PlaylistSong;
+import com.netbuilder.awesomebox.entities.Song;
+import com.netbuilder.awesomebox.entities.SongArtist;
+import com.netbuilder.awesomebox.entities.User;
+import com.netbuilder.awesomebox.entityservices.AlbumArtistService;
+import com.netbuilder.awesomebox.entityservices.AlbumService;
+import com.netbuilder.awesomebox.entityservices.AlbumSongService;
+import com.netbuilder.awesomebox.entityservices.ArtistService;
+import com.netbuilder.awesomebox.entityservices.PlaylistService;
+import com.netbuilder.awesomebox.entityservices.PlaylistSongService;
+import com.netbuilder.awesomebox.entityservices.SongArtistService;
+import com.netbuilder.awesomebox.entityservices.SongService;
+import com.netbuilder.awesomebox.entityservices.UserService;
+
 /**
  * Hello world!
  *
