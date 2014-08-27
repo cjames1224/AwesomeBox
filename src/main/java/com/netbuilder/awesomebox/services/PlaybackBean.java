@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -64,6 +65,12 @@ public class PlaybackBean implements Serializable{
 		return null;
 	}
 		
+	@PreDestroy
+	public void closePlayback(){
+		audioClip.stop();
+		audioClip.close();
+	}
+	
 	public void pause() {
 		audioClip.stop();
 	}
