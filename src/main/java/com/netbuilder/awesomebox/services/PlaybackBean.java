@@ -26,6 +26,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.swing.JApplet;
 
+import com.netbuilder.awesomebox.entities.Song;
 import com.netbuilder.awesomebox.entityservices.SongService;
 
 @Named
@@ -37,6 +38,7 @@ public class PlaybackBean implements Serializable{
 	@Inject
 	private SongService ss;
 	//private AudioInputStream stream;
+	private Song currentSong;
 	private SourceDataLine line = null;
 	private Clip audioClip;
 	private boolean isPlaying = false;
@@ -86,6 +88,14 @@ public class PlaybackBean implements Serializable{
 	
 	public void play() {
 		audioClip.start();
+	}
+	
+	public Song getSong(){
+		return currentSong;
+	}
+	
+	public void setSong(Song s){
+		currentSong = s;
 	}
 	
 	public String togglePlay(String url) {
