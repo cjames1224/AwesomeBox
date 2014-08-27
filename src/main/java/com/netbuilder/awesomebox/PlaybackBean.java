@@ -1,5 +1,6 @@
 package com.netbuilder.awesomebox;
 
+import java.applet.AudioClip;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Line.Info;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
+import javax.swing.JApplet;
 
 @Named
 @SessionScoped
@@ -29,7 +31,8 @@ public class PlaybackBean implements Serializable{
 	private SongService ss;
 	private AudioInputStream stream;
 	private SourceDataLine line = null;
-	private Clip audioClip;
+	private AudioClip audioClip;
+	private boolean isPlaying = false;
 	
 	public PlaybackBean(){
 	}
@@ -54,14 +57,16 @@ public class PlaybackBean implements Serializable{
 
 		try {
 			URL url = new URL("http://localhost:8080/awesomebox/songs/br.wav");
-			//AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+			/*AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioInputStream audioStream1 = AudioSystem.getAudioInputStream(url);
 			AudioFormat format = audioStream1.getFormat();
-			DataLine.Info info = new DataLine.Info(Clip.class, format);
-			audioClip = (Clip) AudioSystem.getLine(info);
-			//audioClip.addLineListener(this);
-			audioClip.open(audioStream1);
-			audioClip.start();
+			DataLine.Info info = new DataLine.Info(AudioClip.class, format);
+			audioClip = (AudioClip) AudioSystem.getLine(info);
+			audioClip.addLineListener(this);
+			((Clip) audioClip).open(audioStream1);
+			audioClip.start();*/
+			audioClip = JApplet.newAudioClip(url);
+			audioClip.play();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -106,16 +111,22 @@ public class PlaybackBean implements Serializable{
 	}
 	
 	public void play() {
-		audioClip.start();
+		audioClip.play();
 	}
 	
 	public String togglePlay() {
+		System.out.println("inside Toggle Play");
 		if (audioClip == null) {
 			initAndStartLine();
-		} else if(audioClip.isRunning()) {
-			pause();
+			isPlaying = true;
+			System.out.println("audio clip is null");
+		} else if(isPlaying) {
+			System.out.println("is running, stopped");
+			audioClip.stop();
+			isPlaying=false;
 		} else {
 			play();
+			System.out.println("is stopped, play");
 		}
 		return null;
 	}

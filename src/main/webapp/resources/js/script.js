@@ -38,4 +38,3 @@ function toggleLength() {
 	$('select[name="j_idt27:j_idt84"]').toggle();
 	$('input[name="j_idt27:lengthSearch"]').toggle();
 }
-
