@@ -2,31 +2,22 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                template="WEB-INF/layouts/template.xhtml">
-    <ui:define name="title">Playlist</ui:define>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="WEB-INF/layouts/template.xhtml">
+	<ui:define name="title">Playlist</ui:define>
 
-    <ui:define name="body">
-
-	<h:dataTable value="#{playlistService.playList}" var="onePlaylist"
-                      styleClass="table">
-            <h:column>
-                <div class="media">
-                    <div class="media-body">
-                        <h3 class="media-heading">
-                        	<h:form>
-                            <h:commandLink value="#{onePlaylist.name}" action="#{playlistController.getPlaylistDetails(onePlaylist.id)}" />
-                            	<!-- <f:param name="songId" value="#{songController.getSongDetails(oneSong.id)}" /> -->
-					
-							</h:form>
-                        </h3>
-                        
-                    </div>
-                </div>
-            </h:column>
-        </h:dataTable> 
-
+	<ui:define name="body">
+		<h:form>
+			<h:dataTable value="#{playlistService.playList}" var="onePlaylist"
+				styleClass="table">
+				<h:column>
+					<f:facet name="header">PLAYLISTS</f:facet>
+					<h:link value="#{onePlaylist.name}"
+						outcome="#{playlistController.getPlaylistDetails(onePlaylist.id)}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>

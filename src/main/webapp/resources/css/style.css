@@ -150,10 +150,40 @@ p {
 	background: #000;
 }
 
+
+/* FORM STYLES */
 input[type="submit"] {
 	background: #eee;
 	padding: 5px;
+	color: white;
 }
+
+input[type="text"] {
+	color: #000;
+
+}
+
+input[name="j_idt31:advancedSearchLink"] {
+	color: white;
+}
+
+
+
+/*  table styles  */
+th {
+	color: #d7d7d7;
+}
+
+.table a {
+	color: white;
+}
+.table a:hover {
+	color: #BCA9F5;
+}
+
+
+
+
 
 
 /* Styles for the toggle on advanced search */
