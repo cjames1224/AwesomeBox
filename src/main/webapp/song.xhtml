@@ -57,11 +57,11 @@
 					</h:selectOneMenu>
 					
 					</p>
-					<p><h:commandButton id="addPlaylist" value="Add to Playlist" action="#{songController.getSongArtist()}" rendered="#{userController.loginBean.isAdmin()}" />
+					<p><h:commandButton id="addPlaylist" value="Add to Playlist" action="#{songController.getSongArtist()}" rendered="false" />
 					<h:commandButton id="addQueue" value="Add to Queue" action="#{queue.addSong(songController.getSong())}" />
 					</p>
 					<p>
-					<h:commandButton id="submit" value="Submit Changes" action="#{songController.getSongArtist()}" />
+					<h:commandButton id="submit" value="Submit Changes" action="#{songController.getSongArtist()}" rendered="false"/>
 					</p>
 		</h:form>
 	</ui:define>
