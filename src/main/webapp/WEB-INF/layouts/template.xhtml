@@ -89,7 +89,10 @@
 							<h:commandButton id="playButton" image="#{playbackBean.image}"
 								action="#{queue.togglePlay()}" />
 								
-								<h:commandButton id="shuffleButton" image="#{queue.shuffleImage}" 
+								<h:commandButton id="shuffleButton" image="resources/images/kobe-next.png" 
+								action="#{queue.next()}" />
+								
+								<h:commandButton id="nextButton" image="#{queue.shuffleImage}" 
 								action="#{queue.toggleShuffle(userController.loginBean.isAdmin())}" 
 								rendered="#{userController.loginBean.isAdmin()}" />
 	
