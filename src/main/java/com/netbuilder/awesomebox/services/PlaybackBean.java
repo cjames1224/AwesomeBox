@@ -82,12 +82,20 @@ public class PlaybackBean implements Serializable{
 	}
 		
 	public String closePlayback(){
-		System.out.println("CALLING CLOSE PLAYBACK");
-		audioClip.stop();
-		audioClip.close();
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-	            .getExternalContext().getSession(false);
-	    session.invalidate();
+		if(audioClip !=null){
+			System.out.println("CLOSED PLAYBACK");
+			isFinished = true;
+			audioClip.stop();
+			audioClip.close();
+			try {
+				stream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+//		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+//	            .getExternalContext().getSession(false);
+//	    session.invalidate();
 	    return null;
 	}
 	
@@ -109,6 +117,7 @@ public class PlaybackBean implements Serializable{
 	
 	public String togglePlay(String url) {
 		if (audioClip == null || isFinished == true) {
+			closePlayback();
 			initAndStartLine(url);
 			isFinished = false;
 			isPlaying = true;
