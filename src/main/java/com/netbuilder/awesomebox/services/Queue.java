@@ -107,10 +107,11 @@ public class Queue implements Serializable {
 	}
 
 	public void togglePlay() {
-		if (queue.size() == 0) {
-			return;
-		}
+		
 		if (currentSong == null) {
+			if (queue.size() == 0) {
+				return;
+			}
 			if (isShuffle) {
 				currentSong = queue.remove(new Random().nextInt(queue.size()));
 			} else {

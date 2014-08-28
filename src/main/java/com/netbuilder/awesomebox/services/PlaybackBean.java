@@ -44,7 +44,7 @@ public class PlaybackBean implements Serializable{
 	private Song currentSong;
 	private SourceDataLine line = null;
 	private Clip audioClip;
-	private boolean isPlaying = false, isFinished = false;
+	private boolean isPlaying = false;
 	private String[] buttonToggle= new String[]{"resources/images/kobePlay.png", "resources/images/kobePause.png"};
 	private String image = buttonToggle[0];
 	private AudioInputStream stream;
@@ -84,7 +84,6 @@ public class PlaybackBean implements Serializable{
 	public String closePlayback(){
 		if(audioClip !=null){
 			System.out.println("CLOSED PLAYBACK");
-			isFinished = true;
 			audioClip.stop();
 			audioClip.close();
 			try {
@@ -116,7 +115,7 @@ public class PlaybackBean implements Serializable{
 	}
 	
 	public String togglePlay(String url) {
-		if (audioClip == null || isFinished == true) {
+		if (audioClip == null) {
 			changeSong(url);
 		}else{
 
