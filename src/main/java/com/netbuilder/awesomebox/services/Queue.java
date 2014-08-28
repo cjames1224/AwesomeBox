@@ -116,7 +116,9 @@ public class Queue implements Serializable {
 			} else {
 				currentSong = queue.remove(0);
 			}
+			playback.changeSong(currentSong.getFileLocation());
+		}else{
+			playback.togglePlay(null);
 		}
-		playback.togglePlay(currentSong.getFileLocation());
 	}
 }

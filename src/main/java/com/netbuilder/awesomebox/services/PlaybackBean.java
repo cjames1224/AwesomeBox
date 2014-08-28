@@ -117,10 +117,7 @@ public class PlaybackBean implements Serializable{
 	
 	public String togglePlay(String url) {
 		if (audioClip == null || isFinished == true) {
-			closePlayback();
-			initAndStartLine(url);
-			isFinished = false;
-			isPlaying = true;
+			changeSong(url);
 		}else{
 
 			if(isPlaying) {
@@ -134,6 +131,12 @@ public class PlaybackBean implements Serializable{
 			}
 		}
 		return null;
+	}
+	
+	public void changeSong(String url){
+		closePlayback();
+		initAndStartLine(url);
+		isPlaying = true;
 	}
 
 	public boolean isPlaying() {
