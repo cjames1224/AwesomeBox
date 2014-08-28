@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeoutException;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -41,10 +44,11 @@ public class PlaybackBean implements Serializable{
 	private Song currentSong;
 	private SourceDataLine line = null;
 	private Clip audioClip;
-	private boolean isPlaying = false;
+	private boolean isPlaying = false, isFinished = false;
 	private String[] buttonToggle= new String[]{"resources/images/kobePlay.png", "resources/images/kobePause.png"};
 	private String image = buttonToggle[0];
-	private AudioListener audioListener= new AudioListener();
+	private AudioInputStream stream;
+	private AudioListener audioListener;
 
 	
 	public PlaybackBean(){
@@ -63,15 +67,17 @@ public class PlaybackBean implements Serializable{
 		try {
 			URL url = new URL(urls);
 			audioClip = AudioSystem.getClip();
+			audioListener = new AudioListener();
 			audioClip.addLineListener(audioListener);
 
-			try(AudioInputStream stream = AudioSystem.getAudioInputStream(url)){
-				audioClip.open(stream);
-			}
-			audioClip.start();
-		} catch (Exception e) {
+			stream = AudioSystem.getAudioInputStream(url);
+			audioClip.open(stream);
+			audioClip.start();			
+		} 
+		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		image = buttonToggle[1];
 		return null;
 	}
 		
@@ -102,11 +108,10 @@ public class PlaybackBean implements Serializable{
 	}
 	
 	public String togglePlay(String url) {
-		if (audioClip == null) {
+		if (audioClip == null || isFinished == true) {
 			initAndStartLine(url);
-			audioClip.start();
+			isFinished = false;
 			isPlaying = true;
-			image = buttonToggle[1];
 		}else{
 
 			if(isPlaying) {

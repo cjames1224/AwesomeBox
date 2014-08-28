@@ -35,6 +35,8 @@ body {
 	padding-top: 60px;
 	margin-bottom: 160px;
 }
+
+
 ol, ul {
 	list-style: none;
 }
@@ -117,12 +119,7 @@ div.navbar.navbar-inverse.navbar-fixed-top {
 }
 
 
-@media (max-width: 768px) {
-  .navSearch {
-    display:none;
 
-  }
-}
 
 
 .navSearch {
@@ -133,7 +130,11 @@ div.navbar.navbar-inverse.navbar-fixed-top {
 	margin-top:15px;
 }
 
-
+@media (max-width: 670px) {
+.navSearch {
+	display: none;	
+}	
+}
 
 /* General Content Styles */
 .h1 {
@@ -249,6 +250,12 @@ input[name="j_idt27:lengthSearch"] {display:none;}
 	background-color:#000;
 }
 
+@media (max-width: 670px) {
+.footer {
+	position: relative;	
+}	
+}
+
 .footer p {
 	color: #888;
 }
@@ -262,7 +269,12 @@ input[name="j_idt27:lengthSearch"] {display:none;}
 	height: 100px;
 	background-color:#222;
 }
-
+@media (max-width: 670px) {
+.currentPlayer {
+	position: relative;	
+	margin-top: 160px;
+}	
+}
 
 
 

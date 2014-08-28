@@ -9,6 +9,7 @@
 	<ui:define name="title">Login</ui:define>
 
 	<ui:define name="body">
+	<h1>Log in</h1>
 		<h:form>
 			<p>
 				<h:outputText value="Enter username: "></h:outputText>
@@ -18,10 +19,10 @@
 			</p>
 			<p>
 			<h:outputText value="Enter password: "></h:outputText>
-				<h:inputSecret id="password" type="password" title="Enter password: "
+				<span style="color:black"><h:inputSecret id="password" type="password" title="Enter password: "
 					value="#{loginBean.password}" autocomplete="off">
 
-				</h:inputSecret>
+				</h:inputSecret></span>
 			</p>
 			<p>
 				<h:commandButton id="submit" value="Submit" action="#{loginBean.login()}" />

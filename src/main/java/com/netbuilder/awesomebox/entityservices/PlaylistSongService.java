@@ -64,11 +64,13 @@ public class PlaylistSongService implements Serializable {
 	 */
 	public void addSongToPlaylist(Playlist playlist, Song song) {
 		// throws error if song already exists
-		if(em.createQuery("SELECT ps from PlaylistSong ps WHERE ps.song = "+song.getId()).getResultList().size() > 0 ) {
+		if(em.createQuery("SELECT ps from PlaylistSong ps WHERE ps.song.id = "+song.getId()).getResultList().size() > 0 ) {
+			System.out.println("|DID \n NOT \n WORK");
+			return;
 			//throw new ValidationException("Song already exists in playlist");
 		}
 		
-		List<PlaylistSong> list = em.createQuery("SELECT ps FROM PlaylistSong ps WHERE ps.playlist =" + playlist.getId(),
+		List<PlaylistSong> list = em.createQuery("SELECT ps FROM PlaylistSong ps WHERE ps.playlist.id =" + playlist.getId(),
 				PlaylistSong.class).getResultList();
 		System.out.println(list.size());
 		PlaylistSong  ps = new PlaylistSong(playlist, song, list.size()+1);

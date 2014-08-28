@@ -144,14 +144,14 @@ public class DBPopulator {
 		songs.add(new Song("21st Century Breakdown", 309,
 				"http://localhost:8080/awesomebox/songs/br.wav", "Punk Rock", 3));
 		songs.add(new Song("American Idiot", 174,
-				"http://localhost:8080/awesomebox/songs/br.wav", "Punk Rock", 5));
+				"http://localhost:8080/awesomebox/songs/americanidiot.wav", "Punk Rock", 5));
 		songs.add(new Song("Wake Me Up When September Ends", 285,
 				"http://localhost:8080/awesomebox/songs/september.wav", "Punk Rock", 4));
 		songs.add(new Song("Boulevard of Broken Dreams", 265,
 				"http://localhost:8080/awesomebox/songs/br.wav", "Punk Rock", 5));
-		songs.add(new Song("K.O.B.E.", 239, "http://localhost:8080/awesomebox/songs/br.wav",
+		songs.add(new Song("K.O.B.E.", 239, "http://localhost:8080/awesomebox/songs/KOBE.wav",
 				"Hip-hop", 5));
-		songs.add(new Song("Kobe Bryant", 305, "http://localhost:8080/awesomebox/songs/br.wav",
+		songs.add(new Song("Kobe Bryant", 305, "http://localhost:8080/awesomebox/songs/kobe_wayne.wav",
 				"Rap", 1));
 		songs.add(new Song("Do You Want To Build A Snowman", 207,
 				"http://localhost:8080/awesomebox/songs/snowman.wav", "Musical", 2));
