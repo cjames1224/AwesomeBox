@@ -44,6 +44,7 @@ public class PlaybackBean implements Serializable{
 	private boolean isPlaying = false;
 	private String[] buttonToggle= new String[]{"resources/images/kobePlay.png", "resources/images/kobePause.png"};
 	private String image = buttonToggle[0];
+	private AudioListener audioListener= new AudioListener();
 
 	
 	public PlaybackBean(){
@@ -62,11 +63,11 @@ public class PlaybackBean implements Serializable{
 		try {
 			URL url = new URL(urls);
 			audioClip = AudioSystem.getClip();
+			audioClip.addLineListener(audioListener);
 
 			try(AudioInputStream stream = AudioSystem.getAudioInputStream(url)){
 				audioClip.open(stream);
 			}
-				
 			audioClip.start();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

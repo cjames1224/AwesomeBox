@@ -114,8 +114,16 @@ public class Queue implements Serializable{
 			Playback.getInstance().createLineFromPath(queue.remove(0).getFileLocation());
 		}
 	}
+	
+	public void next() {
+		currentSong = null;
+		togglePlay();
+	}
 
 	public void togglePlay() {
+		if (queue.size() == 0) {
+			return;
+		}
 		if (currentSong == null) {
 			if (isShuffle) {
 				currentSong = queue.remove(new Random().nextInt(queue.size()));
