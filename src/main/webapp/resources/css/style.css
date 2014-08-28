@@ -130,7 +130,7 @@ div.navbar.navbar-inverse.navbar-fixed-top {
 	margin-top:15px;
 }
 
-@media (max-width: 670px) {
+@media (max-width: 770px) {
 .navSearch {
 	display: none;	
 }	
@@ -166,6 +166,8 @@ a:hover.h2  {
 .right {
 	float:left;
 	padding-left:20px;
+	overflow-y:auto;
+	width:100%;
 }
 
 
@@ -277,6 +279,10 @@ input[name="j_idt27:lengthSearch"] {display:none;}
 }
 
 
+
+input.playbackButtons{
+	float:right;
+}
 
 
 

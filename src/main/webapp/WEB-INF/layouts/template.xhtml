@@ -46,7 +46,7 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><h:link outcome="playlist.xhtml" value="Playlist"
+						<li><h:link outcome="playlist.xhtml" value="Playlists"
 								rendered="#{userController.loginBean.isAdmin()}" /></li>
 						<li><h:link outcome="about.xhtml" value="About" /></li>
 						<li>
@@ -85,16 +85,19 @@
 					<div class="left">
 						<h:form>
 	
-	
+									<h:commandButton  styleClass="playbackButtons" id="nextButton" image="#{queue.shuffleImage}" 
+								action="#{queue.toggleShuffle(userController.loginBean.isAdmin())}"  rendered="#{userController.loginBean.isAdmin()}"
+								 />
+								<!--   -->
+								<div>
 							<h:commandButton id="playButton" image="#{playbackBean.image}"
-								action="#{queue.togglePlay()}" />
+								action="#{queue.togglePlay()}" /></div>
 								
-								<h:commandButton id="shuffleButton" image="resources/images/kobe-next.png" 
-								action="#{queue.next()}" />
+								<h:commandButton styleClass="playbackButtons" id="shuffleButton" image="resources/images/kobe-next.png" 
+								action="#{queue.next()}" rendered="#{playbackBean.isPlaying}" />
+								<!-- add rendered if song is playing -->
 								
-								<h:commandButton id="nextButton" image="#{queue.shuffleImage}" 
-								action="#{queue.toggleShuffle(userController.loginBean.isAdmin())}" 
-								rendered="#{userController.loginBean.isAdmin()}" />
+
 	
 	
 						</h:form>
