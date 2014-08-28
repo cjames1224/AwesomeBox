@@ -150,4 +150,7 @@ public class PlaybackBean implements Serializable{
 		return isPlaying;
 	}
 
+	public boolean getIsPlaying() {
+		return isPlaying;
+	}
 }
