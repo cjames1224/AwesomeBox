@@ -12,6 +12,7 @@
 	<h:head>
 		<title><ui:insert name="title">AwesomeBox</ui:insert></title>
 		<ui:insert name="meta"></ui:insert>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/icon"
 			href="#{request.contextPath}/resources/images/favicon.ico" />
@@ -124,8 +125,14 @@
 		<!-- FOOTER -->
 		<div class="footer">	
 		<div class="container">
-		
-		<p>Brought to you by the Kobe (c) Foundation.</p>
+		<div class="footer-left" style="float:left">
+		<p>Brought to you by the Kobe (c) Foundation.</p></div>
+		<div class="footer-right" style="display:inline;float:right">
+			<a href="http://kobebryant.com/" target="_blank"><h:graphicImage library="images" name="kobe_24.png" /></a>
+			<a href="http://twitter.com/kobebryant" target="_blank"><h:graphicImage library="images" name="kobe_twitter.jpg" /></a>
+			<a href="http://facebook.com/kobe" target="_blank"><h:graphicImage library="images" name="kobe_fb.jpg" /></a>
+			<a href="http://instagram.com/kobebryant" target="_blank"><h:graphicImage library="images" name="kobe_ig.png" /></a>
+			</div>
 		<h:form id="Frm1"> 
 		
 			<h:commandButton id="vendbtn" value=""	action="#{playbackBean.closePlayback()}" immediate="true" 
